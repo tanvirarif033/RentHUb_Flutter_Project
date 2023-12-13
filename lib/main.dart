@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
+import 'package:rent_hub_flutter_project/main.dart';
+import 'package:rent_hub_flutter_project/splash_screen.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -21,8 +22,8 @@ class MyApp extends StatelessWidget {
 
         useMaterial3: true,
       ),
-       home: const MyHomePage(title: 'Flutter Demo Home Page'),
-     // home: splash_screen(),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: splash_screen(),
     );
   }
 }
