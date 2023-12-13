@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:rent_hub_flutter_project/login_screen.dart';
-import 'package:rent_hub_01/signUp_screen.dart';
+import 'package:rent_hub_flutter_project/signUp_screen.dart';
 
 class welcome_screen extends  StatelessWidget{
   ButtonStyle buttonStyle=ElevatedButton.styleFrom(

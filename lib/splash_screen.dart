@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:rent_hub_flutter_project/main.dart';
-import 'package:rent_hub_01/welcome_screen.dart';
+import 'package:rent_hub_flutter_project/welcome_screen.dart';
 
 class splash_screen extends StatefulWidget{
   @override
