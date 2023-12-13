@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
+import 'package:rent_hub_flutter_project/main.dart';
+import 'package:rent_hub_flutter_project/splash_screen.dart';
 void main() {
   runApp(const MyApp());
 }
