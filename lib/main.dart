@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-     // home: splash_screen(),
+      home: splash_screen(),
     );
   }
 }
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
         title: Text(widget.title),
       ),
-
+      body: Container(),
     );
   }
 }
