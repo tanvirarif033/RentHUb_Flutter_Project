@@ -17,7 +17,7 @@ class signUp_screen extends  StatelessWidget{
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('images/page.png'), fit: BoxFit.cover),
+            image: AssetImage('assets/images/page.png'), fit: BoxFit.cover),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,

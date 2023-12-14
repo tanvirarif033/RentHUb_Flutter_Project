@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rent_hub_flutter_project/splash_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rent_hub_flutter_project/takeRent_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/welcome_screen.dart';
 import 'firebase_options.dart';
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,14 +23,15 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.transparent,
+        /*scaffoldBackgroundColor: Colors.transparent,
         appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
-
-
-        useMaterial3: true,
+        useMaterial3: true,*/
+        brightness: Brightness.light
       ),
+      darkTheme: ThemeData(brightness: Brightness.dark),
+      themeMode: ThemeMode.light,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: const splash_screen(),
+      home:  LoginPage(),
     );
   }
 }

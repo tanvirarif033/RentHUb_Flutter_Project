@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:rent_hub_flutter_project/welcome_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/welcome_screen.dart';
 
 class splash_screen extends StatefulWidget{
   const splash_screen({super.key});

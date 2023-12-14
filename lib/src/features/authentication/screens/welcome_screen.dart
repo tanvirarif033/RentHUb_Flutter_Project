@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:rent_hub_flutter_project/login_screen.dart';
-import 'package:rent_hub_flutter_project/signUp_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
 
 class welcome_screen extends  StatelessWidget{
   ButtonStyle buttonStyle=ElevatedButton.styleFrom(
@@ -19,7 +19,7 @@ class welcome_screen extends  StatelessWidget{
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('images/Welcome1.png'), fit: BoxFit.cover),
+            image: AssetImage('assets/images/Welcome1.png'), fit: BoxFit.cover),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -32,7 +32,7 @@ class welcome_screen extends  StatelessWidget{
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context)=> login_screen(),
+                      builder: (context)=> LoginPage(),
                     ));
               },style: buttonStyle, child: const Text('Log in',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600,color: Colors.black),),),
               const Gap(50),
@@ -43,14 +43,10 @@ class welcome_screen extends  StatelessWidget{
                       builder: (context)=> signUp_screen(),
                     ));
               },style: buttonStyle, child: const Text('Sign up',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600,color: Colors.black),),)
-
             ],
           ),
         ) ,
       ),
-
-
-
     );
   }
 
