@@ -30,8 +30,8 @@ const String tOnBoardingCounter3 = "3/3";
 
 
 // -- Welcome Screen Text
-const String tWelcomeTitle = "Build Awesome Apps";
-const String tWelcomeSubTitle = "Let's put your creativity on the development highway.";
+const String tWelcomeTitle = "Welcome to RentHub";
+const String tWelcomeSubTitle = "Choose a Smarter Approach to Renting and Elevate Your Living Experience";
 
 
 // -- Login Screen Text

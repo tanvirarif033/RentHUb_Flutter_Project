@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:rent_hub_flutter_project/src/constants/images_strings.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rent_hub_flutter_project/src/utils/theme/theme.dart';
 import 'package:rent_hub_flutter_project/takeRent_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/welcome_screen.dart';
 import 'firebase_options.dart';
+
+
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -22,16 +27,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        /*scaffoldBackgroundColor: Colors.transparent,
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
-        useMaterial3: true,*/
-        brightness: Brightness.light
-      ),
-      darkTheme: ThemeData(brightness: Brightness.dark),
-      themeMode: ThemeMode.light,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home:  LoginPage(),
+      home: SignUpPage(),
     );
   }
 }

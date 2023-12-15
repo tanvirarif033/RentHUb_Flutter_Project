@@ -15,10 +15,10 @@ class _splash_screenState extends State<splash_screen> {
   void initState() {
 
     super.initState();
-    Timer(const Duration(seconds: 2),(){
+    Timer(const Duration(seconds: 10),(){
       Navigator.pushReplacement(
           context, MaterialPageRoute(
-        builder: (context)=>welcome_screen(),));
+        builder: (context)=>WelcomeScreen(),));
 
     });
   }
