@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: SignUpPage(),
+      home: WelcomeScreen(),
     );
   }
 }

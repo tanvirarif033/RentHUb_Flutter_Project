@@ -34,16 +34,11 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/Welcome1.png
     - assets/images/page.png
-    - assets/images/google.png
-    - assets/images/ttwelcome.png
-    - assets/images/twelcome.png
+    - assets/logo/google.png
     - assets/images/welcome0.png
-    - assets/images/welcome2.png
-    - assets/images/welcome3.png
-    - assets/images/welcome4.png
-    - assets/images/welcome6.png
-    - assets/images/welcome7.png
+    - assets/images/welcome.png
+    - assets/images/forgetPass.png
+    - assets/logo/renthub.png
 
  

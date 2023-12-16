@@ -5,7 +5,7 @@ import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
 
 class SignUpPage extends StatelessWidget {
-  SignUpPage({super.key});
+  const SignUpPage({super.key});
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

@@ -7,15 +7,7 @@ class AppTheme {
   AppTheme._();
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    textTheme: TextTheme(
-      displayMedium: GoogleFonts.montserrat(
-        color: Colors.black87,
-      ),
-      titleMedium: GoogleFonts.poppins(
-        color: Colors.black54,
-        fontSize: 24,
-      ),
-    ),
+    textTheme: TextTheme(),
     appBarTheme: AppBarTheme(),
     floatingActionButtonTheme: FloatingActionButtonThemeData(),
     elevatedButtonTheme: ElevatedButtonThemeData(

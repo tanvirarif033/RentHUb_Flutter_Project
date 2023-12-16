@@ -11,19 +11,23 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height =MediaQuery.of(context).size.height;
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(tDefaultSize),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-             Image(
-              image: AssetImage(tWelcomeScreenImage),height: height * 0.6,
+            Image(
+              image: AssetImage(tWelcomeScreenImage),
+              height: height * 0.6,
             ),
-             Column(
+            Column(
               children: [
-                Text(tWelcomeTitle,style: Theme.of(context).textTheme.displaySmall,),
+                Text(
+                  tWelcomeTitle,
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
                 Text(
                   tWelcomeSubTitle,
                   style: Theme.of(context).textTheme.bodyLarge,
@@ -34,9 +38,27 @@ class WelcomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Expanded(child: OutlinedButton(onPressed: () {}, child:  Text(tLogin.toUpperCase()))),
-                const SizedBox(width: 10.0,),
-                Expanded(child: ElevatedButton(onPressed: () {}, child:  Text(tSignup.toUpperCase()))),
+                Expanded(
+                    child: OutlinedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context)=> const LoginPage(),
+                              ));
+                        }, child: Text(tLogin.toUpperCase()))),
+                const SizedBox(
+                  width: 10.0,
+                ),
+                Expanded(
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context)=>  const SignUpPage(),
+                              ));
+                        }, child: Text(tSignup.toUpperCase()))),
               ],
             ),
           ],

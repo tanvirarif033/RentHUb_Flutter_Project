@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image(
-                image: AssetImage(tWelcomeScreenImage),
+                image: const AssetImage(tWelcomeScreenImage),
                 height: size.height * 0.2,
               ),
               Text(
@@ -34,7 +34,7 @@ class LoginPage extends StatelessWidget {
               ),
               Form(
                   child: Container(
-                padding: EdgeInsets.symmetric(vertical: tFormHeight - 10.0),
+                padding: const EdgeInsets.symmetric(vertical: tFormHeight - 10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -67,7 +67,108 @@ class LoginPage extends StatelessWidget {
                     Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (context) => Container(
+                                  padding: const EdgeInsets.all(tDefaultSize),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        tForgetPasswordTitle,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayMedium,
+                                      ),
+                                      Text(
+                                        tForgetPasswordSubTitle,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium,
+                                      ),
+                                      const SizedBox(height: 30.0),
+                                      Container(
+                                        padding: const EdgeInsets.all(20.0),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          color: Colors.grey.shade200,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.mail_outline_rounded,
+                                              size: 60.0,
+                                            ),
+                                            const SizedBox(
+                                              width: 10.0,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  tEmail,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleLarge,
+                                                ),
+                                                Text(
+                                                  tResetViaEMail,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 20.0,),
+                                      Container(
+                                        padding: const EdgeInsets.all(20.0),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          color: Colors.grey.shade200,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.mail_outline_rounded,
+                                              size: 60.0,
+                                            ),
+                                            const SizedBox(
+                                              width: 10.0,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  tPhoneNo,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleLarge,
+                                                ),
+                                                Text(
+                                                  tResetViaPhone,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
                             child: const Text(tForgetPassword))),
                     SizedBox(
                       width: double.infinity,
@@ -102,7 +203,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {},
-                    child:  Text.rich(
+                    child: Text.rich(
                       TextSpan(
                         text: tDontHaveAnAccount,
                         style: Theme.of(context).textTheme.bodyLarge,
