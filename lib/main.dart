@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/constants/images_strings.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/otp_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';

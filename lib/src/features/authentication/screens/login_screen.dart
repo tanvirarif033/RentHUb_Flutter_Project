@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/constants/images_strings.dart';
 import 'package:rent_hub_flutter_project/src/constants/sizes.dart';
 import 'package:rent_hub_flutter_project/src/constants/text_strings.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/forget_password_mail.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/forget_password_phn_no.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
 import 'package:rent_hub_flutter_project/userType_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../../../../firebase_options.dart';
@@ -34,7 +37,8 @@ class LoginPage extends StatelessWidget {
               ),
               Form(
                   child: Container(
-                padding: const EdgeInsets.symmetric(vertical: tFormHeight - 10.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: tFormHeight - 10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -69,6 +73,8 @@ class LoginPage extends StatelessWidget {
                         child: TextButton(
                             onPressed: () {
                               showModalBottomSheet(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0)),
                                 context: context,
                                 builder: (context) => Container(
                                   padding: const EdgeInsets.all(tDefaultSize),
@@ -89,79 +95,95 @@ class LoginPage extends StatelessWidget {
                                             .bodyMedium,
                                       ),
                                       const SizedBox(height: 30.0),
-                                      Container(
-                                        padding: const EdgeInsets.all(20.0),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.mail_outline_rounded,
-                                              size: 60.0,
-                                            ),
-                                            const SizedBox(
-                                              width: 10.0,
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  tEmail,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge,
-                                                ),
-                                                Text(
-                                                  tResetViaEMail,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(context,
+                                          MaterialPageRoute(builder: (context)=>const ForgetPasswordMailScreen(),),
+                                        );
+                                          },
+                                        child: Container(
+                                          padding: const EdgeInsets.all(20.0),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            color: Theme.of(context).cardColor,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.mail_outline_rounded,
+                                                size: 60.0,
+                                              ),
+                                              const SizedBox(
+                                                width: 10.0,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    tEmail,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleLarge,
+                                                  ),
+                                                  Text(
+                                                    tResetViaEMail,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium,
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                      const SizedBox(height: 20.0,),
-                                      Container(
-                                        padding: const EdgeInsets.all(20.0),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          color: Colors.grey.shade200,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.mail_outline_rounded,
-                                              size: 60.0,
-                                            ),
-                                            const SizedBox(
-                                              width: 10.0,
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  tPhoneNo,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge,
-                                                ),
-                                                Text(
-                                                  tResetViaPhone,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                      const SizedBox(
+                                        height: 20.0,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(builder: (context)=>const ForgetPasswordPhoneNoScreen(),),
+                                          );
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.all(20.0),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            color: Theme.of(context).cardColor,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.mobile_friendly_rounded,
+                                                size: 60.0,
+                                              ),
+                                              const SizedBox(
+                                                width: 10.0,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    tPhoneNo,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleLarge,
+                                                  ),
+                                                  Text(
+                                                    tResetViaPhone,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyMedium,
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -202,7 +224,11 @@ class LoginPage extends StatelessWidget {
                     height: tFormHeight - 20,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context)=>SignUpPage(),),
+                      );
+                    },
                     child: Text.rich(
                       TextSpan(
                         text: tDontHaveAnAccount,
