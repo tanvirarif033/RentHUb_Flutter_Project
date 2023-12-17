@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
-import 'package:rent_hub_flutter_project/userType_screen.dart';
 import '../../../constants/images_strings.dart';
 import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
@@ -22,7 +21,7 @@ class SignUpPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image(
-                    image: AssetImage(tWelcomeScreenImage),
+                    image: const AssetImage(tWelcomeScreenImage),
                     height: size.height * 0.2,
                   ),
                   Text(
@@ -41,7 +40,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   Form(
                       child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             vertical: tFormHeight - 10.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,12 +108,12 @@ class SignUpPage extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: OutlinedButton.icon(
-                          icon: Image(
+                          icon: const Image(
                             image: AssetImage(tGoogleLogoImage),
                             width: 20.0,
                           ),
                           onPressed: () {},
-                          label: Text(tSignInWithGoogle),
+                          label: const Text(tSignInWithGoogle),
                         ),
                       ),
                       const SizedBox(
@@ -123,7 +122,7 @@ class SignUpPage extends StatelessWidget {
                       TextButton(
                         onPressed: () {
                           Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>LoginPage(),),
+                            MaterialPageRoute(builder: (context)=>const LoginPage(),),
                           );
                         },
                         child: Text.rich(

@@ -28,7 +28,7 @@ class OTPScreen extends StatelessWidget {
               const SizedBox(
                 height: 40.0,
               ),
-              Text(
+              const Text(
                 "$tOTPMessage support@renthub.com",
                 textAlign: TextAlign.center,
               ),
@@ -46,7 +46,7 @@ class OTPScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Text(tNext),
+                  child: const Text(tNext),
                 ),
               )
             ],

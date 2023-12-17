@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rent_hub_flutter_project/src/constants/images_strings.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/otp_screen.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:rent_hub_flutter_project/src/utils/theme/theme.dart';
-import 'package:rent_hub_flutter_project/takeRent_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/welcome_screen.dart';
 import 'firebase_options.dart';
 
@@ -32,7 +26,7 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: WelcomeScreen(),
+      home: const WelcomeScreen(),
     );
   }
 }

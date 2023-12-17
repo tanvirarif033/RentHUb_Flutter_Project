@@ -5,9 +5,6 @@ import 'package:rent_hub_flutter_project/src/constants/text_strings.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/forget_password_mail.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/forget_password_phn_no.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
-import 'package:rent_hub_flutter_project/userType_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
-import '../../../../firebase_options.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -212,12 +209,12 @@ class LoginPage extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton.icon(
-                      icon: Image(
+                      icon: const Image(
                         image: AssetImage(tGoogleLogoImage),
                         width: 20.0,
                       ),
                       onPressed: () {},
-                      label: Text(tSignInWithGoogle),
+                      label: const Text(tSignInWithGoogle),
                     ),
                   ),
                   const SizedBox(
@@ -226,7 +223,7 @@ class LoginPage extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context)=>SignUpPage(),),
+                          MaterialPageRoute(builder: (context)=>const SignUpPage(),),
                       );
                     },
                     child: Text.rich(

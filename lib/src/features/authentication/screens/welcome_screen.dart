@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:rent_hub_flutter_project/src/constants/images_strings.dart';
 import 'package:rent_hub_flutter_project/src/constants/sizes.dart';
 import 'package:rent_hub_flutter_project/src/constants/text_strings.dart';
@@ -14,12 +13,12 @@ class WelcomeScreen extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(tDefaultSize),
+        padding: const EdgeInsets.all(tDefaultSize),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Image(
-              image: AssetImage(tWelcomeScreenImage),
+              image: const AssetImage(tWelcomeScreenImage),
               height: height * 0.6,
             ),
             Column(

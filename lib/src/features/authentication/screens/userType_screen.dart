@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:rent_hub_flutter_project/giveRent_screen.dart';
-import 'package:rent_hub_flutter_project/takeRent_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/giveRent_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/takeRent_screen.dart';
 
 class userType_screen extends StatelessWidget{
 

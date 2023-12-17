@@ -7,10 +7,15 @@ const String tSplashImage = "assets/images/splash_images/splash-screen-image.png
 
 
 // -- OnBoarding Screen Images
-const String tOnBoardingImage1 = "assets/images/on_boarding_images/on-boarding-image-1.png";
-const String tOnBoardingImage2 = "assets/images/on_boarding_images/on-boarding-image-2.png";
+const String tOnBoardingImage1 = "assets/images/OnBoardScreen.png";
+const String tOnBoardingImage2 = "assets/images/OnBoardScreen1.png";
 const String tOnBoardingImage3 = "assets/images/on_boarding_images/on-boarding-image-3.png";
 
+// -- Review Screen Images
+const String tReview = "assets/images/Review.png";
+
+// -- User Selection
+const String tUserSelection = "assets/images/UserSelection.png";
 
 // -- Welcome Screen Images
 // -- also used in Login & SignUp

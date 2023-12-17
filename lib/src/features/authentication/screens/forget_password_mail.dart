@@ -65,10 +65,10 @@ class ForgetPasswordMailScreen extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context)=>OTPScreen(),),
+                                  MaterialPageRoute(builder: (context)=>const OTPScreen(),),
                               );
                             },
-                            child: Text(tNext),
+                            child: const Text(tNext),
                           ),
                         )
                       ],

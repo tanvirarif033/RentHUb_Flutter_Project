@@ -68,7 +68,7 @@ class ForgetPasswordPhoneNoScreen extends StatelessWidget {
                                   MaterialPageRoute(builder: (context)=> const OTPScreen(),),
                               );
                             },
-                            child: Text(tNext),
+                            child: const Text(tNext),
                           ),
                         )
                       ],
