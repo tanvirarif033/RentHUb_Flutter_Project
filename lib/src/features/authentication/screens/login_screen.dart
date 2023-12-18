@@ -5,6 +5,7 @@ import 'package:rent_hub_flutter_project/src/constants/text_strings.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/forget_password_mail.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/forget_password_phn_no.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/userType_screen.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -192,7 +193,13 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context)=> const UserType_screen(),
+                              ));
+                        },
                         child: Text(
                           tLogin.toUpperCase(),
                           //style: const TextStyle(color: Colors.white),
