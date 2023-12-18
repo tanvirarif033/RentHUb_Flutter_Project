@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/userType_screen.dart';
 import '../../../constants/images_strings.dart';
 import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
@@ -90,7 +91,13 @@ class SignUpPage extends StatelessWidget {
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context)=> const UserType_screen(),
+                                      ));
+                                },
                                 child: Text(
                                   tSignup.toUpperCase(),
                                   //style: const TextStyle(color: Colors.white),
