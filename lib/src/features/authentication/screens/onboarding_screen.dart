@@ -33,8 +33,8 @@ class _OnBoarding_screenState extends State<OnBoarding_screen> {
               pages:[
                 Container(
                   padding: const EdgeInsets.all(tDefaultSize),
-                    color:tOnBoardingPage1Color ,
-
+                   // color:tOnBoardingPage1Color ,
+                      color: Theme.of(context).cardColor,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
