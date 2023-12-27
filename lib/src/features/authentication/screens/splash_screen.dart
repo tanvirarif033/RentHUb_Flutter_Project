@@ -9,6 +9,9 @@ import 'package:rent_hub_flutter_project/src/features/authentication/screens/wel
 import 'package:rent_hub_flutter_project/main.dart';
 
 class splash_screen extends StatefulWidget{
+  final Widget? child ;
+  const splash_screen({super.key,this.child}) ;
+
   @override
   State<splash_screen> createState() => _splash_screenState();
 }

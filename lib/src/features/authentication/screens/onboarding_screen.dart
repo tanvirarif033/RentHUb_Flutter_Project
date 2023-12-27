@@ -33,8 +33,8 @@ class _OnBoarding_screenState extends State<OnBoarding_screen> {
               pages:[
                 Container(
                   padding: const EdgeInsets.all(tDefaultSize),
-                    color:tOnBoardingPage1Color ,
-
+                   // color:tOnBoardingPage1Color ,
+                      color: Theme.of(context).cardColor,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -47,7 +47,7 @@ class _OnBoarding_screenState extends State<OnBoarding_screen> {
                          const  Text(tOnBoardingSubTitle1,textAlign: TextAlign.center,),
                         ],
                       ),
-                      Text(tOnBoardingCounter1,style: Theme.of(context).textTheme.headline6,),
+                      Text(tOnBoardingCounter1,style: Theme.of(context).textTheme.titleLarge,),
                       SizedBox(height: 60.0),
                     ],
                   ),

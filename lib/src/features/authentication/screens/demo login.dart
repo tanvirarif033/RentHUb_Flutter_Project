@@ -1,3 +1,4 @@
+/*
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
@@ -313,3 +314,4 @@ class _LogInState extends State<LogIn> {
     );
   }
 }
+*/
