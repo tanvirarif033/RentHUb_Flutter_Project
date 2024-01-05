@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:gap/gap.dart';
 
 
-import 'package:google_fonts/google_fonts.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
@@ -15,7 +13,7 @@ import 'home_screen.dart';
 import 'messages_screen.dart';
 import 'notification_screen.dart';
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   _HomeState createState() => _HomeState();
@@ -68,9 +66,9 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Gap(6),
+                    const Gap(6),
                     Container(
-                      margin:EdgeInsets.symmetric(horizontal: 15),
+                      margin:const EdgeInsets.symmetric(horizontal: 15),
                       child: SizedBox(
 
                         height: 45,
@@ -83,7 +81,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     //Gap(7),
-                    Row(
+                    const Row(
                       children: [
                         Gap(10),
                         Text('RENTHUB',style: TextStyle(fontSize: 12,color: Colors.white,fontWeight: FontWeight.w800),),
@@ -102,9 +100,9 @@ class _HomeState extends State<Home> {
           // backgroundColor: Colors.green,
           actions: [
 
-            Text(' TANVIR ARIF',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w800),),
-            Gap(10),
-            CircleAvatar(
+            const Text(' TANVIR ARIF',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w800),),
+            const Gap(10),
+            const CircleAvatar(
               maxRadius: 20,
               backgroundImage: NetworkImage('https://tse1.mm.bing.net/th?id=OIP.wEsBe2udHBieFeZVmus8qAHaHk&pid=Api&rs=1&c=1&qlt=95&w=119&h=121'),
             ),
@@ -112,14 +110,14 @@ class _HomeState extends State<Home> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context)=> notification_screen(),
+                      builder: (context)=> const notification_screen(),
                     ))
             );}, icon:const Icon(Icons.notifications_none_outlined) ,color: Colors.white,focusColor: Colors.grey.shade800,),
     Builder(builder: (context){
     return IconButton(onPressed: (){
     Scaffold.of(context).openDrawer();
     },
-    icon:Icon(Icons.dehaze_outlined,color: Colors.white,),
+    icon:const Icon(Icons.dehaze_outlined,color: Colors.white,),
     );
     }),
 
@@ -135,7 +133,7 @@ class _HomeState extends State<Home> {
 
 
 
-      drawer: NavigationDrawerWidget(),
+      drawer: const NavigationDrawerWidget(),
       bottomNavigationBar: CurvedNavigationBar(
         items: items,
         index: index,
@@ -173,22 +171,22 @@ class _HomeState extends State<Home> {
     Widget widget;
     switch(index){
       case 0:
-        widget =  home_screen();
+        widget =  const home_screen();
         break;
       case 1:
-        widget = favourite_screen();
+        widget = const favourite_screen();
         break;
       case 2:
-        widget=rent_property_screen();
+        widget=const rent_property_screen();
         break;
       case 3:
-        widget=messages_screen();
+        widget=const messages_screen();
         break;
       case 4:
-        widget=search_screen();
+        widget=const search_screen();
         break;
       default:
-        widget = home_screen();
+        widget = const home_screen();
         break;
     }
     return widget;

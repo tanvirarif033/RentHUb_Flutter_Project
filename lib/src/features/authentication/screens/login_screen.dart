@@ -2,14 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/home_page_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/userType_screen.dart';
 
 import '../../../constants/images_strings.dart';
 import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
 import 'forgate.dart';
-import 'forget_password_mail.dart';
-import 'forget_password_phn_no.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -24,25 +21,25 @@ class _LogInState extends State<LogIn> {
 
   final _formkey= GlobalKey<FormState>();
 
-  TextEditingController useremailcontroller = new TextEditingController();
-  TextEditingController userpasswordcontroller = new TextEditingController();
+  TextEditingController useremailcontroller = TextEditingController();
+  TextEditingController userpasswordcontroller = TextEditingController();
 
   userLogin() async {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) =>  Home()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>  const Home()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
             "No User Found for that Email",
             style: TextStyle(fontSize: 18.0, color: Colors.black),
           ),
         ));
       } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
               "Wrong Password Provided by User",
               style: TextStyle(fontSize: 18.0, color: Colors.black),
@@ -154,7 +151,7 @@ class _LogInState extends State<LogIn> {
                                               GestureDetector(
                                                 onTap: () {
                                                   Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context)=> ForgotPassword(),),
+                                                    MaterialPageRoute(builder: (context)=> const ForgotPassword(),),
                                                   );
                                                 },
                                                 child: Container(
@@ -201,7 +198,7 @@ class _LogInState extends State<LogIn> {
                                               GestureDetector(
                                                 onTap: () {
                                                   Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context)=> ForgotPassword()),
+                                                    MaterialPageRoute(builder: (context)=> const ForgotPassword()),
                                                   );
                                                 },
                                                 child: Container(

@@ -9,7 +9,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
 class OnBoarding_screen extends StatefulWidget {
-   OnBoarding_screen({super.key});
+   const OnBoarding_screen({super.key});
 
   @override
   State<OnBoarding_screen> createState() => _OnBoarding_screenState();
@@ -38,17 +38,17 @@ class _OnBoarding_screenState extends State<OnBoarding_screen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                       Image(image:AssetImage(tOnBoardingImage1),height: size.height * 0.4 ,),
+                       Image(image:const AssetImage(tOnBoardingImage1),height: size.height * 0.4 ,),
                       Column(
                         children: [
-                          Text(tOnBoardingTitle1,style: Theme.of(context).textTheme.headline3,textAlign: TextAlign.center,),
+                          Text(tOnBoardingTitle1,style: Theme.of(context).textTheme.displaySmall,textAlign: TextAlign.center,),
 
-                          Gap(10),
+                          const Gap(10),
                          const  Text(tOnBoardingSubTitle1,textAlign: TextAlign.center,),
                         ],
                       ),
                       Text(tOnBoardingCounter1,style: Theme.of(context).textTheme.titleLarge,),
-                      SizedBox(height: 60.0),
+                      const SizedBox(height: 60.0),
                     ],
                   ),
 
@@ -59,16 +59,16 @@ class _OnBoarding_screenState extends State<OnBoarding_screen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image(image:AssetImage(tOnBoardingImage2),height: size.height * 0.4 ,),
+                      Image(image:const AssetImage(tOnBoardingImage2),height: size.height * 0.4 ,),
                       Column(
                         children: [
-                          Text(tOnBoardingTitle2,style: Theme.of(context).textTheme.headline3,textAlign: TextAlign.center),
-                          Gap(10),
+                          Text(tOnBoardingTitle2,style: Theme.of(context).textTheme.displaySmall,textAlign: TextAlign.center),
+                          const Gap(10),
                           const Text(tOnBoardingSubTitle2,textAlign: TextAlign.center,),
                         ],
                       ),
-                      Text(tOnBoardingCounter2,style: Theme.of(context).textTheme.headline6,),
-                      SizedBox(height: 60.0),
+                      Text(tOnBoardingCounter2,style: Theme.of(context).textTheme.titleLarge,),
+                      const SizedBox(height: 60.0),
                     ],
                   ),
 
@@ -79,16 +79,16 @@ class _OnBoarding_screenState extends State<OnBoarding_screen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image(image:AssetImage(tReview),height: size.height * 0.4 ,),
+                      Image(image:const AssetImage(tReview),height: size.height * 0.4 ,),
                       Column(
                         children: [
-                          Text(tOnBoardingTitle3,style: Theme.of(context).textTheme.headline3,textAlign: TextAlign.center),
-                          Gap(10),
+                          Text(tOnBoardingTitle3,style: Theme.of(context).textTheme.displaySmall,textAlign: TextAlign.center),
+                          const Gap(10),
                           const Text(tOnBoardingSubTitle3,textAlign: TextAlign.center,),
                         ],
                       ),
-                      Text(tOnBoardingCounter3,style: Theme.of(context).textTheme.headline6,),
-                      SizedBox(height: 60.0),
+                      Text(tOnBoardingCounter3,style: Theme.of(context).textTheme.titleLarge,),
+                      const SizedBox(height: 60.0),
 
                     ],
                   ),
@@ -109,10 +109,9 @@ class _OnBoarding_screenState extends State<OnBoarding_screen> {
                 controller.animateToPage(page: nextPage);
               },
               style: ElevatedButton.styleFrom(
-                side: const BorderSide(color: Colors.black26),
+                foregroundColor: Colors.white, side: const BorderSide(color: Colors.black26),
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(20.0),
-                onPrimary: Colors.white,
 
               ),
               child: Container(

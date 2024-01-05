@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/userType_screen.dart';
 import '../../../constants/images_strings.dart';
 import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
@@ -18,9 +17,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
   final FirebaseAuthService _auth = FirebaseAuthService();
 
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -178,7 +177,7 @@ class _SignUpPageState extends State<SignUpPage> {
     User? user =await _auth.signUpWithEmailAndPassword(email, password);
     if(user != null){
       print("user is successfully created");
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> LogIn()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> const LogIn()));
     }else{
       print("some error happend");
     }

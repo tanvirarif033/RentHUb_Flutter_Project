@@ -6,7 +6,7 @@ import 'package:rent_hub_flutter_project/src/features/authentication/screens/log
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key});
+  const WelcomeScreen({super.key, Key? key});
 
   @override
   Widget build(BuildContext context) {
