@@ -33,11 +33,91 @@ class _HomeState extends State<Home> {
     return Scaffold(
 
 
-     // drawer: NavigationDrawerWidget(),
+
 
 
         backgroundColor: Colors.white,
+        appBar: AppBar(
 
+          automaticallyImplyLeading: false,
+          //title: const Text('Curved Navigation Bar',style: TextStyle(color: Colors.white),),
+          backgroundColor: Colors.black,
+          titleSpacing: 0,
+          // centerTitle: true,
+          toolbarHeight: 80,
+
+          toolbarOpacity: 1,
+          elevation: 0,
+          shadowColor: Colors.grey.shade800,
+          //shape:RoundedRectangleBorder(
+           // borderRadius: BorderRadius.all(Radius.circular(20)),
+         // ) ,
+
+          leading: SafeArea(
+            child: Stack(
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Gap(6),
+                    Container(
+                      margin:EdgeInsets.symmetric(horizontal: 15),
+                      child: SizedBox(
+
+                        height: 45,
+                        width: 40,
+
+                        child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Image.network('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTP6YL3O9uOYs33pLbypoVEnfypwja6nchmp60aEVZfa6NZEasp'),
+                        ),
+                      ),
+                    ),
+                    //Gap(7),
+                    Row(
+                      children: [
+                        Gap(10),
+                        Text('RENTHUB',style: TextStyle(fontSize: 12,color: Colors.white,fontWeight: FontWeight.w800),),
+                      ],
+                    )
+                  ],
+
+                ),
+
+
+
+              ],
+            ),
+          ),
+          leadingWidth: 100,
+          // backgroundColor: Colors.green,
+          actions: [
+
+            Text(' TANVIR ARIF',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w800),),
+            Gap(10),
+            CircleAvatar(
+              maxRadius: 20,
+              backgroundImage: NetworkImage('https://tse1.mm.bing.net/th?id=OIP.wEsBe2udHBieFeZVmus8qAHaHk&pid=Api&rs=1&c=1&qlt=95&w=119&h=121'),
+            ),
+            IconButton(onPressed: (){(
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context)=> notification_screen(),
+                    ))
+            );}, icon:const Icon(Icons.notifications_none_outlined) ,color: Colors.white,focusColor: Colors.grey.shade800,),
+    Builder(builder: (context){
+    return IconButton(onPressed: (){
+    Scaffold.of(context).openDrawer();
+    },
+    icon:Icon(Icons.dehaze_outlined,color: Colors.white,),
+    );
+    }),
+
+
+  ],
+    ),
 
 
 
