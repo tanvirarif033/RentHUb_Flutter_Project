@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/constants/sizes.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/otp_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
 
 import '../../../constants/images_strings.dart';
 import '../../../constants/text_strings.dart';
@@ -46,7 +48,7 @@ class ForgetPasswordMailScreen extends StatelessWidget {
                     padding:
                     const EdgeInsets.symmetric(vertical: tFormHeight - 10.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         TextFormField(
                           decoration: const InputDecoration(
@@ -68,9 +70,48 @@ class ForgetPasswordMailScreen extends StatelessWidget {
                                   MaterialPageRoute(builder: (context)=>const OTPScreen(),),
                               );
                             },
-                            child: const Text(tNext),
+                            child: const Text(tSend),
                           ),
-                        )
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LogIn(),
+                                ),
+                              );
+                            },
+                            child: Text(tLogin.toUpperCase()),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(context,
+                              MaterialPageRoute(builder: (context)=>const SignUpPage(),),
+                            );
+                          },
+                          child: Text.rich(
+                            TextSpan(
+                              text: tDontHaveAnAccount,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                              children: const [
+                                TextSpan(
+                                  style: TextStyle(color: Colors.blue),
+                                  text: tSignup,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
