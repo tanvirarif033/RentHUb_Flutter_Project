@@ -7,6 +7,13 @@ import 'package:gap/gap.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
+
+import 'favourite_screen.dart';
+import 'home_screen.dart';
+import 'messages_screen.dart';
+import 'notification_screen.dart';
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -178,7 +185,7 @@ class _HomeState extends State<Home> {
         widget=messages_screen();
         break;
       case 4:
-        widget=profile_screen();
+        widget=search_screen();
         break;
       default:
         widget = home_screen();

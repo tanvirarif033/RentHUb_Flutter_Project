@@ -5,7 +5,10 @@ class notification_screen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text('Notification',style: TextStyle(color:Colors.white),),
+      ),
 
     );
   }

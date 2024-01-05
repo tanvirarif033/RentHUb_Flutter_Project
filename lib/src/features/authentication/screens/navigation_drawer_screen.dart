@@ -1,4 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/about_us_screen.dart';
+
+import 'account_screen.dart';
+import 'addAcoount_screen.dart';
+import 'invite_friends_screen.dart';
+import 'logout_screen.dart';
+import 'privacy_screen.dart';
+import 'setting_screen.dart';
+import 'update_screen.dart';
+import 'userPage.dart';
 
 
 class NavigationDrawerWidget extends StatelessWidget {
