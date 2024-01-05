@@ -1,6 +1,7 @@
 /* -- App Text Strings -- */
 
 // -- GLOBAL Texts
+const String tSend = "Send";
 const String tNext = "Next";
 const String tLogin = "Login";
 const String tEmail = "E-Mail";

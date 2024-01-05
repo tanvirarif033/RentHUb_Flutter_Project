@@ -92,16 +92,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             border: OutlineInputBorder(),
                           ),
                         ),
-                        const SizedBox(height: tFormHeight - 20),
-                        TextField(
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.all(13),
-                            prefixIcon: Icon(Icons.numbers_outlined),
-                            labelText: tPhoneNo,
-                            hintText: tPhoneNo,
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
+
+
                         const SizedBox(height: tFormHeight - 20),
                         TextField(
                           controller:_passwordController,

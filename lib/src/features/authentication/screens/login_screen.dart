@@ -6,6 +6,7 @@ import 'package:rent_hub_flutter_project/src/features/authentication/screens/use
 import '../../../constants/images_strings.dart';
 import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
+import 'forgate.dart';
 import 'forget_password_mail.dart';
 import 'forget_password_phn_no.dart';
 
@@ -152,7 +153,7 @@ class _LogInState extends State<LogIn> {
                                               GestureDetector(
                                                 onTap: () {
                                                   Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context)=>const ForgetPasswordMailScreen(),),
+                                                    MaterialPageRoute(builder: (context)=> ForgotPassword(),),
                                                   );
                                                 },
                                                 child: Container(
@@ -199,7 +200,7 @@ class _LogInState extends State<LogIn> {
                                               GestureDetector(
                                                 onTap: () {
                                                   Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context)=>const ForgetPasswordPhoneNoScreen(),),
+                                                    MaterialPageRoute(builder: (context)=> ForgotPassword()),
                                                   );
                                                 },
                                                 child: Container(
