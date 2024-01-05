@@ -30,8 +30,6 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery
@@ -92,16 +90,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             border: OutlineInputBorder(),
                           ),
                         ),
-                        const SizedBox(height: tFormHeight - 20),
-                        TextField(
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.all(13),
-                            prefixIcon: Icon(Icons.numbers_outlined),
-                            labelText: tPhoneNo,
-                            hintText: tPhoneNo,
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
+
+
+
+
                         const SizedBox(height: tFormHeight - 20),
                         TextField(
                           controller:_passwordController,
@@ -188,7 +180,9 @@ class _SignUpPageState extends State<SignUpPage> {
       print("user is successfully created");
       Navigator.push(context, MaterialPageRoute(builder: (context)=> LogIn()));
     }else{
-      print("some error happened");
+
+      print("some error happend");
+
     }
   }
 }
