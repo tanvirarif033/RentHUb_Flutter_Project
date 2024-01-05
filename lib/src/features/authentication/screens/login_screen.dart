@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/home_page_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/userType_screen.dart';
 
@@ -31,7 +32,7 @@ class _LogInState extends State<LogIn> {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => UserType_screen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
