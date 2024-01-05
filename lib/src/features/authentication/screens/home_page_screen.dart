@@ -102,11 +102,11 @@ class _HomeState extends State<Home> {
           // backgroundColor: Colors.green,
           actions: [
 
-            Text(' TANVIR ARIF',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w800),),
+            Text(' TANVIR ARIF',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w800)),
             Gap(10),
             CircleAvatar(
               maxRadius: 20,
-              backgroundImage: NetworkImage('https://tse1.mm.bing.net/th?id=OIP.wEsBe2udHBieFeZVmus8qAHaHk&pid=Api&rs=1&c=1&qlt=95&w=119&h=121'),
+              backgroundImage:  const NetworkImage('https://tse1.mm.bing.net/th?id=OIP.wEsBe2udHBieFeZVmus8qAHaHk&pid=Api&rs=1&c=1&qlt=95&w=119&h=121'),
             ),
             IconButton(onPressed: (){(
                 Navigator.push(
