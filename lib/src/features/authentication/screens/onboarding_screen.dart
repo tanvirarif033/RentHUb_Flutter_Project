@@ -162,6 +162,16 @@ class _OnBoarding_screenState extends State<OnBoarding_screen> {
    onPageChangedCallback(int activePageIndex){
     setState(() {
       currentPage=activePageIndex;
+      // Check if the current page index is 2
+      if (currentPage == 2) {
+        // Navigate to the WelcomeScreen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const WelcomeScreen(),
+          ),
+        );
+      }
     });
 
    }
