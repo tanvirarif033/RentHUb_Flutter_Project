@@ -34,7 +34,7 @@ class _home_screenState extends State<home_screen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        margin: const EdgeInsets.all(5),
+        margin: const EdgeInsets.all(1),
         child: Column(
           children: [
             /// Tab Bar
