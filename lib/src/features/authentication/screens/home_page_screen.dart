@@ -127,7 +127,7 @@ class _HomeState extends State<Home> {
 
 
 
-
+      drawer: NavigationDrawerWidget(),
       bottomNavigationBar: CurvedNavigationBar(
         items: items,
         index: index,
