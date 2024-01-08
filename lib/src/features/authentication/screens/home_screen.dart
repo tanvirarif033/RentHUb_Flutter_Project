@@ -154,8 +154,6 @@ class _home_screenState extends State<home_screen> {
           ],
         ),
       ),
-
-
     );
   }
 

@@ -47,14 +47,12 @@ class _HomeState extends State<Home> {
 
           automaticallyImplyLeading: false,
           //title: const Text('Curved Navigation Bar',style: TextStyle(color: Colors.white),),
-          backgroundColor: Colors.black,
-          titleSpacing: 0,
+
           // centerTitle: true,
-          toolbarHeight: 80,
+
 
           toolbarOpacity: 1,
-          elevation: 0,
-          shadowColor: Colors.grey.shade800,
+
           //shape:RoundedRectangleBorder(
            // borderRadius: BorderRadius.all(Radius.circular(20)),
          // ) ,

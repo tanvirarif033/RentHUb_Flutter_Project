@@ -16,6 +16,13 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  bool passwordVisible=false;
+
+  @override
+  void initState(){
+    super.initState();
+    passwordVisible=true;
+  }
 
   String email = "", password = "";
 
@@ -108,11 +115,14 @@ class _LogInState extends State<LogIn> {
                                 }
                                 return null;
                               },
+                              obscureText: passwordVisible,
                               decoration: const InputDecoration(
                                 contentPadding: EdgeInsets.all(13),
                                 prefixIcon: Icon(Icons.key_outlined),
                                 labelText: tPassword,
                                 hintText: tPassword,
+                                helperText: "Password must contain special character",
+                                helperStyle: TextStyle(color: Colors.deepPurpleAccent),
                                 border: OutlineInputBorder(),
                                 suffixIcon: IconButton(
                                   onPressed: null,
