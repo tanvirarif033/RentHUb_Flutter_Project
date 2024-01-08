@@ -11,6 +11,7 @@ import 'forgate.dart';
 
 import 'forget_password_mail.dart';
 import 'forget_password_phn_no.dart';
+import 'home_page_screen.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -33,17 +34,17 @@ class _LogInState extends State<LogIn> {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => UserType_screen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
             "No User Found for that Email",
             style: TextStyle(fontSize: 18.0, color: Colors.black),
           ),
         ));
       } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
               "Wrong Password Provided by User",
               style: TextStyle(fontSize: 18.0, color: Colors.black),
