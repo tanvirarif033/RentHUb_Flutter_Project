@@ -28,3 +28,6 @@ const String tGoogleLogoImage = "assets/logo/google.png";
 
 // -- Forget Password Images
 const String tForgetPasswordImage = "assets/images/forgetPass.png";
+
+//logo
+const String tLogo="assets/logo/renthub.png";

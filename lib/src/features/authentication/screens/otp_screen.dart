@@ -11,45 +11,48 @@ class OTPScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          padding: const EdgeInsets.all(tDefaultSize),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                tOTPTitle,
-                style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.bold, fontSize: 80.0),
-              ),
-              Text(
-                tOTPSubTitle.toUpperCase(),
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(
-                height: 40.0,
-              ),
-              const Text(
-                "$tOTPMessage support@renthub.com",
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              OtpTextField(
-                numberOfFields: 6,
-                fillColor: Theme.of(context).cardColor.withOpacity(0.5),
-                filled: true,
-                onSubmit: (code){print("otp is => $code");},
-              ),
-              const SizedBox(height: 20.0,),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text(tNext),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Container(
+            padding: const EdgeInsets.all(tDefaultSize),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  tOTPTitle,
+                  style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.bold, fontSize: 80.0),
                 ),
-              )
-            ],
+                Text(
+                  tOTPSubTitle.toUpperCase(),
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(
+                  height: 40.0,
+                ),
+                const Text(
+                  "$tOTPMessage support@renthub.com",
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                OtpTextField(
+                  numberOfFields: 6,
+                  fillColor: Theme.of(context).cardColor.withOpacity(0.5),
+                  filled: true,
+                  onSubmit: (code){print("otp is => $code");},
+                ),
+                const SizedBox(height: 20.0,),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text(tNext),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

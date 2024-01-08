@@ -1,6 +1,7 @@
 /* -- App Text Strings -- */
 
 // -- GLOBAL Texts
+const String tSend = "Send";
 const String tNext = "Next";
 const String tLogin = "Login";
 const String tEmail = "E-Mail";
@@ -8,22 +9,32 @@ const String tSignup = "Signup";
 const String tPhoneNo = "Phone No";
 const String tPassword = "Password";
 const String tFullName = "Full Name";
+
 const String tForgetPassword = "Forget Password";
+const String tPsswordhelper =  "Password must contain special character";
 const String tSignInWithGoogle = "Sign-In with Google";
+
+//user type text
+const String tTakeRent = "Take Rent";
+const String tGiveRent = "Give Rent";
+const String tuserTitle = "RENTHUB";
+const String tuserSubTitle = "Explore diverse options, find your perfect solution, and choose with confidence and convenience.";
+//const String tuserSubTitle = "Explore diverse options, find your perfect solution";
+const String tuserSubTitle1=" Choose with confidence and convenience.";
 
 
 // -- Splash Screen Text
-const String tAppName = ".appable/";
-const String tAppTagLine = "Learn To Code. \nFree For Everyone";
+const String tAppName = "RENTHUB";
+const String tAppTagLine = "Rent Smarter, Live Better";
 
 
 // -- On Boarding Text
-const String tOnBoardingTitle1 = "Build Awesome Apps";
-const String tOnBoardingTitle2 = "Learn from YouTube";
-const String tOnBoardingTitle3 = "Get Code & Resources";
-const String tOnBoardingSubTitle1 = "Let's start your journey with us on this amazing and easy platform.";
-const String tOnBoardingSubTitle2 = "Get Video Tutorials of each topic to learn things easily.";
-const String tOnBoardingSubTitle3 = "Save time by just copy pasting complete apps you learned from videos.";
+const String tOnBoardingTitle1 = "Streamlined Home Rentals & Management";
+const String tOnBoardingTitle2 = "Affordable Housing Solutions";
+const String tOnBoardingTitle3 = "Empowering Choices Through Ratings";
+const String tOnBoardingSubTitle1 = "Bridging homeowners and renters for seamless accommodations and hassle-free rent transactions.";
+const String tOnBoardingSubTitle2 = "Affordable housing solutions in Bangladesh for individuals and families, simplifying the rental process for property owners.";
+const String tOnBoardingSubTitle3 = "Navigate confidently with ReviewEase, where empowering choices are made effortless through insightful ratings.";
 const String tOnBoardingCounter1 = "1/3";
 const String tOnBoardingCounter2 = "2/3";
 const String tOnBoardingCounter3 = "3/3";

@@ -38,26 +38,34 @@ class WelcomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Expanded(
-                    child: OutlinedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context)=> const LoginPage(),
-                              ));
-                        }, child: Text(tLogin.toUpperCase()))),
+                  child: OutlinedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LogIn(),
+                        ),
+                      );
+                    },
+                    child: Text(tLogin.toUpperCase()),
+                  ),
+                ),
                 const SizedBox(
                   width: 10.0,
                 ),
                 Expanded(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context)=>  const SignUpPage(),
-                              ));
-                        }, child: Text(tSignup.toUpperCase()))),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignUpPage(),
+                        ),
+                      );
+                    },
+                    child: Text(tSignup.toUpperCase()),
+                  ),
+                ),
               ],
             ),
           ],

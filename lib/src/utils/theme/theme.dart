@@ -17,7 +17,14 @@ class AppTheme {
       bodyLarge: GoogleFonts.poppins(fontSize: 14.0,fontWeight: FontWeight.normal,color: tDarkColor),
       bodyMedium: GoogleFonts.poppins(fontSize: 14.0,fontWeight: FontWeight.normal,color: tDarkColor),
     ),
-    appBarTheme: const AppBarTheme(),
+    appBarTheme: const AppBarTheme(
+      foregroundColor: tWhiteColor,
+      backgroundColor: tSecondaryColor,
+      elevation: 0,
+      toolbarHeight: 80.0,
+      titleSpacing: 0,
+      shadowColor: Colors.blue,
+    ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -53,7 +60,15 @@ class AppTheme {
       bodyLarge: GoogleFonts.poppins(fontSize: 14.0,fontWeight: FontWeight.normal,color: tWhiteColor),
       bodyMedium: GoogleFonts.poppins(fontSize: 14.0,fontWeight: FontWeight.normal,color: tWhiteColor),
     ),
-    appBarTheme: const AppBarTheme(),
+    appBarTheme: const AppBarTheme(
+      foregroundColor: tSecondaryColor,
+      backgroundColor: tWhiteColor,
+      elevation: 0,
+      toolbarHeight: 80.0,
+      titleSpacing: 0,
+      shadowColor: Colors.grey,
+
+    ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(

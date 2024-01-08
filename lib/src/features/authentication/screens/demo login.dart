@@ -1,12 +1,14 @@
+/*
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/home_page_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/userType_screen.dart';
 
 import '../../../constants/images_strings.dart';
 import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
-import 'forgate.dart';
+import 'forget_password_mail.dart';
+import 'forget_password_phn_no.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -16,37 +18,30 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
-  bool passwordVisible=false;
-
-  @override
-  void initState(){
-    super.initState();
-    passwordVisible=true;
-  }
 
   String email = "", password = "";
 
   final _formkey= GlobalKey<FormState>();
 
-  TextEditingController useremailcontroller = TextEditingController();
-  TextEditingController userpasswordcontroller = TextEditingController();
+  TextEditingController useremailcontroller = new TextEditingController();
+  TextEditingController userpasswordcontroller = new TextEditingController();
 
   userLogin() async {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) =>  const Home()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => UserType_screen()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
             "No User Found for that Email",
             style: TextStyle(fontSize: 18.0, color: Colors.black),
           ),
         ));
       } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
               "Wrong Password Provided by User",
               style: TextStyle(fontSize: 18.0, color: Colors.black),
@@ -101,7 +96,6 @@ class _LogInState extends State<LogIn> {
                                 labelText: tEmail,
                                 hintText: tEmail,
                                 border: OutlineInputBorder(),
-                                filled: true,
                               ),
                             ),
                             const SizedBox(
@@ -116,29 +110,17 @@ class _LogInState extends State<LogIn> {
                                 }
                                 return null;
                               },
-                              obscureText: passwordVisible,
-                              decoration:  InputDecoration(
-                                contentPadding: const EdgeInsets.all(13),
-                                prefixIcon: const Icon(Icons.key_outlined),
+                              decoration: const InputDecoration(
+                                contentPadding: EdgeInsets.all(13),
+                                prefixIcon: Icon(Icons.key_outlined),
                                 labelText: tPassword,
                                 hintText: tPassword,
-                                helperText: tPsswordhelper,
-                                helperStyle: const TextStyle(color: Colors.deepPurpleAccent),
-                                border: const OutlineInputBorder(),
+                                border: OutlineInputBorder(),
                                 suffixIcon: IconButton(
-                                  icon: Icon(passwordVisible ? Icons.visibility:Icons.visibility_off),
-                                  onPressed: (){
-                                    setState(() {
-                                      passwordVisible =!passwordVisible;
-                                    },
-                                    );
-                                  },
+                                  onPressed: null,
+                                  icon: Icon(Icons.remove_red_eye_sharp),
                                 ),
-                                alignLabelWithHint: false,
-                                filled: true,
                               ),
-                              keyboardType: TextInputType.visiblePassword,
-                              textInputAction: TextInputAction.done,
                             ),
                             const SizedBox(height: tFormHeight - 20),
                             Align(
@@ -171,7 +153,7 @@ class _LogInState extends State<LogIn> {
                                               GestureDetector(
                                                 onTap: () {
                                                   Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context)=> const ForgotPassword(),),
+                                                    MaterialPageRoute(builder: (context)=>const ForgetPasswordMailScreen(),),
                                                   );
                                                 },
                                                 child: Container(
@@ -218,7 +200,7 @@ class _LogInState extends State<LogIn> {
                                               GestureDetector(
                                                 onTap: () {
                                                   Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context)=> const ForgotPassword()),
+                                                    MaterialPageRoute(builder: (context)=>const ForgetPasswordPhoneNoScreen(),),
                                                   );
                                                 },
                                                 child: Container(
@@ -332,3 +314,4 @@ class _LogInState extends State<LogIn> {
     );
   }
 }
+*/
