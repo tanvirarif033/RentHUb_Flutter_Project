@@ -116,18 +116,25 @@ class _LogInState extends State<LogIn> {
                                 return null;
                               },
                               obscureText: passwordVisible,
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.all(13),
-                                prefixIcon: Icon(Icons.key_outlined),
+                              decoration:  InputDecoration(
+                                contentPadding: const EdgeInsets.all(13),
+                                prefixIcon: const Icon(Icons.key_outlined),
                                 labelText: tPassword,
                                 hintText: tPassword,
                                 helperText: "Password must contain special character",
-                                helperStyle: TextStyle(color: Colors.deepPurpleAccent),
-                                border: OutlineInputBorder(),
+                                helperStyle: const TextStyle(color: Colors.deepPurpleAccent),
+                                border: const OutlineInputBorder(),
                                 suffixIcon: IconButton(
-                                  onPressed: null,
-                                  icon: Icon(Icons.remove_red_eye_sharp),
+                                  icon: Icon(passwordVisible ? Icons.visibility:Icons.visibility_off),
+                                  onPressed: (){
+                                    setState(() {
+                                      passwordVisible =!passwordVisible;
+                                    },
+                                    );
+                                  },
                                 ),
+                                alignLabelWithHint: false,
+                                filled: true,
                               ),
                             ),
                             const SizedBox(height: tFormHeight - 20),
