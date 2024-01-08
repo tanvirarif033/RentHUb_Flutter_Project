@@ -14,6 +14,13 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  bool passwordVisible=false;
+
+  @override
+  void initState(){
+    super.initState();
+    passwordVisible=true;
+  }
 
   final FirebaseAuthService _auth = FirebaseAuthService();
 
@@ -76,6 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             labelText: tFullName,
                             hintText: tFullName,
                             border: OutlineInputBorder(),
+                            filled: true,
                           ),
                         ),
                         const SizedBox(
@@ -89,20 +97,33 @@ class _SignUpPageState extends State<SignUpPage> {
                             labelText: tEmail,
                             hintText: tEmail,
                             border: OutlineInputBorder(),
+                            filled: true,
                           ),
                         ),
-
-
                         const SizedBox(height: tFormHeight - 20),
                         TextField(
                           controller:_passwordController,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.all(13),
-                            prefixIcon: Icon(Icons.key_outlined),
+                          obscureText: passwordVisible,
+                          decoration:  InputDecoration(
+                            contentPadding: const EdgeInsets.all(13),
+                            prefixIcon: const Icon(Icons.key_outlined),
                             labelText: tPassword,
                             hintText: tPassword,
-                            border: OutlineInputBorder(),
+                            border: const OutlineInputBorder(),
+                            filled: true,
+                            alignLabelWithHint: false,
+                            suffixIcon: IconButton(
+                              icon: Icon(passwordVisible ? Icons.visibility:Icons.visibility_off),
+                              onPressed: (){
+                                setState(() {
+                                  passwordVisible =!passwordVisible;
+                                },
+                                );
+                              },
+                            ),
                           ),
+                          keyboardType: TextInputType.visiblePassword,
+                          textInputAction: TextInputAction.done,
                         ),
                         const SizedBox(height: tFormHeight - 20),
                         SizedBox(
@@ -179,7 +200,7 @@ class _SignUpPageState extends State<SignUpPage> {
       print("user is successfully created");
       Navigator.push(context, MaterialPageRoute(builder: (context)=> const LogIn()));
     }else{
-      print("some error happend");
+      print("some error happened");
     }
   }
 }

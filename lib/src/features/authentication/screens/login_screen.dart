@@ -101,6 +101,7 @@ class _LogInState extends State<LogIn> {
                                 labelText: tEmail,
                                 hintText: tEmail,
                                 border: OutlineInputBorder(),
+                                filled: true,
                               ),
                             ),
                             const SizedBox(
@@ -136,6 +137,8 @@ class _LogInState extends State<LogIn> {
                                 alignLabelWithHint: false,
                                 filled: true,
                               ),
+                              keyboardType: TextInputType.visiblePassword,
+                              textInputAction: TextInputAction.done,
                             ),
                             const SizedBox(height: tFormHeight - 20),
                             Align(
