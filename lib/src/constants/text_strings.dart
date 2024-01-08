@@ -11,6 +11,7 @@ const String tPassword = "Password";
 const String tFullName = "Full Name";
 
 const String tForgetPassword = "Forget Password";
+const String tPsswordhelper =  "Password must contain special character";
 const String tSignInWithGoogle = "Sign-In with Google";
 
 //user type text

@@ -109,6 +109,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             prefixIcon: const Icon(Icons.key_outlined),
                             labelText: tPassword,
                             hintText: tPassword,
+                            helperText:tPsswordhelper,
+                            helperStyle: const TextStyle(color: Colors.deepPurpleAccent),
                             border: const OutlineInputBorder(),
                             filled: true,
                             alignLabelWithHint: false,

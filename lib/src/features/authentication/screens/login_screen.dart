@@ -122,7 +122,7 @@ class _LogInState extends State<LogIn> {
                                 prefixIcon: const Icon(Icons.key_outlined),
                                 labelText: tPassword,
                                 hintText: tPassword,
-                                helperText: "Password must contain special character",
+                                helperText: tPsswordhelper,
                                 helperStyle: const TextStyle(color: Colors.deepPurpleAccent),
                                 border: const OutlineInputBorder(),
                                 suffixIcon: IconButton(
