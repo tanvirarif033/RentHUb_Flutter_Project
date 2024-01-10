@@ -1,13 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
 import 'package:gap/gap.dart';
-
-
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
-
 import 'favourite_screen.dart';
 import 'home_screen.dart';
 import 'messages_screen.dart';
@@ -38,25 +34,10 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-
-
-
-
         backgroundColor: Colors.white,
         appBar: AppBar(
-
           automaticallyImplyLeading: false,
-          //title: const Text('Curved Navigation Bar',style: TextStyle(color: Colors.white),),
-
-          // centerTitle: true,
-
-
           toolbarOpacity: 1,
-
-          //shape:RoundedRectangleBorder(
-           // borderRadius: BorderRadius.all(Radius.circular(20)),
-         // ) ,
-
           leading: SafeArea(
             child: Stack(
               children: [
@@ -86,16 +67,11 @@ class _HomeState extends State<Home> {
                       ],
                     )
                   ],
-
                 ),
-
-
-
               ],
             ),
           ),
           leadingWidth: 100,
-          // backgroundColor: Colors.green,
           actions: [
 
             const Text(' TANVIR ARIF',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w800),),
@@ -178,7 +154,7 @@ class _HomeState extends State<Home> {
         widget=const rent_property_screen();
         break;
       case 3:
-        widget=const messages_screen();
+        widget= messages_screen();
         break;
       case 4:
         widget=const search_screen();
