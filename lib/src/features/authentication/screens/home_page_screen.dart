@@ -47,9 +47,9 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Gap(6),
+                  const Gap(6),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
                     child: SizedBox(
                       height: 45,
                       width: 40,
@@ -60,7 +60,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
-                  Row(
+                  const Row(
                     children: [
                       Gap(10),
                       Text(
@@ -103,14 +103,7 @@ class _HomeState extends State<Home> {
             color: Colors.white,
             focusColor: Colors.grey.shade800,
           ),
-          Builder(builder: (context) {
-            return IconButton(
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              icon: Icon(Icons.dehaze_outlined, color: Colors.white,),
-            );
-          }),
+
         ],
       ),
       drawer: NavigationDrawerWidget(),
