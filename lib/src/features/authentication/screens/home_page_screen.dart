@@ -112,7 +112,7 @@ class _HomeState extends State<Home> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context)=> notification_screen(),
+                      builder: (context)=> NotificationScreen(),
                     ))
             );}, icon:const Icon(Icons.notifications_none_outlined) ,color: Colors.white,focusColor: Colors.grey.shade800,),
     Builder(builder: (context){
@@ -182,7 +182,8 @@ class _HomeState extends State<Home> {
         widget=rent_property_screen();
         break;
       case 3:
-        widget=messages_screen();
+        //widget=messages_screen();
+      widget =ChatScreen();
         break;
       case 4:
         widget=search_screen();
