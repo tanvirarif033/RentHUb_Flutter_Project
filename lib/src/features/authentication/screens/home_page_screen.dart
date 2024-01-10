@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/home_screen0.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
@@ -145,7 +146,7 @@ class _HomeState extends State<Home> {
     Widget widget;
     switch(index){
       case 0:
-        widget =  const home_screen();
+        widget =  const HomeScreen();
         break;
       case 1:
         widget = const favourite_screen();
