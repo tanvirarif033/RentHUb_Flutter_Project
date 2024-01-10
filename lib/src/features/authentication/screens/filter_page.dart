@@ -31,35 +31,38 @@ class _FilterPageState extends State<FilterPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Property Types',
                 style: TextStyle(fontSize: 20),
               ),
-              SizedBox(height: 10),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 1.0,
+              const SizedBox(height: 10),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: ToggleButtons(
-                  children: [
-                    _buildToggleButton('Family'),
-                    _buildToggleButton('Bachelor'),
-                    _buildToggleButton('Office'),
-                    _buildToggleButton('Sublet'),
-                    _buildToggleButton('Hostel'),
-                  ],
-                  isSelected: isSelected,
-                  onPressed: (index) {
-                    setState(() {
-                      // Toggle the state for the selected index
-                      isSelected[index] = !isSelected[index];
-                    });
-                  },
+                  child: ToggleButtons(
+                    children: [
+                      _buildToggleButton('Family'),
+                      _buildToggleButton('Bachelor'),
+                      _buildToggleButton('Office'),
+                      _buildToggleButton('Sublet'),
+                      _buildToggleButton('Hostel'),
+                    ],
+                    isSelected: isSelected,
+                    onPressed: (index) {
+                      setState(() {
+                        // Toggle the state for the selected index
+                        isSelected[index] = !isSelected[index];
+                      });
+                    },
+                  ),
                 ),
               ),
             ],
@@ -71,10 +74,10 @@ class _FilterPageState extends State<FilterPage> {
 
   Widget _buildToggleButton(String label) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Text(
         label,
-        style: TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 16),
       ),
     );
   }
