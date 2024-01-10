@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rent_hub_flutter_project/src/constants/colors.dart';
 import 'package:rent_hub_flutter_project/src/constants/images_strings.dart';
-import 'package:rent_hub_flutter_project/src/constants/sizes.dart';
 import 'package:rent_hub_flutter_project/src/constants/text_strings.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/onboarding_screen.dart';
 import 'dart:async';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/welcome_screen.dart';
-import 'package:rent_hub_flutter_project/main.dart';
 
 class splash_screen extends StatefulWidget{
   final Widget? child ;
@@ -25,17 +21,18 @@ class _splash_screenState extends State<splash_screen> with TickerProviderStateM
     startAnimation();
 
     super.initState();
-    controller =AnimationController(vsync: this,duration: Duration(seconds: 3));
+    controller =AnimationController(vsync: this,duration: const Duration(seconds: 3));
     animation=CurvedAnimation(parent: controller, curve: Curves.easeIn);
     controller.repeat();
-    Timer(Duration(seconds: 5),(){
+    Timer(const Duration(seconds: 5),(){
       Navigator.pushReplacement(
           context, MaterialPageRoute(
-          builder: (context)=> OnBoarding_screen()));
+          builder: (context)=> const OnBoarding_screen()));
 
     });
   }
 
+  @override
   void dispose(){
     controller.dispose();
     super.dispose();
@@ -63,19 +60,19 @@ class _splash_screenState extends State<splash_screen> with TickerProviderStateM
                   opacity: animate ? 1 :0,
                   child: Center(
                     child: Container(
-                      margin:  EdgeInsets.only(bottom: 240.0),
+                      margin:  const EdgeInsets.only(bottom: 240.0),
                       //padding:  EdgeInsets.all(8.0),
 
 
                       height: 140,
                       width: 140,
-                      child: Image(image: AssetImage(tWelcomeScreenImage),height: size.height * 0.3,),
+                      child: Image(image: const AssetImage(tWelcomeScreenImage),height: size.height * 0.3,),
 
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
                 width: 40,
               ),
@@ -89,12 +86,12 @@ class _splash_screenState extends State<splash_screen> with TickerProviderStateM
                       child: SizedBox(
                         height: 53,
                         width: 60,
-                        child:Image(image: AssetImage(tLogo),height: size.height * 0.09,),
+                        child:Image(image: const AssetImage(tLogo),height: size.height * 0.09,),
 
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                     width: 20,
                   ),
@@ -131,9 +128,9 @@ class _splash_screenState extends State<splash_screen> with TickerProviderStateM
     );
   }
   Future startAnimation() async{
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 500));
     setState(() => animate=true );
-    await Future.delayed(Duration(milliseconds:500 ));
+    await Future.delayed(const Duration(milliseconds:500 ));
 
   }
 }

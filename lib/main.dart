@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/onboarding_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/splash_screen.dart';
 import 'package:rent_hub_flutter_project/src/utils/theme/theme.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/welcome_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -26,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
-      home: splash_screen(
+      home: const splash_screen(
         child: LogIn(), // Assuming WelcomeScreen is the initial screen after the splash screen
       ),
     );

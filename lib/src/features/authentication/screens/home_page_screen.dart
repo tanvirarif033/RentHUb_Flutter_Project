@@ -1,19 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
-
 import 'favourite_screen.dart';
 import 'home_screen.dart';
 import 'messages_screen.dart';
 import 'notification_screen.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   _HomeState createState() => _HomeState();
@@ -140,12 +140,15 @@ class _HomeState extends State<Home> {
     Widget widget;
     switch (index) {
       case 0:
+
         widget = home_screen();
+
         break;
       case 1:
-        widget = favourite_screen();
+        widget = const favourite_screen();
         break;
       case 2:
+
         widget = rent_property_screen();
         break;
       case 3:
@@ -153,9 +156,10 @@ class _HomeState extends State<Home> {
         break;
       case 4:
         widget = search_screen();
+
         break;
       default:
-        widget = home_screen();
+        widget = const home_screen();
         break;
     }
     return SingleChildScrollView(

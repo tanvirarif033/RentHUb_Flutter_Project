@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class home_screen extends StatefulWidget{
+  const home_screen({super.key});
+
   @override
   State<home_screen> createState() => _home_screenState();
 }
@@ -34,7 +35,7 @@ class _home_screenState extends State<home_screen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        margin: const EdgeInsets.all(5),
+        margin: const EdgeInsets.all(1),
         child: Column(
           children: [
             /// Tab Bar
@@ -153,8 +154,6 @@ class _home_screenState extends State<home_screen> {
           ],
         ),
       ),
-
-
     );
   }
 

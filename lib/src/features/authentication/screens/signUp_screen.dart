@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/userType_screen.dart';
 import '../../../constants/images_strings.dart';
 import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
@@ -15,12 +14,19 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  bool passwordVisible=false;
+
+  @override
+  void initState(){
+    super.initState();
+    passwordVisible=true;
+  }
 
   final FirebaseAuthService _auth = FirebaseAuthService();
 
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -75,6 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             labelText: tFullName,
                             hintText: tFullName,
                             border: OutlineInputBorder(),
+                            filled: true,
                           ),
                         ),
                         const SizedBox(
@@ -88,22 +95,36 @@ class _SignUpPageState extends State<SignUpPage> {
                             labelText: tEmail,
                             hintText: tEmail,
                             border: OutlineInputBorder(),
+                            filled: true,
                           ),
                         ),
-
-
-
 
                         const SizedBox(height: tFormHeight - 20),
                         TextField(
                           controller:_passwordController,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.all(13),
-                            prefixIcon: Icon(Icons.key_outlined),
+                          obscureText: passwordVisible,
+                          decoration:  InputDecoration(
+                            contentPadding: const EdgeInsets.all(13),
+                            prefixIcon: const Icon(Icons.key_outlined),
                             labelText: tPassword,
                             hintText: tPassword,
-                            border: OutlineInputBorder(),
+                            helperText:tPsswordhelper,
+                            helperStyle: const TextStyle(color: Colors.deepPurpleAccent),
+                            border: const OutlineInputBorder(),
+                            filled: true,
+                            alignLabelWithHint: false,
+                            suffixIcon: IconButton(
+                              icon: Icon(passwordVisible ? Icons.visibility:Icons.visibility_off),
+                              onPressed: (){
+                                setState(() {
+                                  passwordVisible =!passwordVisible;
+                                },
+                                );
+                              },
+                            ),
                           ),
+                          keyboardType: TextInputType.visiblePassword,
+                          textInputAction: TextInputAction.done,
                         ),
                         const SizedBox(height: tFormHeight - 20),
                         SizedBox(
@@ -178,9 +199,8 @@ class _SignUpPageState extends State<SignUpPage> {
     User? user =await _auth.signUpWithEmailAndPassword(email, password);
     if(user != null){
       print("user is successfully created");
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> LogIn()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> const LogIn()));
     }else{
-
       print("some error happend");
 
     }

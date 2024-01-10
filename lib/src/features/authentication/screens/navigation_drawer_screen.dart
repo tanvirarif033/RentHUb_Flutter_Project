@@ -12,12 +12,14 @@ import 'userPage.dart';
 
 
 class NavigationDrawerWidget extends StatelessWidget {
-  final padding = EdgeInsets.symmetric(horizontal: 20);
+  final padding = const EdgeInsets.symmetric(horizontal: 20);
+
+  const NavigationDrawerWidget({super.key});
   @override
   Widget build(BuildContext context) {
-    final name = 'ARIF33';
-    final email = 'arif33@gmail.com';
-    final urlImage =
+    const name = 'ARIF33';
+    const email = 'arif33@gmail.com';
+    const urlImage =
         'https://tse1.mm.bing.net/th?id=OIP.wEsBe2udHBieFeZVmus8qAHaHk&pid=Api&rs=1&c=1&qlt=95&w=119&h=121';
     return Drawer(
 
@@ -30,7 +32,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               name: name,
               email: email,
               onClicked: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => UserPage(
+                builder: (context) => const UserPage(
                   name: 'Arif33',
                   urlImage: urlImage,
                 ),
@@ -40,7 +42,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               padding: padding,
               child: Column(
                 children: [
-                  Divider(color: Colors.white70),
+                  const Divider(color: Colors.white70),
 
                   const SizedBox(height: 24),
                   buildMenuItem(
@@ -75,7 +77,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                     onClicked: () => selectedItem(context, 4),
                   ),
                   const SizedBox(height: 24),
-                  Divider(color: Colors.white70),
+                  const Divider(color: Colors.white70),
                   const SizedBox(height: 24),
                   buildMenuItem(
                     text: 'Log Out',
@@ -112,27 +114,27 @@ class NavigationDrawerWidget extends StatelessWidget {
       InkWell(
         onTap: onClicked,
         child: Container(
-          padding: padding.add(EdgeInsets.symmetric(vertical: 40)),
+          padding: padding.add(const EdgeInsets.symmetric(vertical: 40)),
           child: Row(
             children: [
               CircleAvatar(radius: 30, backgroundImage: NetworkImage(urlImage)),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     name,
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: const TextStyle(fontSize: 20, color: Colors.white),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     email,
-                    style: TextStyle(fontSize: 14, color: Colors.white),
+                    style: const TextStyle(fontSize: 14, color: Colors.white),
                   ),
                 ],
               ),
-              Spacer(),
-              CircleAvatar(
+              const Spacer(),
+              const CircleAvatar(
                 radius: 24,
                 //backgroundColor: Color.fromRGBO(30, 60, 168, 1),
                 backgroundColor: Colors.white,
@@ -150,12 +152,12 @@ class NavigationDrawerWidget extends StatelessWidget {
     required IconData icon,
     VoidCallback? onClicked,
   }) {
-    final color = Colors.white;
-    final hoverColor = Colors.white70;
+    const color = Colors.white;
+    const hoverColor = Colors.white70;
 
     return ListTile(
       leading: Icon(icon, color: color),
-      title: Text(text, style: TextStyle(color: color)),
+      title: Text(text, style: const TextStyle(color: color)),
       hoverColor: hoverColor,
       onTap: onClicked,
     );
@@ -167,48 +169,48 @@ class NavigationDrawerWidget extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => account_screen(),
+          builder: (context) => const account_screen(),
         ));
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => addAccount_screen(),
+          builder: (context) => const addAccount_screen(),
         ));
         break;
       case 2:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => privacy_screen(),
+          builder: (context) => const privacy_screen(),
         ));
         break;
       case 3:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => update_screen(),
+          builder: (context) => const update_screen(),
         ));
         break;
       case 4:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => setting_screen(),
+          builder: (context) => const setting_screen(),
         ));
         break;
       case 5:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => logout_screen(),
+          builder: (context) => const logout_screen(),
         ));
         break;
       case 6:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => about_us_screen(),
+          builder: (context) => const about_us_screen(),
         ));
         break;
       case 7:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => invite_friends_screen(),
+          builder: (context) => const invite_friends_screen(),
         ));
         break;
 
       default:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => account_screen(),
+          builder: (context) => const account_screen(),
         ));
         break;
     }
