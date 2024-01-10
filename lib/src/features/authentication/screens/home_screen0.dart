@@ -12,7 +12,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _value = 1;
-
+  @override
+  void initState() {
+    super.initState();
+    _value = 1; // Set an initial value
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0)),
                             context: context,
+                            isScrollControlled: true,
                             builder: (context) => Container(
+                              height: MediaQuery.of(context).size.height*0.35,
                               padding: const EdgeInsets.all(tDefaultSize),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       "Sort By",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .titleLarge,
+                                          .displaySmall,
                                     ),
                                   ),
                                   Row(
@@ -72,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           setState(() {
                                             _value = value as int;
                                           });
+                                          Navigator.pop(context);
                                         },
                                       ),
                                       const Gap(10),
@@ -87,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           setState(() {
                                             _value = value as int;
                                           });
+                                          Navigator.pop(context);
                                         },
                                       ),
                                       const Gap(10),
@@ -102,11 +110,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                           setState(() {
                                             _value = value as int;
                                           });
+                                          Navigator.pop(context);
                                         },
                                       ),
                                       const Gap(10),
                                       const Text("Price (High to Low)"),
                                     ],
+                                  ),
+                                  Gap(15),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pop(context); // Close the modal
+                                    },
+                                    child: const Text('Close'),
                                   ),
                                 ],
                               ),
