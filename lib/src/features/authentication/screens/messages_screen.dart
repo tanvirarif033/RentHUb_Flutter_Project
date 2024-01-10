@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gap/gap.dart';
 
 class messages_screen extends StatefulWidget {
   @override
@@ -42,8 +43,8 @@ class _MessagesScreenState extends State<messages_screen> {
                     String sender = data['sender'] ?? 'Unknown sender';
 
                     return ListTile(
-                      title: Text(message),
-                      subtitle: Text(sender),
+                      title: Text(sender,style: Theme.of(context).textTheme.headlineMedium),
+                      subtitle: Text(message,style: Theme.of(context).textTheme.titleLarge),
                     );
                   }).toList(),
 
@@ -60,6 +61,7 @@ class _MessagesScreenState extends State<messages_screen> {
                     controller: _messageController,
                     decoration: InputDecoration(
                       hintText: 'Type your message...',
+                      hintStyle: TextStyle(color: Colors.blue,fontSize: 18),
                     ),
                   ),
                 ),
@@ -69,11 +71,14 @@ class _MessagesScreenState extends State<messages_screen> {
                     _sendMessage();
                   },
                 ),
+
               ],
             ),
           ),
+          Gap(8) ,
         ],
       ),
+
     );
   }
 
