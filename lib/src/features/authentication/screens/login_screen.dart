@@ -29,24 +29,29 @@ class _LogInState extends State<LogIn> {
 
   userLogin() async {
     try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: useremailcontroller.text,
+        password: userpasswordcontroller.text,
+      );
+
+      // Show a success Snackbar
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Center(child: Text("Login Successful")),
+          duration: const Duration(seconds: 2),
+        ),
+      );
 
       Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-            "No User Found for that Email",
-            style: TextStyle(fontSize: 18.0, color: Colors.black),
+      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+        // Show a failure Snackbar
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Center(child: Text("Failed to Login. Check your credentials.")),
+            duration: const Duration(seconds: 2),
           ),
-        ));
-      } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(
-              "Wrong Password Provided by User",
-              style: TextStyle(fontSize: 18.0, color: Colors.black),
-            )));
+        );
       }
     }
   }
