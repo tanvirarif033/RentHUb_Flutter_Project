@@ -36,19 +36,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
     // You might want to navigate to a specific screen
   }
 
-
-class notification_screen extends StatelessWidget{
-  const notification_screen({super.key});
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-
         title: Text('Notification', style: TextStyle(color: Colors.white)),
-
       ),
     );
   }
