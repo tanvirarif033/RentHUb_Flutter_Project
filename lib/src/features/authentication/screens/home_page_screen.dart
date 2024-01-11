@@ -19,6 +19,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final items = const [
+
     Icon(Icons.home_outlined, size: 30, color: Colors.white),
     Icon(Icons.favorite_border, size: 30, color: Colors.white),
     Icon(Icons.add_circle_outline_sharp, size: 30, color: Colors.white),
@@ -35,6 +36,7 @@ class _HomeState extends State<Home> {
     'Search',
   ];
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +52,7 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Gap(6),
+
 
                   const Row(
                     children: [
@@ -105,6 +108,7 @@ class _HomeState extends State<Home> {
         items: items,
         index: index,
         onTap: (selectedIndex) {
+
           setState(() {
             index = selectedIndex;
           });
@@ -137,10 +141,11 @@ class _HomeState extends State<Home> {
         widget = const rent_property_screen();
         break;
       case 3:
-        widget =  messages_screen();
+
+      widget =ChatScreen();
         break;
       case 4:
-        widget = const search_screen();
+        widget = const SearchScreen();
         break;
       default:
         widget = const HomeScreen();
