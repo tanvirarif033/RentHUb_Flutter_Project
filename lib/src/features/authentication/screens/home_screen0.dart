@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     padding: const EdgeInsets.all(3.0),
                     child: SizedBox(
-                      width: 100,
+                      width: 125,
                       child: OutlinedButton.icon(
                         icon: const Icon(Icons.feed_outlined),
                         onPressed: () {},
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     padding: const EdgeInsets.all(3.0),
                     child: SizedBox(
-                      width: 100,
+                      width: 125,
                       child: OutlinedButton.icon(
                         icon: const Icon(Icons.content_paste_search_outlined),
                         onPressed: () {
@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     padding: const EdgeInsets.all(3.0),
                     child: SizedBox(
-                      width: 100,
+                      width: 125,
                       child: OutlinedButton.icon(
                         icon: const Icon(Icons.location_on_outlined),
                         onPressed: () {},
@@ -149,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     padding: const EdgeInsets.all(3.0),
                     child: SizedBox(
-                      width: 100,
+                      width: 125,
                       child: OutlinedButton.icon(
                         icon: const Icon(Icons.manage_search_outlined),
                         onPressed: () {},

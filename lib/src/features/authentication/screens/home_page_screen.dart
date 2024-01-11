@@ -9,6 +9,7 @@ import 'favourite_screen.dart';
 import 'home_screen.dart';
 import 'messages_screen.dart';
 import 'notification_screen.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -17,103 +18,108 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   final items = const [
-    Icon(Icons.home_outlined, size: 30,color: Colors.white,),
-    Icon(Icons.favorite_border, size: 30,color: Colors.white),
-    Icon(Icons.add_circle_outline_sharp, size: 30,color: Colors.white),
-    Icon(Icons.chat_bubble_outline_outlined, size: 30,color: Colors.white),
-    Icon(Icons.search_outlined, size: 30,color: Colors.white)
+    Icon(
+      Icons.home_outlined,
+      size: 30,
+      color: Colors.white,
+    ),
+    Icon(Icons.favorite_border, size: 30, color: Colors.white),
+    Icon(Icons.add_circle_outline_sharp, size: 30, color: Colors.white),
+    Icon(Icons.chat_bubble_outline_outlined, size: 30, color: Colors.white),
+    Icon(Icons.search_outlined, size: 30, color: Colors.white)
   ];
   int index = 0;
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          toolbarOpacity: 1,
-          leading: SafeArea(
-            child: Stack(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Gap(6),
-                    Container(
-                      margin:const EdgeInsets.symmetric(horizontal: 15),
-                      child: SizedBox(
-
-                        height: 45,
-                        width: 40,
-
-                        child: Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: Image.network('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTP6YL3O9uOYs33pLbypoVEnfypwja6nchmp60aEVZfa6NZEasp'),
-                        ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        toolbarOpacity: 1,
+        leading: SafeArea(
+          child: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Gap(6),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: SizedBox(
+                      height: 45,
+                      width: 40,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Image.network(
+                            'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTP6YL3O9uOYs33pLbypoVEnfypwja6nchmp60aEVZfa6NZEasp'),
                       ),
                     ),
-                    //Gap(7),
-                    const Row(
-                      children: [
-                        Gap(10),
-                        Text('RENTHUB',style: TextStyle(fontSize: 12,color: Colors.white,fontWeight: FontWeight.w800),),
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                  //Gap(7),
+                  const Row(
+                    children: [
+                      Gap(10),
+                      Text(
+                        'RENTHUB',
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ],
           ),
-          leadingWidth: 100,
-          actions: [
-
-            const Text(' TANVIR ARIF',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w800),),
-            const Gap(10),
-            const CircleAvatar(
-              maxRadius: 20,
-              backgroundImage: NetworkImage('https://tse1.mm.bing.net/th?id=OIP.wEsBe2udHBieFeZVmus8qAHaHk&pid=Api&rs=1&c=1&qlt=95&w=119&h=121'),
-            ),
-            IconButton(onPressed: (){(
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context)=> const notification_screen(),
-                    ))
-            );}, icon:const Icon(Icons.notifications_none_outlined) ,color: Colors.white,focusColor: Colors.grey.shade800,),
-    Builder(builder: (context){
-    return IconButton(onPressed: (){
-    Scaffold.of(context).openDrawer();
-    },
-    icon:const Icon(Icons.dehaze_outlined,color: Colors.white,),
-    );
-    }),
-
-
-  ],
-    ),
-
-
-
-
-
-
-
-
-
+        ),
+        leadingWidth: 100,
+        actions: [
+          const Text(
+            ' TANVIR ARIF',
+            style: TextStyle(
+                fontSize: 15, color: Colors.white, fontWeight: FontWeight.w800),
+          ),
+          const Gap(10),
+          const CircleAvatar(
+            maxRadius: 20,
+            backgroundImage: NetworkImage(
+                'https://tse1.mm.bing.net/th?id=OIP.wEsBe2udHBieFeZVmus8qAHaHk&pid=Api&rs=1&c=1&qlt=95&w=119&h=121'),
+          ),
+          IconButton(
+            onPressed: () {
+              (Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const notification_screen(),
+                  )));
+            },
+            icon: const Icon(Icons.notifications_none_outlined),
+            color: Colors.white,
+            focusColor: Colors.grey.shade800,
+          ),
+          Builder(builder: (context) {
+            return IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              icon: const Icon(
+                Icons.dehaze_outlined,
+                color: Colors.white,
+              ),
+            );
+          }),
+        ],
+      ),
       drawer: const NavigationDrawerWidget(),
       bottomNavigationBar: CurvedNavigationBar(
         items: items,
         index: index,
 
-        onTap: (selctedIndex){
+        onTap: (selctedIndex) {
           setState(() {
             index = selctedIndex;
           });
@@ -125,40 +131,34 @@ class _HomeState extends State<Home> {
         animationDuration: const Duration(milliseconds: 300),
         // animationCurve: ,
       ),
-
       body: Container(
-         // color: Colors.yellow,
-          width: double.infinity,
-          height: double.infinity,
-          alignment: Alignment.center,
+        // color: Colors.yellow,
+        width: double.infinity,
+        height: double.infinity,
+        alignment: Alignment.center,
         margin: const EdgeInsets.all(5),
-          child: getSelectedWidget(index: index),
+        child: getSelectedWidget(index: index),
       ),
-
-
-
-
     );
-
   }
 
-  Widget getSelectedWidget({required int index}){
+  Widget getSelectedWidget({required int index}) {
     Widget widget;
-    switch(index){
+    switch (index) {
       case 0:
-        widget =  const HomeScreen();
+        widget = const HomeScreen();
         break;
       case 1:
         widget = const favourite_screen();
         break;
       case 2:
-        widget=const rent_property_screen();
+        widget = const rent_property_screen();
         break;
       case 3:
-        widget= messages_screen();
+        widget = messages_screen();
         break;
       case 4:
-        widget=const search_screen();
+        widget = const SearchScreen();
         break;
       default:
         widget = const home_screen();
