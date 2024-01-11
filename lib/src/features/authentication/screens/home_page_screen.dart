@@ -75,46 +75,36 @@ class _HomeState extends State<Home> {
               ),
             ],
           ),
-        ),
-        leadingWidth: 100,
-        actions: [
-          const Text(
-            ' TANVIR ARIF',
-            style: TextStyle(
-                fontSize: 15, color: Colors.white, fontWeight: FontWeight.w800),
-          ),
-          const Gap(10),
-          const CircleAvatar(
-            maxRadius: 20,
-            backgroundImage: NetworkImage(
-                'https://tse1.mm.bing.net/th?id=OIP.wEsBe2udHBieFeZVmus8qAHaHk&pid=Api&rs=1&c=1&qlt=95&w=119&h=121'),
-          ),
-          IconButton(
-            onPressed: () {
-              (Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const notification_screen(),
-                  )));
-            },
-            icon: const Icon(Icons.notifications_none_outlined),
-            color: Colors.white,
-            focusColor: Colors.grey.shade800,
-          ),
-          Builder(builder: (context) {
-            return IconButton(
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              icon: const Icon(
-                Icons.dehaze_outlined,
-                color: Colors.white,
-              ),
-            );
-          }),
-        ],
-      ),
-      drawer: const NavigationDrawerWidget(),
+          leadingWidth: 100,
+          // backgroundColor: Colors.green,
+          actions: [
+
+            Text(' TANVIR ARIF',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w800)),
+            Gap(10),
+            CircleAvatar(
+              maxRadius: 20,
+              backgroundImage:  const NetworkImage('https://tse1.mm.bing.net/th?id=OIP.wEsBe2udHBieFeZVmus8qAHaHk&pid=Api&rs=1&c=1&qlt=95&w=119&h=121'),
+            ),
+            IconButton(onPressed: (){(
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context)=> NotificationScreen(),
+                    ))
+            );}, icon:const Icon(Icons.notifications_none_outlined) ,color: Colors.white,focusColor: Colors.grey.shade800,),
+    Builder(builder: (context){
+    return IconButton(onPressed: (){
+    Scaffold.of(context).openDrawer();
+    },
+    icon:Icon(Icons.dehaze_outlined,color: Colors.white,),
+    );
+    }),
+
+
+  ],
+    ),
+      drawer: NavigationDrawerWidget(),
+
       bottomNavigationBar: CurvedNavigationBar(
         items: items,
         index: index,
@@ -155,7 +145,7 @@ class _HomeState extends State<Home> {
         widget = const rent_property_screen();
         break;
       case 3:
-        widget = messages_screen();
+      widget =ChatScreen();
         break;
       case 4:
         widget = const SearchScreen();
