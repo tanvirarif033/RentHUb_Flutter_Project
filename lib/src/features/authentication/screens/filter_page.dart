@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:rent_hub_flutter_project/src/constants/text_strings.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class FilterPage extends StatefulWidget {
@@ -81,30 +82,29 @@ class _FilterPageState extends State<FilterPage> {
                       ],
                     ),
                     TextField(
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(13),
-                        prefixIcon: Icon(Icons.mail_outline_outlined),
-                        /*labelText: ,
-                            hintText: tEmail,*/
+                        prefixIcon: Icon(Icons.money),
+                        labelText: tminprice,
+                        hintText: tminprice,
                         border: OutlineInputBorder(),
                         filled: true,
                       ),
                     ),
                     Gap(5),
-                    Text('To'),
+                    Text('To',style: TextStyle(fontWeight: FontWeight.bold),),
                     TextField(
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(13),
                         prefixIcon: Icon(Icons.mail_outline_outlined),
-                        /*labelText: ,
-                            hintText: tEmail,*/
+                        labelText: tmaxprice,
+                        hintText: tmaxprice,
                         border: OutlineInputBorder(),
                         filled: true,
                       ),
                     ),
                   ],
                 ),
-
 
                 SizedBox(height: 20),
                 const Row(
@@ -164,6 +164,23 @@ class _FilterPageState extends State<FilterPage> {
                   ),
                 ),
 
+                SizedBox(height: 40),
+
+                // ElevatedButton to show properties
+                SizedBox(
+                  width: double.infinity,
+                  child:ElevatedButton(
+                    onPressed: () {
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Showing properties with selected filters'),
+                        ),
+                      );
+                    },
+                    child: Text('Show Properties'),
+                  ),
+                ),
               ],
             ),
           ),
