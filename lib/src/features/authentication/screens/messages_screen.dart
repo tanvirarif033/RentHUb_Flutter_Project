@@ -17,7 +17,6 @@ class _ChatScreenState extends State<ChatScreen> {
   CollectionReference _messages = FirebaseFirestore.instance.collection('messages');
   CollectionReference _users = FirebaseFirestore.instance.collection('users');
   String _currentUser = 'User1'; // Replace this with the actual username
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +70,6 @@ class _ChatScreenState extends State<ChatScreen> {
                     );
                   }).toList(),
                 );
-
               },
             ),
           ),
@@ -99,6 +97,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     _pickImage();
                   },
                 ),
+
               ],
             ),
           ),
@@ -113,11 +112,13 @@ class _ChatScreenState extends State<ChatScreen> {
       _messages.add({
         'message': message,
         'sender': _currentUser,
+
         'timestamp': FieldValue.serverTimestamp(),
       });
       _messageController.clear();
     }
   }
+
 
   void _searchUser() async {
     String username = _searchController.text.trim();
@@ -195,3 +196,4 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
+

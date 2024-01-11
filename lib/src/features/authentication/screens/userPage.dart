@@ -5,10 +5,10 @@ class UserPage extends StatelessWidget {
   final String urlImage;
 
   const UserPage({
-    Key? key,
+    super.key,
     required this.name,
     required this.urlImage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => Scaffold(
