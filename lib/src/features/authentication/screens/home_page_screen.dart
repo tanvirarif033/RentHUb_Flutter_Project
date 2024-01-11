@@ -19,17 +19,23 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final items = const [
-    Icon(
-      Icons.home_outlined,
-      size: 30,
-      color: Colors.white,
-    ),
+
+    Icon(Icons.home_outlined, size: 30, color: Colors.white),
     Icon(Icons.favorite_border, size: 30, color: Colors.white),
     Icon(Icons.add_circle_outline_sharp, size: 30, color: Colors.white),
     Icon(Icons.chat_bubble_outline_outlined, size: 30, color: Colors.white),
-    Icon(Icons.search_outlined, size: 30, color: Colors.white)
+    Icon(Icons.search_outlined, size: 30, color: Colors.white),
   ];
   int index = 0;
+
+  List<String> appBarTitles = [
+    'Home',
+    'Favorites',
+    'Rent Property',
+    'Messages',
+    'Search',
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,28 +52,18 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Gap(6),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 15),
-                    child: SizedBox(
-                      height: 45,
-                      width: 40,
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Image.network(
-                            'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTP6YL3O9uOYs33pLbypoVEnfypwja6nchmp60aEVZfa6NZEasp'),
-                      ),
-                    ),
-                  ),
-                  //Gap(7),
+
+
                   const Row(
                     children: [
                       Gap(10),
                       Text(
                         'RENTHUB',
                         style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w800),
+                          fontSize: 12,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
                     ],
                   )
@@ -75,54 +71,54 @@ class _HomeState extends State<Home> {
               ),
             ],
           ),
-          leadingWidth: 100,
-          // backgroundColor: Colors.green,
-          actions: [
-
-            Text(' TANVIR ARIF',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.w800)),
-            Gap(10),
-            CircleAvatar(
-              maxRadius: 20,
-              backgroundImage:  const NetworkImage('https://tse1.mm.bing.net/th?id=OIP.wEsBe2udHBieFeZVmus8qAHaHk&pid=Api&rs=1&c=1&qlt=95&w=119&h=121'),
-            ),
-            IconButton(onPressed: (){(
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context)=> NotificationScreen(),
-                    ))
-            );}, icon:const Icon(Icons.notifications_none_outlined) ,color: Colors.white,focusColor: Colors.grey.shade800,),
-    Builder(builder: (context){
-    return IconButton(onPressed: (){
-    Scaffold.of(context).openDrawer();
-    },
-    icon:Icon(Icons.dehaze_outlined,color: Colors.white,),
-    );
-    }),
-
-
-  ],
-    ),
-      drawer: NavigationDrawerWidget(),
-
+        ),
+        leadingWidth: 100,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const notification_screen(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.notifications_none_outlined),
+            color: Colors.white,
+            focusColor: Colors.grey.shade800,
+          ),
+          Builder(
+            builder: (context) {
+              return IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                icon: const Icon(Icons.dehaze_outlined, color: Colors.white),
+              );
+            },
+          ),
+        ],
+        title: Text(appBarTitles[index],
+        style: TextStyle(color: Colors.white,fontSize: 28) ,
+        ),
+        centerTitle: true,
+      ),
+      drawer: const NavigationDrawerWidget(),
       bottomNavigationBar: CurvedNavigationBar(
         items: items,
         index: index,
+        onTap: (selectedIndex) {
 
-        onTap: (selctedIndex) {
           setState(() {
-            index = selctedIndex;
+            index = selectedIndex;
           });
         },
         height: 70,
-
         color: Colors.black,
         backgroundColor: Colors.white,
         animationDuration: const Duration(milliseconds: 300),
-        // animationCurve: ,
       ),
       body: Container(
-        // color: Colors.yellow,
         width: double.infinity,
         height: double.infinity,
         alignment: Alignment.center,
@@ -145,13 +141,14 @@ class _HomeState extends State<Home> {
         widget = const rent_property_screen();
         break;
       case 3:
+
       widget =ChatScreen();
         break;
       case 4:
         widget = const SearchScreen();
         break;
       default:
-        widget = const home_screen();
+        widget = const HomeScreen();
         break;
     }
     return widget;

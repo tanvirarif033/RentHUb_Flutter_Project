@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/filter_page.dart';
 import 'package:provider/provider.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/ThemeModeProvider.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
@@ -38,9 +39,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
+
       themeMode: _currentThemeMode,
       home: const splash_screen(
         child: LogIn(), // Assuming WelcomeScreen is the initial screen after the splash screen
+
       ),
     );
   }

@@ -7,6 +7,10 @@ import '../../../constants/images_strings.dart';
 import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
 import 'forgate.dart';
+import 'forget_password_mail.dart';
+import 'forget_password_phn_no.dart';
+import 'home_page_screen.dart';
+
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -37,6 +41,7 @@ class _LogInState extends State<LogIn> {
         email: useremailcontroller.text,
         password: userpasswordcontroller.text,
       );
+
 
 
       // Show a success Snackbar
@@ -177,7 +182,9 @@ class _LogInState extends State<LogIn> {
                                               GestureDetector(
                                                 onTap: () {
                                                   Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context)=> const ForgotPassword(),),
+
+                                                    MaterialPageRoute(builder: (context)=> ForgotPassword(),),
+
                                                   );
                                                 },
                                                 child: Container(
@@ -224,7 +231,8 @@ class _LogInState extends State<LogIn> {
                                               GestureDetector(
                                                 onTap: () {
                                                   Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context)=> const ForgotPassword()),
+
+                                                    MaterialPageRoute(builder: (context)=> ForgotPassword()),
                                                   );
                                                 },
                                                 child: Container(

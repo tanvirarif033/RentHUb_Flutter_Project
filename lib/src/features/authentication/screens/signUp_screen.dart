@@ -37,8 +37,6 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery
@@ -101,6 +99,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             filled: true,
                           ),
                         ),
+
                         const SizedBox(height: tFormHeight - 20),
                         TextField(
                           controller:_passwordController,

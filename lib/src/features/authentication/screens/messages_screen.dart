@@ -1,8 +1,12 @@
 import 'dart:io';  // Import the 'File' class from the 'dart:io' library
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:gap/gap.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -20,17 +24,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat App'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              _searchUser();
-            },
-          ),
-        ],
-      ),
+
       body: Column(
         children: [
           Expanded(
@@ -58,15 +52,10 @@ class _ChatScreenState extends State<ChatScreen> {
                     String imageUrl = data['imageUrl'] ?? '';
 
                     return ListTile(
-                      title: Text('$sender: $message'),
-                      subtitle: imageUrl.isNotEmpty
-                          ? Image.network(
-                        imageUrl,
-                        width: 100.0, // Adjust the width as needed
-                        height: 100.0, // Adjust the height as needed
-                        fit: BoxFit.cover,
-                      )
-                          : Container(), // Empty container if no image
+
+                      title: Text(sender,style: Theme.of(context).textTheme.headlineMedium),
+                      subtitle: Text(message,style: Theme.of(context).textTheme.titleLarge),
+
                     );
                   }).toList(),
                 );
@@ -82,6 +71,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     controller: _messageController,
                     decoration: InputDecoration(
                       hintText: 'Type your message...',
+                      hintStyle: TextStyle(color: Colors.blue,fontSize: 18),
                     ),
                   ),
                 ),
@@ -91,18 +81,20 @@ class _ChatScreenState extends State<ChatScreen> {
                     _sendMessage();
                   },
                 ),
+
                 IconButton(
                   icon: Icon(Icons.image),
                   onPressed: () async {
                     _pickImage();
                   },
                 ),
-
               ],
             ),
           ),
+          Gap(8) ,
         ],
       ),
+
     );
   }
 
