@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class FilterPage extends StatefulWidget {
@@ -62,6 +63,48 @@ class _FilterPageState extends State<FilterPage> {
                     ),
                   ),
                 ),
+
+                SizedBox(height: 20,),
+                Column(
+                  children: [
+                    const Row(
+                      children: [
+                        Icon(Icons.money),
+                        SizedBox(width: 8.0),
+                        Text(
+                          'Price Range',
+                          style: TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    TextField(
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.all(13),
+                        prefixIcon: Icon(Icons.mail_outline_outlined),
+                        /*labelText: ,
+                            hintText: tEmail,*/
+                        border: OutlineInputBorder(),
+                        filled: true,
+                      ),
+                    ),
+                    Gap(5),
+                    Text('To'),
+                    TextField(
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.all(13),
+                        prefixIcon: Icon(Icons.mail_outline_outlined),
+                        /*labelText: ,
+                            hintText: tEmail,*/
+                        border: OutlineInputBorder(),
+                        filled: true,
+                      ),
+                    ),
+                  ],
+                ),
+
 
                 SizedBox(height: 20),
                 const Row(
