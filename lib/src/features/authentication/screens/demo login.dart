@@ -1,317 +1,89 @@
-/*
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/userType_screen.dart';
 
-import '../../../constants/images_strings.dart';
-import '../../../constants/sizes.dart';
-import '../../../constants/text_strings.dart';
-import 'forget_password_mail.dart';
-import 'forget_password_phn_no.dart';
-
-class LogIn extends StatefulWidget {
-  const LogIn({super.key});
+class FilterPage extends StatefulWidget {
+  const FilterPage({Key? key}) : super(key: key);
 
   @override
-  State<LogIn> createState() => _LogInState();
+  State<FilterPage> createState() => _FilterPageState();
 }
 
-class _LogInState extends State<LogIn> {
-
-  String email = "", password = "";
-
-  final _formkey= GlobalKey<FormState>();
-
-  TextEditingController useremailcontroller = new TextEditingController();
-  TextEditingController userpasswordcontroller = new TextEditingController();
-
-  userLogin() async {
-    try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-
-      Navigator.push(context, MaterialPageRoute(builder: (context) => UserType_screen()));
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-            "No User Found for that Email",
-            style: TextStyle(fontSize: 18.0, color: Colors.black),
-          ),
-        ));
-      } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(
-              "Wrong Password Provided by User",
-              style: TextStyle(fontSize: 18.0, color: Colors.black),
-            )));
-      }
-    }
-  }
+class _FilterPageState extends State<FilterPage> {
+  List<bool> isSelected = [false, false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.all(tDefaultSize),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image(
-                    image: const AssetImage(tWelcomeScreenImage),
-                    height: size.height * 0.2,
-                  ),
-                  Text(
-                    tLoginTitle,
-                    style: Theme.of(context).textTheme.displayLarge,
-                  ),
-                  Text(
-                    tLoginSubTitle,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  Form(
-                      key: _formkey,
-                      child: Container(
-                        padding:
-                        const EdgeInsets.symmetric(vertical: tFormHeight - 10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TextFormField(
-                              controller:  useremailcontroller,
-                              validator: (value){
-                                if(value==null|| value.isEmpty){
-                                  return 'Please Enter E-Mail';
-                                }
-                                return null;
-                              },
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: const Text(
+          'Filter',
+          style: TextStyle(fontSize: 25),
+        ),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 20),
+              const Text(
+                'Property Types',
+                style: TextStyle(fontSize: 20),
+              ),
+              const SizedBox(height: 10),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.red, // Change the color of the box
 
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.all(13),
-                                prefixIcon: Icon(Icons.person_outline_outlined),
-                                labelText: tEmail,
-                                hintText: tEmail,
-                                border: OutlineInputBorder(),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: tFormHeight - 20,
-                            ),
-                            TextFormField(
-                              controller: userpasswordcontroller,
-                              validator: (value){
-                                if(value==null|| value.isEmpty){
-                                  return 'Please Enter Password';
-
-                                }
-                                return null;
-                              },
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.all(13),
-                                prefixIcon: Icon(Icons.key_outlined),
-                                labelText: tPassword,
-                                hintText: tPassword,
-                                border: OutlineInputBorder(),
-                                suffixIcon: IconButton(
-                                  onPressed: null,
-                                  icon: Icon(Icons.remove_red_eye_sharp),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: tFormHeight - 20),
-                            Align(
-                                alignment: Alignment.centerRight,
-                                child: TextButton(
-                                    onPressed: () {
-                                      showModalBottomSheet(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(20.0)),
-                                        context: context,
-                                        builder: (context) => Container(
-                                          padding: const EdgeInsets.all(tDefaultSize),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                tForgetPasswordTitle,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .displayMedium,
-                                              ),
-                                              Text(
-                                                tForgetPasswordSubTitle,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyMedium,
-                                              ),
-                                              const SizedBox(height: 30.0),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context)=>const ForgetPasswordMailScreen(),),
-                                                  );
-                                                },
-                                                child: Container(
-                                                  padding: const EdgeInsets.all(20.0),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                    color: Theme.of(context).cardColor,
-                                                  ),
-                                                  child: Row(
-                                                    children: [
-                                                      const Icon(
-                                                        Icons.mail_outline_rounded,
-                                                        size: 60.0,
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 10.0,
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                        children: [
-                                                          Text(
-                                                            tEmail,
-                                                            style: Theme.of(context)
-                                                                .textTheme
-                                                                .titleLarge,
-                                                          ),
-                                                          Text(
-                                                            tResetViaEMail,
-                                                            style: Theme.of(context)
-                                                                .textTheme
-                                                                .bodyMedium,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 20.0,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context)=>const ForgetPasswordPhoneNoScreen(),),
-                                                  );
-                                                },
-                                                child: Container(
-                                                  padding: const EdgeInsets.all(20.0),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                    color: Theme.of(context).cardColor,
-                                                  ),
-                                                  child: Row(
-                                                    children: [
-                                                      const Icon(
-                                                        Icons.mobile_friendly_rounded,
-                                                        size: 60.0,
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 10.0,
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                        children: [
-                                                          Text(
-                                                            tPhoneNo,
-                                                            style: Theme.of(context)
-                                                                .textTheme
-                                                                .titleLarge,
-                                                          ),
-                                                          Text(
-                                                            tResetViaPhone,
-                                                            style: Theme.of(context)
-                                                                .textTheme
-                                                                .bodyMedium,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: const Text(tForgetPassword))),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  if(_formkey.currentState!.validate()){
-                                    setState(() {
-                                      email= useremailcontroller.text;
-                                      password= userpasswordcontroller.text;
-                                    });
-                                  }
-                                  userLogin();
-                                },
-                                child: Text(
-                                  tLogin.toUpperCase(),
-                                  //style: const TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ToggleButtons(
+                    isSelected: isSelected,
+                    onPressed: (index) {
+                      setState(() {
+                        // Toggle the state for the selected index
+                        isSelected[index] = !isSelected[index];
+                      });
+                    },
+                    color: Colors.grey,
+                    selectedColor: Colors.blue,
                     children: [
-                      const Text("OR"),
-                      SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton.icon(
-                          icon: const Image(
-                            image: AssetImage(tGoogleLogoImage),
-                            width: 20.0,
-                          ),
-                          onPressed: () {},
-                          label: const Text(tSignInWithGoogle),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: tFormHeight - 20,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>const SignUpPage(),),
-                          );
-                        },
-                        child: Text.rich(
-                          TextSpan(
-                            text: tDontHaveAnAccount,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                            children: const [
-                              TextSpan(
-                                style: TextStyle(color: Colors.blue),
-                                text: tSignup,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      _buildToggleButton('Family'),
+                      _buildToggleButton('Bachelor'),
+                      _buildToggleButton('Office'),
+                      _buildToggleButton('Sublet'),
+                      _buildToggleButton('Hostel'),
                     ],
                   ),
-                ],
+                ),
               ),
-            )),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildToggleButton(String label) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Text(
+        label,
+        style: TextStyle(fontSize: 16),
       ),
     );
   }
 }
-*/

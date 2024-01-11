@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({Key? key}) : super(key: key);
@@ -8,76 +9,65 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> {
-  List<bool> isSelected = [false, false, false, false, false];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: const Text(
+            'Filter',
+            style: TextStyle(fontSize: 25),
+          ),
+          centerTitle: true,
         ),
-        title: const Text(
-          'Filter',
-          style: TextStyle(fontSize: 25),
-        ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 20),
-              const Text(
-                'Property Types',
-                style: TextStyle(fontSize: 20),
-              ),
-              const SizedBox(height: 10),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 1.0,
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Row(
+                  children: [
+                    Icon(Icons.business),
+                    SizedBox(width: 8.0),
+                    Text(
+                      'Property types',
+                      style: TextStyle(
+                        fontSize: 23,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: ToggleButtons(
-                    children: [
-                      _buildToggleButton('Family'),
-                      _buildToggleButton('Bachelor'),
-                      _buildToggleButton('Office'),
-                      _buildToggleButton('Sublet'),
-                      _buildToggleButton('Hostel'),
-                    ],
-                    isSelected: isSelected,
-                    onPressed: (index) {
-                      setState(() {
-                        // Toggle the state for the selected index
-                        isSelected[index] = !isSelected[index];
-                      });
-                    },
+                  ],
+                ),
+                const SizedBox(height: 10),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: ToggleSwitch(
+                      labels: const ['family', 'Sublet', 'Office','Bachelor'],
+                      fontSize: 18,
+                      minWidth: 200, // Adjusted minWidth value
+                      minHeight: 60,
+                      activeBgColor: const [Colors.redAccent, Colors.redAccent, Colors.redAccent],
+                      activeFgColor: Colors.black,
+                      inactiveBgColor: Colors.white10,
+                      inactiveFgColor: Colors.black,
+                    ),
                   ),
                 ),
-              ),
-            ],
+
+
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildToggleButton(String label) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Text(
-        label,
-        style: const TextStyle(fontSize: 16),
       ),
     );
   }
