@@ -7,9 +7,6 @@ import '../../../constants/images_strings.dart';
 import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
 import 'forgate.dart';
-import 'forget_password_mail.dart';
-import 'forget_password_phn_no.dart';
-import 'home_page_screen.dart';
 
 
 class LogIn extends StatefulWidget {
@@ -46,20 +43,20 @@ class _LogInState extends State<LogIn> {
 
       // Show a success Snackbar
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Center(child: Text("Login Successful")),
-          duration: const Duration(seconds: 2),
+          duration: Duration(seconds: 2),
         ),
       );
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
         // Show a failure Snackbar
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Center(child: Text("Failed to Login. Check your credentials.")),
-            duration: const Duration(seconds: 2),
+            duration: Duration(seconds: 2),
           ),
         );
       }
@@ -183,7 +180,7 @@ class _LogInState extends State<LogIn> {
                                                 onTap: () {
                                                   Navigator.push(context,
 
-                                                    MaterialPageRoute(builder: (context)=> ForgotPassword(),),
+                                                    MaterialPageRoute(builder: (context)=> const ForgotPassword(),),
 
                                                   );
                                                 },
@@ -232,7 +229,7 @@ class _LogInState extends State<LogIn> {
                                                 onTap: () {
                                                   Navigator.push(context,
 
-                                                    MaterialPageRoute(builder: (context)=> ForgotPassword()),
+                                                    MaterialPageRoute(builder: (context)=> const ForgotPassword()),
                                                   );
                                                 },
                                                 child: Container(

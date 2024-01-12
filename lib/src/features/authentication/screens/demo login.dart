@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FilterPage extends StatefulWidget {
-  const FilterPage({Key? key}) : super(key: key);
+  const FilterPage({super.key});
 
   @override
   State<FilterPage> createState() => _FilterPageState();
@@ -82,7 +82,7 @@ class _FilterPageState extends State<FilterPage> {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Text(
         label,
-        style: TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 16),
       ),
     );
   }

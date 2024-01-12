@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/filter_page.dart';
 import 'package:provider/provider.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/ThemeModeProvider.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
@@ -27,10 +26,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeMode _currentThemeMode = ThemeMode.light;
+    ThemeMode currentThemeMode = ThemeMode.light;
 
-    void _toggleThemeMode() {
-      _currentThemeMode = _currentThemeMode == ThemeMode.light
+    void toggleThemeMode() {
+      currentThemeMode = currentThemeMode == ThemeMode.light
           ? ThemeMode.dark
           : ThemeMode.light;
     }
@@ -40,7 +39,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
 
-      themeMode: _currentThemeMode,
+      themeMode: currentThemeMode,
       home: const splash_screen(
         child: LogIn(), // Assuming WelcomeScreen is the initial screen after the splash screen
 

@@ -9,6 +9,8 @@ import 'package:image_picker/image_picker.dart';
 
 
 class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -18,9 +20,9 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _searchController = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
-  CollectionReference _messages = FirebaseFirestore.instance.collection('messages');
-  CollectionReference _users = FirebaseFirestore.instance.collection('users');
-  String _currentUser = 'User1'; // Replace this with the actual username
+  final CollectionReference _messages = FirebaseFirestore.instance.collection('messages');
+  final CollectionReference _users = FirebaseFirestore.instance.collection('users');
+  final String _currentUser = 'User1'; // Replace this with the actual username
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
               stream: _messages.orderBy('timestamp').snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -41,7 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   children: snapshot.data!.docs.map((DocumentSnapshot document) {
                     Map<String, dynamic>? data = document.data() as Map<String, dynamic>?;
                     if (data == null) {
-                      return ListTile(
+                      return const ListTile(
                         title: Text('Error: Invalid Data'),
                         subtitle: Text('Error'),
                       );
@@ -69,21 +71,21 @@ class _ChatScreenState extends State<ChatScreen> {
                 Expanded(
                   child: TextField(
                     controller: _messageController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Type your message...',
                       hintStyle: TextStyle(color: Colors.blue,fontSize: 18),
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: () {
                     _sendMessage();
                   },
                 ),
 
                 IconButton(
-                  icon: Icon(Icons.image),
+                  icon: const Icon(Icons.image),
                   onPressed: () async {
                     _pickImage();
                   },
@@ -91,7 +93,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ],
             ),
           ),
-          Gap(8) ,
+          const Gap(8) ,
         ],
       ),
 
@@ -130,7 +132,7 @@ class _ChatScreenState extends State<ChatScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ChatScreen(),
+        builder: (context) => const ChatScreen(),
         settings: RouteSettings(
           arguments: {
             'currentUser': _currentUser,
@@ -183,7 +185,7 @@ class _ChatScreenState extends State<ChatScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
