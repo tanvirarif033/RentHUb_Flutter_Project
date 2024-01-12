@@ -37,8 +37,6 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery
@@ -101,6 +99,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             filled: true,
                           ),
                         ),
+
                         const SizedBox(height: tFormHeight - 20),
                         TextField(
                           controller:_passwordController,
@@ -217,7 +216,7 @@ class _SignUpPageState extends State<SignUpPage> {
       });
 
       print("User successfully created with ID: $userId");
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const LogIn()));
     } catch (e) {
       print("Error occurred: $e");
       // Handle the error, show a message, etc.
