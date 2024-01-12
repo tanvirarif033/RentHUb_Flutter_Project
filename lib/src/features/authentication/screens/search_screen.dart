@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'ThemeModeProvider.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key? key});
+  const SearchScreen({super.key, Key? key});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -14,13 +14,10 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final themeModeProvider = Provider.of<ThemeModeProvider>(context);
-    final ThemeMode _currentThemeMode = themeModeProvider.currentThemeMode;
+    final ThemeMode currentThemeMode = themeModeProvider.currentThemeMode;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Serach"),
-        centerTitle: true,
-      ),
+
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SearchAnchor(
@@ -41,7 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 Tooltip(
                   message: 'Change brightness mode',
                   child: IconButton(
-                    isSelected: _currentThemeMode == ThemeMode.dark,
+                    isSelected: currentThemeMode == ThemeMode.dark,
                     onPressed: () {
                       themeModeProvider.toggleThemeMode();
                     },
