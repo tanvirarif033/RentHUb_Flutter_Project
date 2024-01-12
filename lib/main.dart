@@ -26,10 +26,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeMode _currentThemeMode = ThemeMode.light;
+    ThemeMode currentThemeMode = ThemeMode.light;
 
-    void _toggleThemeMode() {
-      _currentThemeMode = _currentThemeMode == ThemeMode.light
+    void toggleThemeMode() {
+      currentThemeMode = currentThemeMode == ThemeMode.light
           ? ThemeMode.dark
           : ThemeMode.light;
     }
@@ -38,9 +38,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: _currentThemeMode,
+
+      themeMode: currentThemeMode,
       home: const splash_screen(
         child: LogIn(), // Assuming WelcomeScreen is the initial screen after the splash screen
+
       ),
     );
   }

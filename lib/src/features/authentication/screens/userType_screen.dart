@@ -52,7 +52,9 @@ class UserType_screen extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
+
                                     builder: (context)=> const Home(),
+
                                   ));
                             }, child: Text(tTakeRent.toUpperCase()))),
                     const SizedBox(
