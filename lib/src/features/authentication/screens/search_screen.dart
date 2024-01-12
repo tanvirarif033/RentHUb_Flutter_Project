@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'ThemeModeProvider.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key, Key? key});
+  const SearchScreen({super.key});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();

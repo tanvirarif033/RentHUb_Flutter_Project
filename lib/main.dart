@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/filter_page.dart';
 import 'package:provider/provider.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/ThemeModeProvider.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
