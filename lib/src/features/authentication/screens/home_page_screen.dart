@@ -10,6 +10,7 @@ import 'package:rent_hub_flutter_project/src/features/authentication/screens/nav
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
 
+
 import 'favourite_screen.dart';
 import 'home_screen.dart';
 import 'messages_screen.dart';
@@ -184,6 +185,7 @@ class _HomeState extends State<Home> {
       case 3:
         //widget=messages_screen();
       widget =ChatScreen();
+     // widget =chatpage(email: AutofillHints.email,);
         break;
       case 4:
         widget=search_screen();
