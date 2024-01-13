@@ -1,10 +1,16 @@
 import 'dart:io';  // Import the 'File' class from the 'dart:io' library
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:gap/gap.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
+
 class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -14,24 +20,13 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _searchController = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
-  CollectionReference _messages = FirebaseFirestore.instance.collection('messages');
-  CollectionReference _users = FirebaseFirestore.instance.collection('users');
-  String _currentUser = 'User1'; // Replace this with the actual username
-
+  final CollectionReference _messages = FirebaseFirestore.instance.collection('messages');
+  final CollectionReference _users = FirebaseFirestore.instance.collection('users');
+  final String _currentUser = 'User1'; // Replace this with the actual username
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat App'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              _searchUser();
-            },
-          ),
-        ],
-      ),
+
       body: Column(
         children: [
           Expanded(
@@ -39,7 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
               stream: _messages.orderBy('timestamp').snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -48,7 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   children: snapshot.data!.docs.map((DocumentSnapshot document) {
                     Map<String, dynamic>? data = document.data() as Map<String, dynamic>?;
                     if (data == null) {
-                      return ListTile(
+                      return const ListTile(
                         title: Text('Error: Invalid Data'),
                         subtitle: Text('Error'),
                       );
@@ -59,19 +54,13 @@ class _ChatScreenState extends State<ChatScreen> {
                     String imageUrl = data['imageUrl'] ?? '';
 
                     return ListTile(
-                      title: Text('$sender: $message'),
-                      subtitle: imageUrl.isNotEmpty
-                          ? Image.network(
-                        imageUrl,
-                        width: 100.0, // Adjust the width as needed
-                        height: 100.0, // Adjust the height as needed
-                        fit: BoxFit.cover,
-                      )
-                          : Container(), // Empty container if no image
+
+                      title: Text(sender,style: Theme.of(context).textTheme.headlineMedium),
+                      subtitle: Text(message,style: Theme.of(context).textTheme.titleLarge),
+
                     );
                   }).toList(),
                 );
-
               },
             ),
           ),
@@ -82,19 +71,21 @@ class _ChatScreenState extends State<ChatScreen> {
                 Expanded(
                   child: TextField(
                     controller: _messageController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Type your message...',
+                      hintStyle: TextStyle(color: Colors.blue,fontSize: 18),
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: () {
                     _sendMessage();
                   },
                 ),
+
                 IconButton(
-                  icon: Icon(Icons.image),
+                  icon: const Icon(Icons.image),
                   onPressed: () async {
                     _pickImage();
                   },
@@ -102,8 +93,10 @@ class _ChatScreenState extends State<ChatScreen> {
               ],
             ),
           ),
+          const Gap(8) ,
         ],
       ),
+
     );
   }
 
@@ -113,11 +106,13 @@ class _ChatScreenState extends State<ChatScreen> {
       _messages.add({
         'message': message,
         'sender': _currentUser,
+
         'timestamp': FieldValue.serverTimestamp(),
       });
       _messageController.clear();
     }
   }
+
 
   void _searchUser() async {
     String username = _searchController.text.trim();
@@ -137,7 +132,7 @@ class _ChatScreenState extends State<ChatScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ChatScreen(),
+        builder: (context) => const ChatScreen(),
         settings: RouteSettings(
           arguments: {
             'currentUser': _currentUser,
@@ -190,8 +185,9 @@ class _ChatScreenState extends State<ChatScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
 }
+

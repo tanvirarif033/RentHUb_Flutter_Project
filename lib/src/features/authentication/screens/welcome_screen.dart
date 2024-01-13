@@ -6,7 +6,7 @@ import 'package:rent_hub_flutter_project/src/features/authentication/screens/log
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key});
+  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class WelcomeScreen extends StatelessWidget {
           children: [
             Image(
               image: const AssetImage(tWelcomeScreenImage),
-              height: height * 0.6,
+              height: height * 0.6 ,
             ),
             Column(
               children: [
@@ -38,6 +38,7 @@ class WelcomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Expanded(
+
                   child: OutlinedButton(
                     onPressed: () {
                       Navigator.push(
@@ -50,6 +51,7 @@ class WelcomeScreen extends StatelessWidget {
                     child: Text(tLogin.toUpperCase()),
                   ),
                 ),
+
                 const SizedBox(
                   width: 10.0,
                 ),

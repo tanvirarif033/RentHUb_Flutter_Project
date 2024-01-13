@@ -11,7 +11,10 @@ const String tPassword = "Password";
 const String tFullName = "Full Name";
 
 const String tForgetPassword = "Forget Password";
+const String tPsswordhelper =  "Password must contain special character";
 const String tSignInWithGoogle = "Sign-In with Google";
+const String tminprice = "Minimum price";
+const String tmaxprice = "Maximum Price";
 
 //user type text
 const String tTakeRent = "Take Rent";

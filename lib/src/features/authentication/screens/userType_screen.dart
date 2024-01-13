@@ -3,8 +3,6 @@ import 'package:rent_hub_flutter_project/src/constants/images_strings.dart';
 import 'package:rent_hub_flutter_project/src/constants/sizes.dart';
 import 'package:rent_hub_flutter_project/src/constants/text_strings.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/home_page_screen.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
 
 class UserType_screen extends StatelessWidget {
   const UserType_screen ({super.key});
@@ -41,7 +39,7 @@ class UserType_screen extends StatelessWidget {
             ),
             Column(
               children: [
-                Container(
+                const SizedBox(
                   height: 80,
                   width: 80,
                 ),
@@ -54,7 +52,9 @@ class UserType_screen extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
+
                                     builder: (context)=> const Home(),
+
                                   ));
                             }, child: Text(tTakeRent.toUpperCase()))),
                     const SizedBox(

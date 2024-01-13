@@ -2,14 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/home_page_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/signUp_screen.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/userType_screen.dart';
 
 import '../../../constants/images_strings.dart';
 import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
 import 'forgate.dart';
-import 'forget_password_mail.dart';
-import 'forget_password_phn_no.dart';
+
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -19,37 +17,65 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  bool passwordVisible=false;
+  bool isLoading = false;
+
+  @override
+  void initState(){
+    super.initState();
+    passwordVisible=true;
+  }
 
   String email = "", password = "";
 
   final _formkey= GlobalKey<FormState>();
 
-  TextEditingController useremailcontroller = new TextEditingController();
-  TextEditingController userpasswordcontroller = new TextEditingController();
+  TextEditingController useremailcontroller = TextEditingController();
+  TextEditingController userpasswordcontroller = TextEditingController();
 
   userLogin() async {
     try {
+      // Show the loading dialog
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text("Logging in..."),
+              ],
+            ),
+          );
+        },
+      );
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: useremailcontroller.text,
         password: userpasswordcontroller.text,
       );
+      // Hide the loading dialog
+      Navigator.pop(context);
+
 
       // Show a success Snackbar
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Center(child: Text("Login Successful")),
-          duration: const Duration(seconds: 2),
+          duration: Duration(seconds: 2),
         ),
       );
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
         // Show a failure Snackbar
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Center(child: Text("Failed to Login. Check your credentials.")),
-            duration: const Duration(seconds: 2),
+            duration: Duration(seconds: 2),
           ),
         );
       }
@@ -102,6 +128,7 @@ class _LogInState extends State<LogIn> {
                                 labelText: tEmail,
                                 hintText: tEmail,
                                 border: OutlineInputBorder(),
+                                filled: true,
                               ),
                             ),
                             const SizedBox(
@@ -116,17 +143,29 @@ class _LogInState extends State<LogIn> {
                                 }
                                 return null;
                               },
-                              decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.all(13),
-                                prefixIcon: Icon(Icons.key_outlined),
+                              obscureText: passwordVisible,
+                              decoration:  InputDecoration(
+                                contentPadding: const EdgeInsets.all(13),
+                                prefixIcon: const Icon(Icons.key_outlined),
                                 labelText: tPassword,
                                 hintText: tPassword,
-                                border: OutlineInputBorder(),
+                                helperText: tPsswordhelper,
+                                helperStyle: const TextStyle(color: Colors.deepPurpleAccent),
+                                border: const OutlineInputBorder(),
                                 suffixIcon: IconButton(
-                                  onPressed: null,
-                                  icon: Icon(Icons.remove_red_eye_sharp),
+                                  icon: Icon(passwordVisible ? Icons.visibility:Icons.visibility_off),
+                                  onPressed: (){
+                                    setState(() {
+                                      passwordVisible =!passwordVisible;
+                                    },
+                                    );
+                                  },
                                 ),
+                                alignLabelWithHint: false,
+                                filled: true,
                               ),
+                              keyboardType: TextInputType.visiblePassword,
+                              textInputAction: TextInputAction.done,
                             ),
                             const SizedBox(height: tFormHeight - 20),
                             Align(
@@ -159,7 +198,9 @@ class _LogInState extends State<LogIn> {
                                               GestureDetector(
                                                 onTap: () {
                                                   Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context)=> ForgotPassword(),),
+
+                                                    MaterialPageRoute(builder: (context)=> const ForgotPassword(),),
+
                                                   );
                                                 },
                                                 child: Container(
@@ -206,7 +247,8 @@ class _LogInState extends State<LogIn> {
                                               GestureDetector(
                                                 onTap: () {
                                                   Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context)=> ForgotPassword()),
+
+                                                    MaterialPageRoute(builder: (context)=> const ForgotPassword()),
                                                   );
                                                 },
                                                 child: Container(
