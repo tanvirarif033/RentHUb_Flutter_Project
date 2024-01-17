@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:gap/gap.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/chatpage.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/messenger_page.dart';
 
 
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
@@ -183,7 +184,7 @@ class _HomeState extends State<Home> {
         break;
       case 3:
       //widget =ChatScreen();
-        widget =const chatpage();
+        widget = MessengerPage();
 
         break;
       case 4:
