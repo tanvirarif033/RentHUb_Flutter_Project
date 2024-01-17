@@ -1,11 +1,13 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/demo%20login.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/home_screen0.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
 import 'favourite_screen.dart';
+import 'filter_page.dart';
 import 'home_screen.dart';
 import 'messages_screen.dart';
 import 'notification_screen.dart';
@@ -134,7 +136,7 @@ class _HomeState extends State<Home> {
         widget = const favourite_screen();
         break;
       case 2:
-        widget = const rent_property_screen();
+        widget = const FilterPage();
         break;
       case 3:
         widget =  messages_screen();

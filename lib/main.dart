@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: const FilterPage(
-       // child: LogIn(), // Assuming WelcomeScreen is the initial screen after the splash screen
+      home: const splash_screen(
+        child: LogIn(), // Assuming WelcomeScreen is the initial screen after the splash screen
       ),
     );
   }

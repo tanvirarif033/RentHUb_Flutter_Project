@@ -15,22 +15,10 @@ class _FilterPageState extends State<FilterPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          title: const Text(
-            'Filter',
-            style: TextStyle(fontSize: 25),
-          ),
-          centerTitle: true,
-        ),
+
         body: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(12),
+            //padding: const EdgeInsets.all(12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -65,10 +53,10 @@ class _FilterPageState extends State<FilterPage> {
                   ),
                 ),
 
-                SizedBox(height: 20,),
-                Column(
+                const SizedBox(height: 20,),
+                const Column(
                   children: [
-                    const Row(
+                    Row(
                       children: [
                         Icon(Icons.money),
                         SizedBox(width: 8.0),
@@ -121,14 +109,14 @@ class _FilterPageState extends State<FilterPage> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: ToggleSwitch(
-                    labels: const ['1', '2', '3','4','5','6','7'],
+                    labels: const ['1', '2', '3','4','5'],
                     fontSize: 18,
-                    minWidth: 200, // Adjusted minWidth value
+                    minWidth: 100, // Adjusted minWidth value
                     minHeight: 60,
-                    activeBgColor: const [Colors.redAccent, Colors.redAccent, Colors.redAccent],
+                    activeBgColor: const [ Colors.redAccent, Colors.redAccent],
                     activeFgColor: Colors.black,
                     inactiveBgColor: Colors.white10,
                     inactiveFgColor: Colors.black,
@@ -150,21 +138,21 @@ class _FilterPageState extends State<FilterPage> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: ToggleSwitch(
-                    labels: const ['1', '2', '3','4','5','6','7'],
-                    fontSize: 18,
-                    minWidth: 200, // Adjusted minWidth value
+                    labels: const ['1', '2', '3','4','5',],
+                    fontSize: 15,
+                    minWidth: 100, // Adjusted minWidth value
                     minHeight: 60,
-                    activeBgColor: const [Colors.redAccent, Colors.redAccent, Colors.redAccent],
+                    activeBgColor: const [ Colors.redAccent, Colors.redAccent],
                     activeFgColor: Colors.black,
                     inactiveBgColor: Colors.white10,
                     inactiveFgColor: Colors.black,
                   ),
                 ),
 
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
 
                 // ElevatedButton to show properties
                 SizedBox(
@@ -173,12 +161,12 @@ class _FilterPageState extends State<FilterPage> {
                     onPressed: () {
 
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Showing properties with selected filters'),
                         ),
                       );
                     },
-                    child: Text('Show Properties'),
+                    child: const Text('Show Properties'),
                   ),
                 ),
               ],
