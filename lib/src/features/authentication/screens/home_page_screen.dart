@@ -3,18 +3,17 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:gap/gap.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/demo%20login.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/home_screen0.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/chatpage.dart';
+
+
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
 
+
 import 'favourite_screen.dart';
-import 'FilterPage.dart';
-import 'home_screen.dart';
-
+import 'filter_page0.dart';
 import 'home_screen0.dart';
-
 import 'messages_screen.dart';
 import 'notification_screen.dart';
 class Home extends StatefulWidget {
@@ -134,11 +133,11 @@ class _HomeState extends State<Home> {
           ),
         ],
         title: Text(appBarTitles[index],
-        style: const TextStyle(color: Colors.white,fontSize: 28) ,
+          style: const TextStyle(color: Colors.white,fontSize: 28) ,
         ),
         centerTitle: true,
       ),
-      drawer: const NavigationDrawerWidget(),
+      drawer:  NavigationDrawerWidget(),
 
       bottomNavigationBar: CurvedNavigationBar(
         items: items,
@@ -155,12 +154,12 @@ class _HomeState extends State<Home> {
       ),
 
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        alignment: Alignment.center,
-        margin: const EdgeInsets.all(5),
-        child: getSelectedWidget(index: index),
-      ),
+      width: double.infinity,
+      height: double.infinity,
+      alignment: Alignment.center,
+      margin: const EdgeInsets.all(5),
+      child: getSelectedWidget(index: index),
+    ),
 
 
 
@@ -176,17 +175,15 @@ class _HomeState extends State<Home> {
         widget =  const HomeScreen();
         break;
       case 1:
-        widget = const favourite_screen();
+      //widget = const favourite_screen();
+        widget = const FilterPage();
         break;
       case 2:
-<<<<<<< HEAD
-        widget = const FilterPage();
-=======
-        widget=const rent_property_screen();
->>>>>>> bbcb7078bfcc88f3d43d065adc355921db134873
+        widget=const RentPropertyScreen();
         break;
       case 3:
-      widget =const ChatScreen();
+      //widget =ChatScreen();
+        widget =const chatpage();
 
         break;
       case 4:

@@ -38,17 +38,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-<<<<<<< HEAD
+
       themeMode: ThemeMode.system,
       home: const splash_screen(
         child: LogIn(), // Assuming WelcomeScreen is the initial screen after the splash screen
-=======
 
-      themeMode: currentThemeMode,
-      home: const splash_screen(
-        child: LogIn(), // Assuming WelcomeScreen is the initial screen after the splash screen
-
->>>>>>> bbcb7078bfcc88f3d43d065adc355921db134873
       ),
     );
   }

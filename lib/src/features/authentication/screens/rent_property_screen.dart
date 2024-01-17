@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-class rent_property_screen extends StatelessWidget{
-  const rent_property_screen({super.key});
+class RentPropertyScreen extends StatefulWidget {
+  const RentPropertyScreen({super.key});
 
   @override
+  State<RentPropertyScreen> createState() => _RentPropertyScreenState();
+}
+
+class _RentPropertyScreenState extends State<RentPropertyScreen> {
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-    //   backgroundColor: Colors.red,
-
-    );
+    return const Placeholder();
   }
-
 }
