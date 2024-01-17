@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:gap/gap.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/chatpage.dart';
 
 
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
@@ -135,7 +136,7 @@ class _HomeState extends State<Home> {
         ),
         centerTitle: true,
       ),
-      drawer: const NavigationDrawerWidget(),
+      drawer:  NavigationDrawerWidget(),
 
       bottomNavigationBar: CurvedNavigationBar(
         items: items,
@@ -173,14 +174,15 @@ class _HomeState extends State<Home> {
         widget =  const HomeScreen();
         break;
       case 1:
-        widget = const favourite_screen();
+        //widget = const favourite_screen();
+      widget = const FilterPage();
         break;
       case 2:
-        widget=const rent_property_screen();
+        widget=const RentPropertyScreen();
         break;
       case 3:
       //widget =ChatScreen();
-      widget =const ChatScreen();
+      widget =const chatpage();
 
         break;
       case 4:
