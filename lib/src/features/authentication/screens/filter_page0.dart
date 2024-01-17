@@ -4,7 +4,7 @@ import 'package:rent_hub_flutter_project/src/constants/text_strings.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class FilterPage extends StatefulWidget {
-  const FilterPage({Key? key}) : super(key: key);
+  const FilterPage({super.key});
 
   @override
   State<FilterPage> createState() => _FilterPageState();
@@ -38,7 +38,7 @@ class _FilterPageState extends State<FilterPage> {
                 const SizedBox(height: 10),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Container(
+                  child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: ToggleSwitch(
                       labels: const ['family', 'Sublet', 'Office','Bachelor'],
@@ -94,7 +94,7 @@ class _FilterPageState extends State<FilterPage> {
                   ],
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 const Row(
                   children: [
                     Icon(Icons.bed_rounded),
@@ -123,7 +123,7 @@ class _FilterPageState extends State<FilterPage> {
                   ),
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 const Row(
                   children: [
                     Icon(Icons.bathroom),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import '../../../constants/sizes.dart';
+import 'demo login.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -117,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const Text("Price (High to Low)"),
                                     ],
                                   ),
-                                  Gap(15),
+                                  const Gap(15),
                                   ElevatedButton(
                                     onPressed: () {
                                       Navigator.pop(context); // Close the modal
@@ -152,7 +153,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 125,
                       child: OutlinedButton.icon(
                         icon: const Icon(Icons.manage_search_outlined),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context)=>const FilterPage()));
+                        },
                         label: const Text("Filter"),
                       ),
                     ),

@@ -5,7 +5,7 @@ import 'package:rent_hub_flutter_project/src/constants/text_strings.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class FilterPage extends StatefulWidget {
-  const FilterPage({Key? key}) : super(key: key);
+  const FilterPage({super.key});
 
   @override
   State<FilterPage> createState() => _FilterPageState();
@@ -166,5 +166,16 @@ class _FilterPageState extends State<FilterPage> {
       ),
     );
   }
+
+  Widget _buildToggleButton(String label) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Text(
+        label,
+        style: const TextStyle(fontSize: 16),
+      ),
+    );
+  }
+
 }
 */

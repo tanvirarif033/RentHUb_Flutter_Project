@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
@@ -191,18 +192,36 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-  void _singUp() async{
+  void _singUp() async {
     String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    User? user =await _auth.signUpWithEmailAndPassword(email, password);
-    if(user != null){
-      print("user is successfully created");
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> const LogIn()));
-    }else{
-      print("some error happend");
+
+    try {
+      UserCredential userCredential =
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Get the user ID from the userCredential
+      String userId = userCredential.user!.uid;
+
+      // Now, you can store the username along with the user ID in Firestore or any other database
+      await FirebaseFirestore.instance.collection('users').doc(userId).set({
+        'username': username,
+        'email': email,
+        // Add other user-related data as needed
+      });
+
+      print("User successfully created with ID: $userId");
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const LogIn()));
+    } catch (e) {
+      print("Error occurred: $e");
+      // Handle the error, show a message, etc.
 
     }
   }
+
 }
