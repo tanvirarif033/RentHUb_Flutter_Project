@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
 
       themeMode: ThemeMode.system,
-      home: const splash_screen(
+      home: const  splash_screen(
         child: LogIn(), // Assuming WelcomeScreen is the initial screen after the splash screen
 
       ),

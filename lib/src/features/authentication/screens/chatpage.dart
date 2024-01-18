@@ -1,23 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
 
 import 'chatroom.dart';
 
-class chatpage extends StatefulWidget {
-  const chatpage({super.key});
+class ChatPage extends StatefulWidget {
+  const ChatPage({Key? key}) : super(key: key);
 
   @override
-  State<chatpage> createState() => _chatpageState();
+  State<ChatPage> createState() => _ChatPageState();
 }
 
-
-class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
-
-  Map<String, dynamic> ? userMap;
-  bool isLoading=false;
+class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver {
+  Map<String, dynamic>? userMap;
+  bool isLoading = false;
   final TextEditingController _search = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -46,29 +42,17 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
     }
   }
 
-
   String chatRoomId(String currentUserUid, String otherUserUid) {
     if (currentUserUid != null &&
         otherUserUid != null &&
         currentUserUid.isNotEmpty &&
         otherUserUid.isNotEmpty) {
       List<String> uids = [currentUserUid, otherUserUid];
-      uids.sort(); // Sort the UIDs to ensure consistency
-
-      // Concatenate the sorted UIDs to create the unique chat room ID
+      uids.sort();
       return "${uids[0]}_${uids[1]}";
     }
-
-    // Return a default value if any of the conditions are not met
     return "default_chat_room_id";
   }
-
-
-
-
-
-
-
 
   void onSearch() async {
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -79,7 +63,7 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
 
     await _firestore
         .collection('users')
-        .where("username", isEqualTo: _search.text) // Use the correct field name
+        .where("username", isEqualTo: _search.text)
         .get()
         .then((value) {
       setState(() {
@@ -90,30 +74,33 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
           userMap = value.docs[0].data();
         });
 
-        String roomId = chatRoomId(
-          _auth.currentUser?.uid ?? "", // Current user's UID
-          userMap!['uid'] ?? "", // Searched user's UID (assuming 'uid' is the field name)
-        );
+        if (userMap != null) {
+          String roomId = chatRoomId(
+            _auth.currentUser?.uid ?? "",
+            userMap!['uid'] ?? "",
+          );
 
-        if (roomId.isNotEmpty) {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (_) => ChatRoom(
-              chatRoomId: roomId,
-              userMap: userMap!,
-            ),
-          ));
+          if (roomId.isNotEmpty) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ChatRoom(
+                  chatRoomId: roomId,
+                  userMap: userMap!,
+                ),
+              ),
+            );
+          } else {
+            print("Error: Empty chat room ID");
+          }
         } else {
-          print("Error: Empty chat room ID");
+          print("Error: userMap is null");
         }
-
       } else {
-        // Handle the case where no matching user is found
         print("User not found");
       }
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +108,6 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
     return Scaffold(
       appBar: AppBar(
         title: Text("Chat Screen"),
-
       ),
       body: isLoading
           ? Center(
@@ -168,37 +154,38 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
             ListTile(
               onTap: () {
                 String roomId = chatRoomId(
-                  _auth.currentUser?.displayName ?? "", // Null-aware operator
+                  _auth.currentUser?.displayName ?? "",
                   userMap!['username'] ?? "",
                 );
 
                 if (roomId.isNotEmpty) {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => ChatRoom(
-                      chatRoomId: roomId,
-                      userMap: userMap!,
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ChatRoom(
+                        chatRoomId: roomId,
+                        userMap: userMap!,
+                      ),
                     ),
-                  ));
+                  );
                 } else {
                   print("Error: Empty chat room ID");
                 }
               },
               leading: Icon(Icons.account_box, color: Colors.black),
               title: Text(
-                userMap!['username'] ?? "", // Null-aware operator
+                userMap!['username'] ?? "",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 17,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: Text(userMap!['email'] ?? ""), // Null-aware operator
+              subtitle: Text(userMap!['email'] ?? ""),
               trailing: Icon(Icons.chat, color: Colors.black),
             ),
         ],
       ),
     );
   }
-
-
 }
