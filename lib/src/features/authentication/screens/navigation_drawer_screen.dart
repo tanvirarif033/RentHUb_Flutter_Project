@@ -1,58 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/about_us_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/logout_screen.dart';
 
 import 'account_screen.dart';
 import 'addAcoount_screen.dart';
 import 'invite_friends_screen.dart';
-import 'logout_screen.dart';
 import 'privacy_screen.dart';
 import 'setting_screen.dart';
 import 'update_screen.dart';
 import 'userPage.dart';
 
-
 class NavigationDrawerWidget extends StatelessWidget {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final padding = const EdgeInsets.symmetric(horizontal: 20);
 
-  const NavigationDrawerWidget({super.key});
+  NavigationDrawerWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     const name = 'ARIF33';
     const email = 'arif33@gmail.com';
     const urlImage =
         'https://tse1.mm.bing.net/th?id=OIP.wEsBe2udHBieFeZVmus8qAHaHk&pid=Api&rs=1&c=1&qlt=95&w=119&h=121';
-    return Drawer(
 
+    return Drawer(
       child: Material(
-        color:Colors.black,
+        color: Colors.black,
         child: ListView(
           children: <Widget>[
             buildHeader(
               urlImage: urlImage,
               name: name,
               email: email,
-              onClicked: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const UserPage(
-                  name: 'Arif33',
-                  urlImage: urlImage,
+              onClicked: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const UserPage(
+                    name: 'Arif33',
+                    urlImage: urlImage,
+                  ),
                 ),
-              )),
+              ),
             ),
             Container(
               padding: padding,
               child: Column(
                 children: [
                   const Divider(color: Colors.white70),
-
                   const SizedBox(height: 24),
                   buildMenuItem(
-                    text: 'Acount',
+                    text: 'Account',
                     icon: Icons.account_circle_outlined,
                     onClicked: () => selectedItem(context, 0),
                   ),
                   const SizedBox(height: 24),
                   buildMenuItem(
-                    text: 'Add Acount',
+                    text: 'Add Account',
                     icon: Icons.add_circle_outline_outlined,
                     onClicked: () => selectedItem(context, 1),
                   ),
@@ -62,8 +66,6 @@ class NavigationDrawerWidget extends StatelessWidget {
                     icon: Icons.privacy_tip_outlined,
                     onClicked: () => selectedItem(context, 2),
                   ),
-
-
                   const SizedBox(height: 16),
                   buildMenuItem(
                     text: 'Updates',
@@ -82,7 +84,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   buildMenuItem(
                     text: 'Log Out',
                     icon: Icons.logout_outlined,
-                    onClicked: () => selectedItem(context, 5),
+                    onClicked: () => showLogoutDialog(context),
                   ),
                   const SizedBox(height: 16),
                   buildMenuItem(
@@ -136,7 +138,6 @@ class NavigationDrawerWidget extends StatelessWidget {
               const Spacer(),
               const CircleAvatar(
                 radius: 24,
-                //backgroundColor: Color.fromRGBO(30, 60, 168, 1),
                 backgroundColor: Colors.white,
                 child: Icon(Icons.add_a_photo_outlined, color: Colors.black),
               )
@@ -144,8 +145,6 @@ class NavigationDrawerWidget extends StatelessWidget {
           ),
         ),
       );
-
-
 
   Widget buildMenuItem({
     required String text,
@@ -193,9 +192,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         ));
         break;
       case 5:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const logout_screen(),
-        ));
+      // Log Out
         break;
       case 6:
         Navigator.of(context).push(MaterialPageRoute(
@@ -214,5 +211,50 @@ class NavigationDrawerWidget extends StatelessWidget {
         ));
         break;
     }
+  }
+
+  Future<void> showLogoutDialog(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Logout Confirmation'),
+          content: Text('Are you sure you want to log out?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('No'),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                await logout(context);
+              },
+              child: Text('Yes'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> logout(BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
+    await _auth.signOut();
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => const LogIn()),
+    );
   }
 }

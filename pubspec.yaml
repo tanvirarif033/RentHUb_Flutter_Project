@@ -34,6 +34,17 @@ dependencies:
   firebase_storage: ^11.6.0
   image_picker: ^1.0.7
   firebase_messaging: ^14.7.10
+  fluttertoast: ^8.2.4
+
+  uuid: ^4.2.1
+
+  photo_view: ^0.14.0
+  riverpod: ^2.4.9
+  flutter_typeahead: ^4.0.0
+
+
+
+
 
 
 dev_dependencies:
@@ -41,8 +52,10 @@ dev_dependencies:
     sdk: flutter
 
 
+
   flutter_lints: ^3.0.1
   smooth_page_indicator: ^1.1.0
+
 
 
 flutter:

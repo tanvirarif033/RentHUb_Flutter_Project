@@ -18,6 +18,7 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   bool passwordVisible=false;
+  bool isLoading = false;
 
   @override
   void initState(){
@@ -34,11 +35,29 @@ class _LogInState extends State<LogIn> {
 
   userLogin() async {
     try {
+      // Show the loading dialog
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text("Logging in..."),
+              ],
+            ),
+          );
+        },
+      );
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: useremailcontroller.text,
         password: userpasswordcontroller.text,
       );
-
+      // Hide the loading dialog
+      Navigator.pop(context);
 
 
       // Show a success Snackbar
