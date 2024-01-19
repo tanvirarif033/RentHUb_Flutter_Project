@@ -36,7 +36,16 @@ class PropertyList extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection('properties').snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text("Loading..."),
+              ],
+            ),
+          );
         }
 
         if (snapshot.hasError) {
