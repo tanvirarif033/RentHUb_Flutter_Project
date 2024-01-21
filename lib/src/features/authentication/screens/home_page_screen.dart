@@ -1,7 +1,7 @@
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_local_notifications/flutter_local_notifications.dart' as local_notifications;
 import 'package:gap/gap.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/chatpage.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';

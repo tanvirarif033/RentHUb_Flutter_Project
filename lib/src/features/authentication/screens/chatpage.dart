@@ -34,10 +34,8 @@ class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      // online
       setStatus("Online");
     } else {
-      // offline
       setStatus("Offline");
     }
   }
@@ -51,28 +49,35 @@ class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver {
       uids.sort();
       return "${uids[0]}_${uids[1]}";
     }
-    return "default_chat_room_id";
+    return "";
   }
 
-  void onSearch() async {
-    FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
+  Future<void> onSearch() async {
     setState(() {
       isLoading = true;
     });
 
-    await _firestore
-        .collection('users')
-        .where("username", isEqualTo: _search.text)
-        .get()
-        .then((value) {
+    final query = _search.text.trim();
+    if (query.isEmpty) {
       setState(() {
         isLoading = false;
       });
-      if (value.docs.isNotEmpty) {
-        setState(() {
-          userMap = value.docs[0].data();
-        });
+      return;
+    }
+
+    try {
+      final querySnapshot = await _firestore
+          .collection('users')
+          .where("username", isEqualTo: query)
+          .limit(1)
+          .get();
+
+      setState(() {
+        isLoading = false;
+      });
+
+      if (querySnapshot.docs.isNotEmpty) {
+        userMap = querySnapshot.docs[0].data() as Map<String, dynamic>;
 
         if (userMap != null) {
           String roomId = chatRoomId(
@@ -99,29 +104,29 @@ class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver {
       } else {
         print("User not found");
       }
-    });
+    } catch (error) {
+      print("Error searching for user: $error");
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Chat Screen"),
       ),
       body: isLoading
           ? Center(
-        child: Container(
-          height: size.height / 20,
-          width: size.height / 20,
-          child: CircularProgressIndicator(),
-        ),
+        child: CircularProgressIndicator(),
       )
           : Column(
         children: [
-          SizedBox(
-            height: size.height / 20,
-          ),
+          SizedBox(height: size.height / 20),
           Container(
             height: size.height / 14,
             width: size.width,
@@ -140,16 +145,12 @@ class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver {
               ),
             ),
           ),
-          SizedBox(
-            height: size.height / 50,
-          ),
+          SizedBox(height: size.height / 50),
           ElevatedButton(
             onPressed: onSearch,
             child: Text("Search"),
           ),
-          SizedBox(
-            height: size.height / 20,
-          ),
+          SizedBox(height: size.height / 20),
           if (userMap != null)
             ListTile(
               onTap: () {
