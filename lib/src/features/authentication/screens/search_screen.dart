@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rent_hub_flutter_project/src/constants/text_strings.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class FilterPage extends StatefulWidget {
   const FilterPage({Key? key}) : super(key: key);
@@ -15,41 +16,167 @@ class _FilterPageState extends State<FilterPage> {
   final TextEditingController _bathroomsController = TextEditingController();
   final TextEditingController _districtController = TextEditingController();
   final TextEditingController _areaController = TextEditingController();
-
+  final TextEditingController _facilityController = TextEditingController();
+  final TextEditingController _availableDateController = TextEditingController();
   final CollectionReference _propertyCollection =
   FirebaseFirestore.instance.collection('properties');
+
+  final List<String> suggestions = ["Family", "Bachelor", "Sublet", "Others"];
+  final List<String> suggestions1 = [
+    "Dhaka",
+    "Faridpur",
+    "Gazipur",
+    "Gopalganj",
+    "Jamalpur",
+    "Kishoreganj",
+    "Madaripur",
+    "Manikganj",
+    "Munshiganj",
+    "Mymensingh",
+    "Narayanganj",
+    "Narsingdi",
+    "Netrokona",
+    "Rajbari",
+    "Shariatpur",
+    "Sherpur",
+    "Tangail",
+    "Bogra",
+    "Joypurhat",
+    "Naogaon",
+    "Natore",
+    "Nawabganj",
+    "Pabna",
+    "Rajshahi",
+    "Sirajgonj",
+    "Dinajpur",
+    "Gaibandha",
+    "Kurigram",
+    "Lalmonirhat",
+    "Nilphamari",
+    "Panchagarh",
+    "Rangpur"
+        "Thakurgaon",
+    "Barguna",
+    "Barisal",
+    "Bhola",
+    "Jhalokati",
+    "Patuakhali",
+    "Pirojpur",
+    "Bandarban",
+    "Brahmanbaria",
+    "Chandpur",
+    "Chittagong",
+    "Comilla",
+    "Cox's Bazar",
+    "Feni",
+    "Khagrachari",
+    "Lakshmipur",
+    "Noakhali",
+    "Rangamati",
+    "Habiganj",
+    "Maulvibazar",
+    "Sunamganj",
+    "Sylhet",
+    "Bagerhat",
+    "Chuadanga",
+    "Jessore",
+    "Jhenaidah",
+    "Khulna",
+    "Kushtia",
+    "Magura",
+    "Meherpur",
+    "Narail",
+    "Satkhira",
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Filter Properties'),
-      ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              controller: _propertyTypeController,
-              decoration: InputDecoration(labelText: 'Property Type'),
+            TypeAheadField(
+              hideOnEmpty: true,
+              debounceDuration: Duration(milliseconds: 300),
+
+              suggestionsCallback: (pattern) async {
+                return suggestions
+                    .where((item) =>
+                    item.toLowerCase().contains(pattern.toLowerCase()))
+                    .toList();
+              },
+              itemBuilder: (context, suggestion) {
+                return ListTile(
+                  title: Text(suggestion),
+
+                );
+              },
+              onSuggestionSelected: (suggestion) {
+                _propertyTypeController.text = suggestion;
+              },
+              textFieldConfiguration: TextFieldConfiguration(
+                controller: _propertyTypeController,
+                decoration: InputDecoration(
+                  labelText: 'Property Type',
+                  labelStyle:
+                  TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                  prefixIcon:Icon(Icons.location_city_rounded),
+                ),
+              ),
             ),
-            TextField(
+            TextFormField(
               controller: _bedroomsController,
-              decoration: InputDecoration(labelText: 'Bedrooms'),
+              decoration: InputDecoration(
+                labelText: 'Bedrooms',
+                prefixIcon: Icon(Icons.king_bed), // Add an icon
+              ),
             ),
-            TextField(
+            TextFormField(
               controller: _bathroomsController,
-              decoration: InputDecoration(labelText: 'Bathrooms'),
+              decoration: InputDecoration(labelText: 'Bathrooms',
+                prefixIcon: Icon(Icons.bathtub_rounded),
+
+              ),
             ),
-            TextField(
-              controller: _districtController,
-              decoration: InputDecoration(labelText: 'District'),
+            TypeAheadField(
+              hideOnEmpty: true,
+              debounceDuration: Duration(milliseconds: 300),
+
+              suggestionsCallback: (pattern) async {
+                return suggestions1
+                    .where((item) =>
+                    item.toLowerCase().contains(pattern.toLowerCase()))
+                    .toList();
+              },
+              itemBuilder: (context, suggestion) {
+                return ListTile(
+                  title: Text(suggestion),
+
+                );
+              },
+              onSuggestionSelected: (suggestion) {
+                _districtController.text = suggestion;
+              },
+              textFieldConfiguration: TextFieldConfiguration(
+                controller: _districtController,
+                decoration: InputDecoration(
+                  labelText: 'District',
+                  labelStyle:
+                  TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                  prefixIcon:Icon(Icons.location_searching_rounded),
+                ),
+              ),
             ),
-            TextField(
+            TextFormField(
               controller: _areaController,
-              decoration: InputDecoration(labelText: 'Area'),
+              decoration: InputDecoration(labelText: 'Area',
+                prefixIcon: Icon(Icons.location_on),),
             ),
+
+
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
@@ -129,6 +256,8 @@ class ResultsDialog extends StatelessWidget {
     String area = document['area'];
     String price = document['price'];
     String phone = document['phone'];
+    String facilities = document['facilities'];
+    String availableDate =document['availableDate'];
     // String imageUrl = document['image'];
 
     return Card(
@@ -138,11 +267,13 @@ class ResultsDialog extends StatelessWidget {
           ListTile(
             title: Text('Property Type: $propertyType'),
             subtitle: Text('Bedrooms: $bedrooms, Bathrooms: $bathrooms, District: $district, Area: $area,Price: $price'),
+
           ),
           ListTile(
-
-            title: Text('Phone: $phone'),
+            title: Text('availableDate: $availableDate'),
+            subtitle: Text('facilities: $facilities,Phone: $phone'),
           ),
+
         ],
       ),
     );

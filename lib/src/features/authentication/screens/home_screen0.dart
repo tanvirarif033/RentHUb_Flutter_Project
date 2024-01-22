@@ -89,7 +89,10 @@ class PropertyCard extends StatelessWidget {
 
             if (data?.containsKey('area') ?? false) Text('Area: ${property['area']}'),
 
+            if (data?.containsKey('availableDate') ?? false) Text('availableDate: ${property['availableDate']}'),
+
             if (data?.containsKey('phone') ?? false) Text('Phone: ${property['phone']}'),
+            if (data?.containsKey('facilities') ?? false) Text('facilities: ${property['facilities']}'),
 
           ],
         ),
