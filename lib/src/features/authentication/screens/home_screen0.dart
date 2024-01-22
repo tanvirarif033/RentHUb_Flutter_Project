@@ -63,6 +63,7 @@ class PropertyList extends StatelessWidget {
     );
   }
 }
+
 class PropertyCard extends StatelessWidget {
   final QueryDocumentSnapshot<Object?> property;
 
@@ -74,31 +75,42 @@ class PropertyCard extends StatelessWidget {
     final Map<String, dynamic>? data = property.data() as Map<String, dynamic>?;
 
     return Card(
+      elevation: 5, // Add some elevation for a shadow effect
       margin: EdgeInsets.all(8.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
       child: ListTile(
-        title: Text('Property Type: ${property['propertyType']}'),
+        contentPadding: EdgeInsets.all(16.0),
+        title: Text(
+          'Property Type: ${property['propertyType']}',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 8),
             Text('Bedrooms: ${property['bedrooms']}'),
             Text('Bathrooms: ${property['bathrooms']}'),
-            // Check if 'price' field exists before accessing its value
             if (data?.containsKey('price') ?? false) Text('Price: ${property['price']}'),
-            // Check if 'district' field exists before accessing its value
             if (data?.containsKey('district') ?? false) Text('District: ${property['district']}'),
-
             if (data?.containsKey('area') ?? false) Text('Area: ${property['area']}'),
-
-            if (data?.containsKey('availableDate') ?? false) Text('availableDate: ${property['availableDate']}'),
-
+            if (data?.containsKey('availableDate') ?? false) Text('Available Date: ${property['availableDate']}'),
             if (data?.containsKey('phone') ?? false) Text('Phone: ${property['phone']}'),
-            if (data?.containsKey('facilities') ?? false) Text('facilities: ${property['facilities']}'),
-
+            if (data?.containsKey('facilities') ?? false) Text('Facilities: ${property['facilities']}'),
+            SizedBox(height: 8),
           ],
         ),
+        tileColor: Colors.blueGrey[50], // Set a background color
       ),
     );
   }
 }
+
+
+
 
 

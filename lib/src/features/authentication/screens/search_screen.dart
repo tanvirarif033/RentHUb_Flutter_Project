@@ -259,23 +259,45 @@ class ResultsDialog extends StatelessWidget {
     String facilities = document['facilities'];
     String availableDate =document['availableDate'];
     // String imageUrl = document['image'];
-
     return Card(
+      elevation: 5, // Add some elevation for a shadow effect
+      margin: EdgeInsets.all(8.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
       child: Column(
         children: [
           // Image.network(imageUrl), // Assuming the image is stored as a URL in the database
           ListTile(
-            title: Text('Property Type: $propertyType'),
-            subtitle: Text('Bedrooms: $bedrooms, Bathrooms: $bathrooms, District: $district, Area: $area,Price: $price'),
-
+            contentPadding: EdgeInsets.all(16.0),
+            title: Text(
+              'Property Type: $propertyType',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            subtitle: Text(
+              'Bedrooms: $bedrooms, Bathrooms: $bathrooms, District: $district, Area: $area, Price: $price',
+              style: TextStyle(fontSize: 14),
+            ),
           ),
+          Divider(height: 0, thickness: 1, color: Colors.grey[300]), // Add a divider for separation
           ListTile(
-            title: Text('availableDate: $availableDate'),
-            subtitle: Text('facilities: $facilities,Phone: $phone'),
+            contentPadding: EdgeInsets.all(16.0),
+            title: Text(
+              'Available Date: $availableDate',
+              style: TextStyle(fontSize: 14),
+            ),
+            subtitle: Text(
+              'Facilities: $facilities, Phone: $phone',
+              style: TextStyle(fontSize: 14),
+            ),
           ),
-
         ],
       ),
+      color: Colors.white, // Set a background color
     );
+
   }
 }
