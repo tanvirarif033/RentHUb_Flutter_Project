@@ -181,7 +181,7 @@ class _HomeState extends State<Home> {
         break;
       case 3:
       //widget =ChatScreen();
-        widget = ChatScreen();
+        widget = ChatPage();
 
         break;
       case 4:

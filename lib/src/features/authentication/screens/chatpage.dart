@@ -1,14 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 import 'chatroom.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
-
   @override
-  State<ChatPage> createState() => _ChatPageState();
+  _ChatPageState createState() => _ChatPageState();
 }
 
 class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver {
@@ -21,7 +19,7 @@ class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     setStatus("Online");
   }
 
@@ -34,99 +32,64 @@ class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
+      // online
       setStatus("Online");
     } else {
+      // offline
       setStatus("Offline");
     }
   }
 
-  String chatRoomId(String currentUserUid, String otherUserUid) {
-    if (currentUserUid != null &&
-        otherUserUid != null &&
-        currentUserUid.isNotEmpty &&
-        otherUserUid.isNotEmpty) {
-      List<String> uids = [currentUserUid, otherUserUid];
-      uids.sort();
-      return "${uids[0]}_${uids[1]}";
+  String chatRoomId(String user1, String user2) {
+    if (user1[0].toLowerCase().codeUnits[0] >
+        user2.toLowerCase().codeUnits[0]) {
+      return "$user1$user2";
+    } else {
+      return "$user2$user1";
     }
-    return "";
   }
 
-  Future<void> onSearch() async {
+  void onSearch() async {
+    FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
     setState(() {
       isLoading = true;
     });
 
-    final query = _search.text.trim();
-    if (query.isEmpty) {
+    await _firestore
+        .collection('users')
+        .where("email", isEqualTo: _search.text)
+        .get()
+        .then((value) {
       setState(() {
+        userMap = value.docs.isNotEmpty ? value.docs[0].data() : null;
         isLoading = false;
       });
-      return;
-    }
+      print(userMap);
+    });
 
-    try {
-      final querySnapshot = await _firestore
-          .collection('users')
-          .where("username", isEqualTo: query)
-          .limit(1)
-          .get();
-
-      setState(() {
-        isLoading = false;
-      });
-
-      if (querySnapshot.docs.isNotEmpty) {
-        userMap = querySnapshot.docs[0].data() as Map<String, dynamic>;
-
-        if (userMap != null) {
-          String roomId = chatRoomId(
-            _auth.currentUser?.uid ?? "",
-            userMap!['uid'] ?? "",
-          );
-
-          if (roomId.isNotEmpty) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => ChatRoom(
-                  chatRoomId: roomId,
-                  userMap: userMap!,
-                ),
-              ),
-            );
-          } else {
-            print("Error: Empty chat room ID");
-          }
-        } else {
-          print("Error: userMap is null");
-        }
-      } else {
-        print("User not found");
-      }
-    } catch (error) {
-      print("Error searching for user: $error");
-      setState(() {
-        isLoading = false;
-      });
-    }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Chat Screen"),
-      ),
       body: isLoading
           ? Center(
-        child: CircularProgressIndicator(),
+        child: Container(
+          height: size.height / 20,
+          width: size.height / 20,
+          child: CircularProgressIndicator(),
+        ),
       )
           : Column(
         children: [
-          SizedBox(height: size.height / 20),
+          SizedBox(
+            height: size.height / 20,
+          ),
           Container(
             height: size.height / 14,
             width: size.width,
@@ -145,46 +108,47 @@ class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver {
               ),
             ),
           ),
-          SizedBox(height: size.height / 50),
+          SizedBox(
+            height: size.height / 50,
+          ),
           ElevatedButton(
             onPressed: onSearch,
             child: Text("Search"),
           ),
-          SizedBox(height: size.height / 20),
-          if (userMap != null)
-            ListTile(
-              onTap: () {
-                String roomId = chatRoomId(
-                  _auth.currentUser?.displayName ?? "",
-                  userMap!['username'] ?? "",
-                );
+          SizedBox(
+            height: size.height / 30,
+          ),
+          userMap != null
+              ? ListTile(
+            onTap: () {
+              String currentUserDisplayName =
+                  _auth.currentUser?.displayName ?? "";
+              String otherUserName = userMap!['username'] ?? "";
 
-                if (roomId.isNotEmpty) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => ChatRoom(
-                        chatRoomId: roomId,
-                        userMap: userMap!,
-                      ),
-                    ),
-                  );
-                } else {
-                  print("Error: Empty chat room ID");
-                }
-              },
-              leading: Icon(Icons.account_box, color: Colors.black),
-              title: Text(
-                userMap!['username'] ?? "",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500,
+              String roomId = chatRoomId(currentUserDisplayName, otherUserName);
+
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => ChatRoom(
+                    chatRoomId: roomId,
+                    userMap: userMap!,
+                  ),
                 ),
+              );
+            },
+            leading: Icon(Icons.account_box, color: Colors.black),
+            title: Text(
+              userMap!['username'] ?? "", // Handle null user name
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 17,
+                fontWeight: FontWeight.w500,
               ),
-              subtitle: Text(userMap!['email'] ?? ""),
-              trailing: Icon(Icons.chat, color: Colors.black),
             ),
+            subtitle: Text(userMap!['email'] ?? ""), // Handle null email
+            trailing: Icon(Icons.chat, color: Colors.black),
+          )
+              : Container(),
         ],
       ),
     );
