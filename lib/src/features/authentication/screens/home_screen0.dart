@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
             ),
-            const SizedBox(height: 20), // Add space between Categories and Recent Posts
+            SizedBox(height: 20), // Add space between Categories and Recent Posts
             const Text(
               'Recent Posts', // Add this header
               style: TextStyle(
