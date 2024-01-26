@@ -5,6 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart' as
 import 'package:gap/gap.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/chatpage.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_list_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
 
@@ -183,7 +184,7 @@ class _HomeState extends State<Home> {
         break;
       case 3:
       //widget =ChatScreen();
-        widget = ChatPage();
+        widget = PropertyListScreen();
 
         break;
       case 4:

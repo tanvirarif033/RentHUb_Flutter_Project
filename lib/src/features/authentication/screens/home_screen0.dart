@@ -17,12 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   List<String> catNames = ['Family', 'Bachelor', 'Office', 'Sublet', 'Hostel', 'More..'];
-
-  // Define your catColors and catIcons here
   List<Color> catColors = [
     Colors.blue, Colors.green, Colors.orange, Colors.red, Colors.purple, Colors.yellow,
   ];
-
   List<Icon> catIcons = [
     Icon(Icons.people),
     Icon(Icons.person),
@@ -32,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Icon(Icons.more),
   ];
 
-  // Function to handle tap action
   void _handleTap(String category) {
     // You can replace this with your actual navigation logic
     print('Pressed: $category');
@@ -67,13 +63,13 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Categories', // Add this header
+              'Categories',
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 20), // Adjust spacing if needed
+            const SizedBox(height: 20),
             GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
@@ -115,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
             ),
-            SizedBox(height: 20), // Add space between Categories and Recent Posts
+            const SizedBox(height: 20), // Add space between Categories and Recent Posts
             const Text(
               'Recent Posts', // Add this header
               style: TextStyle(
