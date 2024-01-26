@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-
-import '../../../constants/sizes.dart';
-import 'chat_screen.dart';
-import 'filter_page0.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/about_us_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -14,157 +10,120 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _value = 1;
+
   @override
   void initState() {
     super.initState();
-    _value = 1; // Set an initial value
   }
+
+  List<String> catNames = ['Family', 'Bachelor', 'Office', 'Sublet', 'Hostel', 'More..'];
+
+  // Define your catColors and catIcons here
+  List<Color> catColors = [
+    Colors.blue, Colors.green, Colors.orange, Colors.red, Colors.purple, Colors.yellow,
+  ];
+
+  List<Icon> catIcons = [
+    Icon(Icons.people),
+    Icon(Icons.person),
+    Icon(Icons.work),
+    Icon(Icons.apartment),
+    Icon(Icons.hotel),
+    Icon(Icons.more),
+  ];
+
+  // Function to handle tap action
+  void _handleTap(String category) {
+    // You can replace this with your actual navigation logic
+    print('Pressed: $category');
+    switch (category) {
+      case 'Family':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => about_us_screen()));
+        break;
+      case 'Bachelor':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => about_us_screen()));
+        break;
+      case 'Office':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => about_us_screen()));
+        break;
+      case 'Sublet':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => about_us_screen()));
+        break;
+      case 'Hostel':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => about_us_screen()));
+        break;
+      case 'More..':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => about_us_screen()));
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        margin: const EdgeInsets.all(1),
+      body: Padding(
+        padding: const EdgeInsets.only(right: 15, bottom: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(3.0),
-                    child: SizedBox(
-                      width: 125,
-                      child: OutlinedButton.icon(
-                        icon: const Icon(Icons.feed_outlined),
-                        onPressed: () {},
-                        label: const Text("Feed"),
-                      ),
-                    ),
-                  ),
-                  const Gap(10),
-                  Container(
-                    padding: const EdgeInsets.all(3.0),
-                    child: SizedBox(
-                      width: 125,
-                      child: OutlinedButton.icon(
-                        icon: const Icon(Icons.content_paste_search_outlined),
-                        onPressed: () {
-                          showModalBottomSheet(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
-                            context: context,
-                            isScrollControlled: true,
-                            builder: (context) => Container(
-                              height: MediaQuery.of(context).size.height*0.35,
-                              padding: const EdgeInsets.all(tDefaultSize),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      "Sort By",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displaySmall,
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Radio(
-                                        value: 1,
-                                        groupValue: _value,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _value = value as int;
-                                          });
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      const Gap(10),
-                                      const Text("Newest"),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Radio(
-                                        value: 2,
-                                        groupValue: _value,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _value = value as int;
-                                          });
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      const Gap(10),
-                                      const Text("Price (Low to High)"),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Radio(
-                                        value: 3,
-                                        groupValue: _value,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _value = value as int;
-                                          });
-                                          Navigator.pop(context);
-                                        },
-                                      ),
-                                      const Gap(10),
-                                      const Text("Price (High to Low)"),
-                                    ],
-                                  ),
-                                  const Gap(15),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context); // Close the modal
-                                    },
-                                    child: const Text('Close'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                        label: const Text("Sort"),
-                      ),
-                    ),
-                  ),
-                  const Gap(10),
-                  Container(
-                    padding: const EdgeInsets.all(3.0),
-                    child: SizedBox(
-                      width: 125,
-                      child: OutlinedButton.icon(
-                        icon: const Icon(Icons.location_on_outlined),
-                        onPressed: () {},
-                        label: const Text("Location"),
-                      ),
-                    ),
-                  ),
-                  const Gap(10),
-                  Container(
-                    padding: const EdgeInsets.all(3.0),
-                    child: SizedBox(
-                      width: 125,
-                      child: OutlinedButton.icon(
-                        icon: const Icon(Icons.manage_search_outlined),
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context)=>const FilterPage()));
-                        },
-                        label: const Text("Filter"),
-                      ),
-                    ),
-                  ),
-                ],
+            const Text(
+              'Categories', // Add this header
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(height: 20), // Adjust spacing if needed
+            GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 1.3,
+              ),
+              itemCount: catNames.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    // Handle tap action for the icon
+                    _handleTap(catNames[index]);
+                  },
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          color: catColors[index],
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: catIcons[index],
+                        ),
+                      ),
+                      // SizedBox(height: 10,), // Adjust spacing if needed
+                      Text(
+                        catNames[index],
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+            SizedBox(height: 20), // Add space between Categories and Recent Posts
+            const Text(
+              'Recent Posts', // Add this header
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            // Add your Recent Posts content here
           ],
         ),
       ),
