@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_details_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_model.dart';
 
 class PropertyListScreen extends StatefulWidget {
@@ -62,7 +63,6 @@ class PropertyTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigate to property details screen
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -71,7 +71,8 @@ class PropertyTile extends StatelessWidget {
         );
       },
       child: Card(
-        elevation: 2.0,
+        color: Colors.black87,
+        elevation: 3.0,
         child: ListView(
           shrinkWrap: true,
           children: [
@@ -79,25 +80,25 @@ class PropertyTile extends StatelessWidget {
               height: 120.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: property.imageUrl != null
+                  image: property.imageUrl != null && property.imageUrl.isNotEmpty
                       ? Image.network(property.imageUrl).image
-                      : AssetImage('assets/logo/renthub.png'),
+                      : const AssetImage('assets/logo/renthub.png',),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(5.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     property.propertyType,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.white),
                   ),
-                  SizedBox(height: 4.0),
-                  Text('Location: ${property.district}'),
-                  Text('Price: ${property.price}'),
+                  const SizedBox(height: 2.0),
+                  Text('Location: ${property.district} , ${property.area}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white),),
+                  Text('Price : BDT ${property.price}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white)),
                 ],
               ),
             ),
@@ -107,88 +108,3 @@ class PropertyTile extends StatelessWidget {
     );
   }
 }
-
-
-class PropertyDetailsScreen extends StatelessWidget {
-  final Property property;
-
-  const PropertyDetailsScreen({Key? key, required this.property}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Property Details'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.network(
-              property.imageUrl,
-              height: 200.0,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    property.propertyType,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 16.0),
-                  Text('Location: ${property.district}',style: TextStyle(fontSize: 20),),
-                  SizedBox(height: 8.0),
-                  Row(
-                    children: [
-                      Icon(Icons.king_bed,size: 40,),
-                      SizedBox(width: 8.0),
-                      Text('Bedrooms: ${property.bedrooms}',style: TextStyle(fontSize: 15),),
-                      SizedBox(width: 50.0),
-                      Icon(Icons.bathtub,size: 40,),
-                      SizedBox(width: 8.0),
-                      Text('Bathrooms: ${property.bathrooms}',style: TextStyle(fontSize: 15),),
-                    ],
-                  ),
-                  SizedBox(height: 16.0),
-                  _buildSectionHeader('Price Info',),
-                  SizedBox(height: 8.0),
-                  Text('Price(Monthly): ${property.price}',style: TextStyle(fontSize: 18),),
-                  SizedBox(height: 16.0),
-                  _buildSectionHeader('Location'),
-                  SizedBox(height: 8.0),
-                  Text('District: ${property.district}',style: TextStyle(fontSize: 20),),
-                  Text('Area: ${property.area} sq. ft.',style: TextStyle(fontSize: 18),),
-                  SizedBox(height: 16.0),
-                  _buildSectionHeader('Facilities'),
-                  SizedBox(height: 8.0),
-                  Text('Facilities: ${property.facilities}',style: TextStyle(fontSize: 20),),
-                  SizedBox(height: 16.0),
-                  _buildSectionHeader('Contact'),
-                  SizedBox(height: 5.0),
-                  Text('Phone: ${property.phone}',style: TextStyle(fontSize: 20),),
-                  SizedBox(height: 16.0),
-                  _buildSectionHeader('Available From'),
-                  SizedBox(height: 5.0),
-                  Text('Available From: ${property.availableDate}',style: TextStyle(fontSize: 20),),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSectionHeader(String title) {
-    return Text(
-      title,
-      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-    );
-  }
-}
-
-
