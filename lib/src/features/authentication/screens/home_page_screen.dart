@@ -173,7 +173,7 @@ class _HomeState extends State<Home> {
     Widget widget;
     switch(index){
       case 0:
-        widget =  const HomeScreen();
+        widget =  PropertyListScreen();
         break;
       case 1:
       //widget = const favourite_screen();
@@ -183,8 +183,7 @@ class _HomeState extends State<Home> {
         widget=const RentPropertyScreen();
         break;
       case 3:
-      //widget =ChatScreen();
-        widget = PropertyListScreen();
+        widget = ChatPage();
 
         break;
       case 4:

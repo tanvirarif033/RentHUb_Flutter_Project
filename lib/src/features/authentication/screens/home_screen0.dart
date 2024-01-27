@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/about_us_screen.dart';
+import 'property_list_screen.dart'; // Assuming you have a file named property_list_screen.dart
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -57,70 +58,74 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(right: 15, bottom: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Categories',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(right: 15, bottom: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Categories',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 1.3,
+              const SizedBox(height: 20),
+              GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 1.3,
+                ),
+                itemCount: catNames.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      // Handle tap action for the icon
+                      _handleTap(catNames[index]);
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: catColors[index],
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: catIcons[index],
+                          ),
+                        ),
+                        // SizedBox(height: 10,), // Adjust spacing if needed
+                        Text(
+                          catNames[index],
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
               ),
-              itemCount: catNames.length,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    // Handle tap action for the icon
-                    _handleTap(catNames[index]);
-                  },
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          color: catColors[index],
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: catIcons[index],
-                        ),
-                      ),
-                      // SizedBox(height: 10,), // Adjust spacing if needed
-                      Text(
-                        catNames[index],
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: 20), // Add space between Categories and Recent Posts
-            const Text(
-              'Recent Posts', // Add this header
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
+              SizedBox(height: 20), // Add space between Categories and Recent Posts
+              const Text(
+                'Recent Posts', // Add this header
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            // Add your Recent Posts content here
-          ],
+              Expanded(
+                child: PropertyListScreen(),
+              ), // Add your Recent Posts content here
+            ],
+          ),
         ),
       ),
     );
