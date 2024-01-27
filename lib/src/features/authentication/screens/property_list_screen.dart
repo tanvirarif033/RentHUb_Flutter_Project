@@ -1,46 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-class Property {
-  final String propertyType;
-  final String price;
-  final String bedrooms;
-  final String bathrooms;
-  final String district;
-  final String area;
-  final String phone;
-  final String facilities;
-  final String imageUrl;
-  final String availableDate;
-
-  Property({
-    required this.propertyType,
-    required this.price,
-    required this.bedrooms,
-    required this.bathrooms,
-    required this.district,
-    required this.area,
-    required this.phone,
-    required this.facilities,
-    required this.imageUrl,
-    required this.availableDate,
-  });
-
-  factory Property.fromDocument(Map<String, dynamic> data) {
-    return Property(
-      propertyType: data['propertyType'] ?? '',
-      price: data['price'] ?? '',
-      bedrooms: data['bedrooms'] ?? '',
-      bathrooms: data['bathrooms'] ?? '',
-      district: data['district'] ?? '',
-      area: data['area'] ?? '',
-      phone: data['phone'] ?? '',
-      facilities: data['facilities'] ?? '',
-      imageUrl: data['imageUrl'] ?? '',
-      availableDate: data['availableDate'] ?? '',
-    );
-  }
-}
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_model.dart';
 
 class PropertyListScreen extends StatefulWidget {
   const PropertyListScreen({Key? key}) : super(key: key);
@@ -56,36 +16,38 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder<QuerySnapshot>(
-        stream: _propertyCollection.snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          }
+      body: Center(
+        child: StreamBuilder<QuerySnapshot>(
+          stream: _propertyCollection.snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            }
 
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
-          }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            }
 
-          List<Property> properties = snapshot.data!.docs.map((doc) {
-            Map<String, dynamic> data =
-            doc.data() as Map<String, dynamic>;
-            return Property.fromDocument(data);
-          }).toList();
+            List<Property> properties = snapshot.data!.docs.map((doc) {
+              Map<String, dynamic> data =
+              doc.data() as Map<String, dynamic>;
+              return Property.fromDocument(data);
+            }).toList();
 
-          return GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 8.0,
-              mainAxisSpacing: 8.0,
-            ),
-            itemCount: properties.length,
-            itemBuilder: (context, index) {
-              Property property = properties[index];
-              return PropertyTile(property: property);
-            },
-          );
-        },
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+              ),
+              itemCount: properties.length,
+              itemBuilder: (context, index) {
+                Property property = properties[index];
+                return PropertyTile(property: property);
+              },
+            );
+          },
+        ),
       ),
     );
   }
@@ -119,7 +81,7 @@ class PropertyTile extends StatelessWidget {
                 image: DecorationImage(
                   image: property.imageUrl != null
                       ? Image.network(property.imageUrl).image
-                      : AssetImage('assets/default_image.jpg'),
+                      : AssetImage('assets/logo/renthub.png'),
                   fit: BoxFit.cover,
                 ),
               ),

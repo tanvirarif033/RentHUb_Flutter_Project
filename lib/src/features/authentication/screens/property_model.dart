@@ -23,7 +23,6 @@ class Property {
     required this.availableDate,
   });
 
-  // Factory method to create Property from Firestore document data
   factory Property.fromDocument(Map<String, dynamic> data) {
     return Property(
       propertyType: data['propertyType'] ?? '',
