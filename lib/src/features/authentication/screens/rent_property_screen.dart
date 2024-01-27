@@ -269,7 +269,7 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
 
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Property information saved')));
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),
     );
