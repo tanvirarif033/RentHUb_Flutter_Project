@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/post_success_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_list_screen.dart';
 
 import 'home_screen0.dart';
 
@@ -103,151 +105,153 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TypeAheadField(
-                hideOnEmpty: true,
-                debounceDuration: Duration(milliseconds: 300),
-                suggestionsCallback: (pattern) async {
-                  return suggestions
-                      .where((item) =>
-                      item.toLowerCase().contains(pattern.toLowerCase()))
-                      .toList();
-                },
-                itemBuilder: (context, suggestion) {
-                  return ListTile(
-                    title: Text(suggestion),
-                  );
-                },
-                onSuggestionSelected: (suggestion) {
-                  _propertyTypeController.text = suggestion;
-                },
-                textFieldConfiguration: TextFieldConfiguration(
-                  controller: _propertyTypeController,
-                  decoration: InputDecoration(
-                    labelText: 'Property Type',
-                    labelStyle:
-                    TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                    prefixIcon: Icon(Icons.location_city_rounded),
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TypeAheadField(
+                  hideOnEmpty: true,
+                  debounceDuration: Duration(milliseconds: 300),
+                  suggestionsCallback: (pattern) async {
+                    return suggestions
+                        .where((item) =>
+                        item.toLowerCase().contains(pattern.toLowerCase()))
+                        .toList();
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      title: Text(suggestion),
+                    );
+                  },
+                  onSuggestionSelected: (suggestion) {
+                    _propertyTypeController.text = suggestion;
+                  },
+                  textFieldConfiguration: TextFieldConfiguration(
+                    controller: _propertyTypeController,
+                    decoration: InputDecoration(
+                      labelText: 'Property Type',
+                      labelStyle:
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      prefixIcon: Icon(Icons.location_city_rounded),
+                    ),
                   ),
                 ),
-              ),
-              TextFormField(
-                controller: _priceRangeController,
-                decoration: InputDecoration(
-                  labelText: 'Price',
-                  prefixIcon: Icon(Icons.attach_money),
-                ),
-              ),
-              TextFormField(
-                controller: _bedroomsController,
-                decoration: InputDecoration(
-                  labelText: 'Bedrooms',
-                  prefixIcon: Icon(Icons.king_bed),
-                ),
-              ),
-              TextFormField(
-                controller: _bathroomsController,
-                decoration: InputDecoration(
-                  labelText: 'Bathrooms',
-                  prefixIcon: Icon(Icons.bathtub_rounded),
-                ),
-              ),
-              TypeAheadField(
-                hideOnEmpty: true,
-                debounceDuration: Duration(milliseconds: 300),
-                suggestionsCallback: (pattern) async {
-                  return suggestions1
-                      .where((item) =>
-                      item.toLowerCase().contains(pattern.toLowerCase()))
-                      .toList();
-                },
-                itemBuilder: (context, suggestion) {
-                  return ListTile(
-                    title: Text(suggestion),
-                  );
-                },
-                onSuggestionSelected: (suggestion) {
-                  _districtController.text = suggestion;
-                },
-                textFieldConfiguration: TextFieldConfiguration(
-                  controller: _districtController,
+                TextFormField(
+                  controller: _priceRangeController,
                   decoration: InputDecoration(
-                    labelText: 'District',
-                    labelStyle:
-                    TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                    prefixIcon: Icon(Icons.location_searching_rounded),
+                    labelText: 'Price',
+                    prefixIcon: Icon(Icons.attach_money),
                   ),
                 ),
-              ),
-              TextFormField(
-                controller: _areaController,
-                decoration: InputDecoration(
-                  labelText: 'Area',
-                  prefixIcon: Icon(Icons.location_on),
+                TextFormField(
+                  controller: _bedroomsController,
+                  decoration: InputDecoration(
+                    labelText: 'Bedrooms',
+                    prefixIcon: Icon(Icons.king_bed),
+                  ),
                 ),
-              ),
-              TextFormField(
-                controller: _phoneController,
-                decoration: InputDecoration(
-                  labelText: 'Phone Number',
-                  prefixIcon: Icon(Icons.phone),
+                TextFormField(
+                  controller: _bathroomsController,
+                  decoration: InputDecoration(
+                    labelText: 'Bathrooms',
+                    prefixIcon: Icon(Icons.bathtub_rounded),
+                  ),
                 ),
-              ),
-              TextFormField(
-                controller: _facilityController,
-                decoration: InputDecoration(
-                  labelText: 'Facilities',
-                  prefixIcon: Icon(Icons.local_offer_rounded),
-                ),
-              ),
-              TextFormField(
-                controller: _availableDateController,
-                decoration: InputDecoration(
-                  labelText: 'Available From',
-                  prefixIcon: Icon(Icons.date_range_rounded),
-                ),
-                onTap: () {
-                  _selectDate(context);
-                },
-              ),
-              SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    _pickImage();
+                TypeAheadField(
+                  hideOnEmpty: true,
+                  debounceDuration: Duration(milliseconds: 300),
+                  suggestionsCallback: (pattern) async {
+                    return suggestions1
+                        .where((item) =>
+                        item.toLowerCase().contains(pattern.toLowerCase()))
+                        .toList();
                   },
-                  child: Text('Select Image'),
-                ),
-              ),
-              SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    _uploadImageToFirebase();
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      title: Text(suggestion),
+                    );
                   },
-                  child: const Text('Upload Image '),
-                ),
-              ),
-              SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    _savePropertyInformation();
+                  onSuggestionSelected: (suggestion) {
+                    _districtController.text = suggestion;
                   },
-                  child: Text('Submit'),
+                  textFieldConfiguration: TextFieldConfiguration(
+                    controller: _districtController,
+                    decoration: InputDecoration(
+                      labelText: 'District',
+                      labelStyle:
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      prefixIcon: Icon(Icons.location_searching_rounded),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                TextFormField(
+                  controller: _areaController,
+                  decoration: InputDecoration(
+                    labelText: 'Area',
+                    prefixIcon: Icon(Icons.location_on),
+                  ),
+                ),
+                TextFormField(
+                  controller: _phoneController,
+                  decoration: InputDecoration(
+                    labelText: 'Phone Number',
+                    prefixIcon: Icon(Icons.phone),
+                  ),
+                ),
+                TextFormField(
+                  controller: _facilityController,
+                  decoration: InputDecoration(
+                    labelText: 'Facilities',
+                    prefixIcon: Icon(Icons.local_offer_rounded),
+                  ),
+                ),
+                TextFormField(
+                  controller: _availableDateController,
+                  decoration: InputDecoration(
+                    labelText: 'Available From',
+                    prefixIcon: Icon(Icons.date_range_rounded),
+                  ),
+                  onTap: () {
+                    _selectDate(context);
+                  },
+                ),
+                SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _pickImage();
+                    },
+                    child: Text('Select Image'),
+                  ),
+                ),
+                SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _uploadImageToFirebase();
+                    },
+                    child: const Text('Upload Image '),
+                  ),
+                ),
+                SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _savePropertyInformation();
+                    },
+                    child: Text('Submit'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -332,7 +336,7 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
         .showSnackBar(SnackBar(content: Text('Property information saved')));
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
+      MaterialPageRoute(builder: (context) => PropertyListScreen()),
     );
   }
 
