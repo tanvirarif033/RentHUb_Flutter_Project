@@ -19,34 +19,33 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
 
   List<String> catNames = ['Family', 'Bachelor', 'Office', 'Sublet', 'Hostel', 'More..'];
   List<Color> catColors = [
-    Colors.blue, Colors.green, Colors.orange, Colors.red, Colors.purple, Colors.yellow,
+    Colors.black87, Colors.black87, Colors.black87, Colors.black87, Colors.black87, Colors.black87,
   ];
   List<Icon> catIcons = [
-    Icon(Icons.people),
-    Icon(Icons.person),
-    Icon(Icons.work),
-    Icon(Icons.apartment),
-    Icon(Icons.hotel),
-    Icon(Icons.more),
+    Icon(Icons.people,color: Colors.white,size: 30,),
+    Icon(Icons.person,color: Colors.white,size: 30,),
+    Icon(Icons.work,color: Colors.white,size: 30,),
+    Icon(Icons.apartment,color: Colors.white,size: 30,),
+    Icon(Icons.hotel,color: Colors.white,size: 30,),
+    Icon(Icons.more_horiz_outlined,color: Colors.white,size: 30,),
   ];
 
-  List<Property> allProperties = []; // List to store all properties
-  List<Property> filteredProperties = []; // List to store filtered properties
+  List<Property> allProperties = [];
+  List<Property> filteredProperties = [];
 
   @override
   void initState() {
     super.initState();
-    // Listen to changes in the Firestore collection
+
     _propertyCollection.snapshots().listen((snapshot) {
-      // Check if the snapshot has data
+
       if (snapshot.docs.isNotEmpty) {
-        // Update the list of all properties when the data changes
+
         allProperties = snapshot.docs.map((doc) {
           Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
           return Property.fromDocument(data);
         }).toList();
 
-        // Initially, show all properties
         _updateProperties(allProperties);
       }
     });
@@ -59,7 +58,6 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
     });
   }
 
-  // Method to filter properties based on the selected category
   void _filterPropertiesByCategory(String category) {
     List<Property> filteredProperties = allProperties
         .where((property) => property.propertyType == category)
@@ -67,7 +65,6 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
     _updateProperties(filteredProperties);
   }
 
-  // Method to handle category tap
   void _handleTap(String category) {
     print('Pressed: $category');
     List<Property> categoryProperties = allProperties
@@ -122,7 +119,7 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
                               width: 60,
                               decoration: BoxDecoration(
                                 color: catColors[index],
-                                shape: BoxShape.circle,
+                                shape: BoxShape.rectangle
                               ),
                               child: Center(
                                 child: catIcons[index],
