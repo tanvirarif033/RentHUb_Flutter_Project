@@ -126,7 +126,6 @@ class _CategoryPropertiesScreenState
       onTap: () {
         setState(() {
           _selectedSortOption = option;
-          // Sort the properties here
           _sortProperties();
         });
         Navigator.pop(context);
