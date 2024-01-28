@@ -53,7 +53,7 @@ class PropertyDetailsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 16.0),
                   _buildSection('Price Info', 'Price(Monthly): ${property.price}', 18),
-                  _buildSection('Location', 'District: ${property.district}\nArea: ${property.area} sq. ft.', 20),
+                  _buildSection('Location', 'District: ${property.district}\nArea: ${property.area} ', 20),
                   _buildSection('Facilities', 'Facilities: ${property.facilities}', 20),
                   _buildSection('Contact', 'Phone: ${property.phone}', 20),
                   _buildSection('Available From', 'Available From: ${property.availableDate}', 20),
