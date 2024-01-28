@@ -94,8 +94,8 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
           _auth.currentUser?.uid ?? "", // Current user's UID
           userMap!['uid'] ?? "", // Searched user's UID (assuming 'uid' is the field name)
         );
-
-        if (roomId.isNotEmpty) {
+/*
+if (roomId.isNotEmpty) {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (_) => ChatRoom(
               chatRoomId: roomId,
@@ -105,6 +105,8 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
         } else {
           print("Error: Empty chat room ID");
         }
+ */
+
 
       } else {
         // Handle the case where no matching user is found
@@ -119,10 +121,7 @@ class _chatpageState extends State<chatpage>  with WidgetsBindingObserver{
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Chat Screen"),
 
-      ),
       body: isLoading
           ? Center(
         child: Container(

@@ -221,26 +221,37 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
               ),
               SizedBox(height: 16),
               // Image picker button
-              ElevatedButton(
-                onPressed: () {
-                  _pickImage();
-                },
-                child: Text('Select Image'),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    _pickImage();
+                  },
+                  child: Text('Select Image'),
+                ),
               ),
               SizedBox(height: 16),
               // Upload image button
-              ElevatedButton(
-                onPressed: () {
-                  _uploadImageToFirebase();
-                },
-                child: const Text('Upload Image '),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    _uploadImageToFirebase();
+                  },
+                  child: const Text('Upload Image '),
+                ),
               ),
               SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  _savePropertyInformation();
-                },
-                child: Text('Submit'),
+              
+              SizedBox(
+                width: double.infinity,
+
+                child: ElevatedButton(
+                  onPressed: () {
+                    _savePropertyInformation();
+                  },
+                  child: Text('Submit'),
+                ),
               ),
             ],
           ),
@@ -343,7 +354,7 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
     }
 
     Reference storageReference =
-    FirebaseStorage.instance.ref().child('property_images/${DateTime.now()}');
+    FirebaseStorage.instance.ref().child(' ${DateTime.now()}');
     UploadTask uploadTask = storageReference.putFile(_selectedImage!);
     await uploadTask.whenComplete(() => null);
 

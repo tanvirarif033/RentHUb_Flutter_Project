@@ -178,11 +178,14 @@ class _FilterPageState extends State<FilterPage> {
 
 
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                _searchProperties();
-              },
-              child: Text('Search'),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  _searchProperties();
+                },
+                child: Text('Search'),
+              ),
             ),
           ],
         ),

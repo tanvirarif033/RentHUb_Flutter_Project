@@ -11,6 +11,7 @@ import 'package:rent_hub_flutter_project/src/features/authentication/screens/ren
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
 
 
+import '../../../constants/images_strings.dart';
 import 'favourite_screen.dart';
 import 'home_screen0.dart';
 import 'messages_screen.dart';
@@ -79,6 +80,18 @@ class _HomeState extends State<Home> {
                 children: [
 
                   Gap(6),
+                  Row(
+
+                    children: [
+                      Gap(6),
+                      SizedBox(
+                        height: 40,
+                        width: 45,
+                        child:Image(image: const AssetImage(tLogo),),
+
+                      ),
+                    ],
+                  ),
 
 
                   Row(
@@ -175,7 +188,7 @@ class _HomeState extends State<Home> {
         break;
       case 1:
         //widget = const favourite_screen();
-        widget=const SearchScreen();
+        widget= FavoriteListScreen ();
 
         break;
       case 2:
