@@ -42,8 +42,13 @@ dependencies:
 
   photo_view: ^0.14.0
   riverpod: ^2.4.9
-  flutter_typeahead: ^4.0.0
+
   line_awesome_flutter: ^2.0.0
+
+  flutter_typeahead: ^5.0.2
+  flutter_local_notifications: ^16.3.0
+  app_settings: ^5.1.1
+
 
 
 

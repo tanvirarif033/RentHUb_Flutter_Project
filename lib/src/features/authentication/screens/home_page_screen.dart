@@ -189,10 +189,9 @@ class _HomeState extends State<Home> {
       case 1:
         //widget = const favourite_screen();
         widget= FavoriteListScreen ();
-
         break;
       case 2:
-        widget=const RentPropertyScreen();
+        widget=const HomeScreen();
         break;
       case 3:
       //widget =ChatScreen();
