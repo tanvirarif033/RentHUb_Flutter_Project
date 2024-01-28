@@ -198,30 +198,32 @@ class _SignUpPageState extends State<SignUpPage> {
     String password = _passwordController.text;
 
 
-    try {
-      UserCredential userCredential =
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
+      User? user = await _auth.signUpWithEmailAndPassword(username, email, password);
+
+      if (user != null) {
+      print("User is successfully created");
+
+
+
+      ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+      content: Text('Sign up successful!'),
+      duration: Duration(seconds: 2),
+      ),
       );
 
-      // Get the user ID from the userCredential
-      String userId = userCredential.user!.uid;
 
-      // Now, you can store the username along with the user ID in Firestore or any other database
-      await FirebaseFirestore.instance.collection('users').doc(userId).set({
-        'username': username,
-        'email': email,
-        // Add other user-related data as needed
-      });
-
-      print("User successfully created with ID: $userId");
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const LogIn()));
-    } catch (e) {
-      print("Error occurred: $e");
-      // Handle the error, show a message, etc.
-
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>  LogIn()));
+      } else {
+      print("Some error happened");
+      }
     }
+
+
+
   }
 
-}
+
+
+
+      // Handle the error, show a message, etc

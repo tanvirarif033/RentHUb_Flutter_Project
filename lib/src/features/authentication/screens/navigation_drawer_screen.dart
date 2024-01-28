@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gap/gap.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/about_us_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/login_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/logout_screen.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import '../../../constants/images_strings.dart';
+import '../../../constants/text_strings.dart';
 import 'account_screen.dart';
 import 'addAcoount_screen.dart';
 import 'invite_friends_screen.dart';
@@ -20,38 +25,34 @@ class NavigationDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const name = 'ARIF33';
-    const email = 'arif33@gmail.com';
-    const urlImage =
-        'https://tse1.mm.bing.net/th?id=OIP.wEsBe2udHBieFeZVmus8qAHaHk&pid=Api&rs=1&c=1&qlt=95&w=119&h=121';
 
     return Drawer(
       child: Material(
         color: Colors.black,
         child: ListView(
           children: <Widget>[
-            buildHeader(
-              urlImage: urlImage,
-              name: name,
-              email: email,
-              onClicked: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const UserPage(
-                    name: 'Arif33',
-                    urlImage: urlImage,
-                  ),
-                ),
-              ),
-            ),
+
             Container(
               padding: padding,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Gap(2),
+                   SizedBox(
+                    height: 40,
+                    width: 50,
+                    child:Image(image: const AssetImage(tLogo),),
+
+                  ),
+                  Gap(5),
+                  Text(tAppName,style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w700),textAlign: TextAlign.start,),
+                  Gap(5),
+                  Text(tAppTagLine,style: TextStyle(color: Colors.white70,fontSize: 16,fontWeight: FontWeight.w500),textAlign: TextAlign.start),
                   const Divider(color: Colors.white70),
                   const SizedBox(height: 24),
                   buildMenuItem(
-                    text: 'Account',
-                    icon: Icons.account_circle_outlined,
+                    text: 'Edit Profile',
+                    icon: Icons.person_2_outlined,
                     onClicked: () => selectedItem(context, 0),
                   ),
                   const SizedBox(height: 24),
@@ -168,7 +169,7 @@ class NavigationDrawerWidget extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const account_screen(),
+          builder: (context) =>  UserProfileScreen(),
         ));
         break;
       case 1:
@@ -207,7 +208,7 @@ class NavigationDrawerWidget extends StatelessWidget {
 
       default:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const account_screen(),
+          builder: (context) =>  UserProfileScreen(),
         ));
         break;
     }
