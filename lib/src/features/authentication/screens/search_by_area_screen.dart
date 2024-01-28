@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_model.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_tile.dart';
 
-class CategoryPropertiesScreen extends StatefulWidget {
+class SearchByArea extends StatefulWidget {
   final String categoryName;
   final List<Property> properties;
 
-  CategoryPropertiesScreen({
+  SearchByArea({
     required this.categoryName,
     required this.properties,
   });
 
   @override
-  _CategoryPropertiesScreenState createState() =>
-      _CategoryPropertiesScreenState();
+  _SearchByAreaState createState() =>
+      _SearchByAreaState();
 }
 
-class _CategoryPropertiesScreenState
-    extends State<CategoryPropertiesScreen> {
+class _SearchByAreaState
+    extends State<SearchByArea> {
   String _selectedSortOption = 'Price Low to High';
   late List<Property> sortedProperties; // Declare sortedProperties here
 
@@ -30,7 +30,7 @@ class _CategoryPropertiesScreenState
         centerTitle: true,
         title: Text(
           widget.categoryName,
-          style: const TextStyle(fontSize: 25),
+          style: TextStyle(fontSize: 25),
         ),
         actions: [
           Container(

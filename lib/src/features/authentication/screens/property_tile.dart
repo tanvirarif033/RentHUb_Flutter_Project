@@ -28,6 +28,7 @@ class PropertyTile extends StatelessWidget {
             Container(
               height: 120.0,
               decoration: BoxDecoration(
+                border: Border.all(color: Colors.black,width: 2),
                 image: DecorationImage(
                   image: property.imageUrl != null &&
                       property.imageUrl.isNotEmpty
