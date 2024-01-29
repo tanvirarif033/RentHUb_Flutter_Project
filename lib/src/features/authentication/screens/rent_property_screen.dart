@@ -1,13 +1,20 @@
 import 'dart:io';
 import 'package:intl/intl.dart';
 
+
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/home_screen0.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/post_success_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_list_screen.dart';
+
+import 'home_screen0.dart';
+
+
 
 class RentPropertyScreen extends StatefulWidget {
   const RentPropertyScreen({Key? key}) : super(key: key);
@@ -28,11 +35,10 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
   final TextEditingController _availableDateController = TextEditingController();
 
 
-
-  // Firestore reference
   final CollectionReference _propertyCollection =
   FirebaseFirestore.instance.collection('properties');
-  final List<String> suggestions = ["Family", "Bachelor", "Sublet", "Others"];
+  final List<String> suggestions = ["Family", "Bachelor", "Sublet", "Office","Hostel","Others"];
+
   final List<String> suggestions1 = [
     "Dhaka",
     "Faridpur",
@@ -65,8 +71,10 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
     "Lalmonirhat",
     "Nilphamari",
     "Panchagarh",
-    "Rangpur"
-        "Thakurgaon",
+
+    "Rangpur",
+    "Thakurgaon",
+
     "Barguna",
     "Barisal",
     "Bhola",
@@ -97,163 +105,165 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
     "Magura",
     "Meherpur",
     "Narail",
-    "Satkhira",
+
+    "Satkhira"
+
   ];
 
-  // Image picker
+
   final ImagePicker _imagePicker = ImagePicker();
   File? _selectedImage;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TypeAheadField(
-                hideOnEmpty: true,
-                debounceDuration: Duration(milliseconds: 300),
 
-                suggestionsCallback: (pattern) async {
-                  return suggestions
-                      .where((item) =>
-                      item.toLowerCase().contains(pattern.toLowerCase()))
-                      .toList();
-                },
-                itemBuilder: (context, suggestion) {
-                  return ListTile(
-                    title: Text(suggestion),
-
-                  );
-                },
-                onSuggestionSelected: (suggestion) {
-                  _propertyTypeController.text = suggestion;
-                },
-                textFieldConfiguration: TextFieldConfiguration(
-                  controller: _propertyTypeController,
-                  decoration: InputDecoration(
-                    labelText: 'Property Type',
-                    labelStyle:
-                    TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                    prefixIcon:Icon(Icons.location_city_rounded),
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TypeAheadField(
+                  hideOnEmpty: true,
+                  debounceDuration: Duration(milliseconds: 300),
+                  suggestionsCallback: (pattern) async {
+                    return suggestions
+                        .where((item) =>
+                        item.toLowerCase().contains(pattern.toLowerCase()))
+                        .toList();
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      title: Text(suggestion),
+                    );
+                  },
+                  onSuggestionSelected: (suggestion) {
+                    _propertyTypeController.text = suggestion;
+                  },
+                  textFieldConfiguration: TextFieldConfiguration(
+                    controller: _propertyTypeController,
+                    decoration: InputDecoration(
+                      labelText: 'Property Type',
+                      labelStyle:
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      prefixIcon: Icon(Icons.location_city_rounded),
+                    ),
                   ),
                 ),
-              ),
-              TextFormField(
-                controller: _priceRangeController,
-                decoration: InputDecoration(
-                  labelText: 'Price',
-                  prefixIcon: Icon(Icons.attach_money), // Add an icon
-                ),
-              ),
-              TextFormField(
-                controller: _bedroomsController,
-                decoration: InputDecoration(
-                  labelText: 'Bedrooms',
-                  prefixIcon: Icon(Icons.king_bed), // Add an icon
-                ),
-              ),
-              TextFormField(
-                controller: _bathroomsController,
-                decoration: InputDecoration(labelText: 'Bathrooms',
-                  prefixIcon: Icon(Icons.bathtub_rounded),
-
-                ),
-              ),
-              TypeAheadField(
-                hideOnEmpty: true,
-                debounceDuration: Duration(milliseconds: 300),
-
-                suggestionsCallback: (pattern) async {
-                  return suggestions1
-                      .where((item) =>
-                      item.toLowerCase().contains(pattern.toLowerCase()))
-                      .toList();
-                },
-                itemBuilder: (context, suggestion) {
-                  return ListTile(
-                    title: Text(suggestion),
-
-                  );
-                },
-                onSuggestionSelected: (suggestion) {
-                  _districtController.text = suggestion;
-                },
-                textFieldConfiguration: TextFieldConfiguration(
-                  controller: _districtController,
+                TextFormField(
+                  controller: _priceRangeController,
                   decoration: InputDecoration(
-                    labelText: 'District',
-                    labelStyle:
-                    TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                    prefixIcon:Icon(Icons.location_searching_rounded),
+                    labelText: 'Price',
+                    prefixIcon: Icon(Icons.attach_money),
                   ),
                 ),
-              ),
-              TextFormField(
-                controller: _areaController,
-                decoration: InputDecoration(labelText: 'Area',
-                  prefixIcon: Icon(Icons.location_on),),
-              ),
-              TextFormField(
-                controller: _phoneController,
-                decoration: InputDecoration(labelText: 'Phone Number',
-                  prefixIcon: Icon(Icons.phone),
+                TextFormField(
+                  controller: _bedroomsController,
+                  decoration: InputDecoration(
+                    labelText: 'Bedrooms',
+                    prefixIcon: Icon(Icons.king_bed),
+                  ),
                 ),
-              ),
-              TextFormField(
-                controller: _facilityController,
-                decoration: InputDecoration(labelText: 'Facilities',
-                  prefixIcon: Icon(Icons.local_offer_rounded),
+                TextFormField(
+                  controller: _bathroomsController,
+                  decoration: InputDecoration(
+                    labelText: 'Bathrooms',
+                    prefixIcon: Icon(Icons.bathtub_rounded),
+                  ),
                 ),
-              ),
-              TextFormField(
-                controller: _availableDateController,
-                decoration: InputDecoration(labelText: 'Available From',
-                  prefixIcon: Icon(Icons.date_range_rounded),
-                ),
-                onTap: () {
-                  _selectDate(context);
-                },
-              ),
-              SizedBox(height: 16),
-              // Image picker button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    _pickImage();
+                TypeAheadField(
+                  hideOnEmpty: true,
+                  debounceDuration: Duration(milliseconds: 300),
+                  suggestionsCallback: (pattern) async {
+                    return suggestions1
+                        .where((item) =>
+                        item.toLowerCase().contains(pattern.toLowerCase()))
+                        .toList();
                   },
-                  child: Text('Select Image'),
-                ),
-              ),
-              SizedBox(height: 16),
-              // Upload image button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    _uploadImageToFirebase();
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      title: Text(suggestion),
+                    );
                   },
-                  child: const Text('Upload Image '),
-                ),
-              ),
-              SizedBox(height: 16),
-              
-              SizedBox(
-                width: double.infinity,
-
-                child: ElevatedButton(
-                  onPressed: () {
-                    _savePropertyInformation();
+                  onSuggestionSelected: (suggestion) {
+                    _districtController.text = suggestion;
                   },
-                  child: Text('Submit'),
+                  textFieldConfiguration: TextFieldConfiguration(
+                    controller: _districtController,
+                    decoration: InputDecoration(
+                      labelText: 'District',
+                      labelStyle:
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      prefixIcon: Icon(Icons.location_searching_rounded),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                TextFormField(
+                  controller: _areaController,
+                  decoration: InputDecoration(
+                    labelText: 'Area',
+                    prefixIcon: Icon(Icons.location_on),
+                  ),
+                ),
+                TextFormField(
+                  controller: _phoneController,
+                  decoration: InputDecoration(
+                    labelText: 'Phone Number',
+                    prefixIcon: Icon(Icons.phone),
+                  ),
+                ),
+                TextFormField(
+                  controller: _facilityController,
+                  decoration: InputDecoration(
+                    labelText: 'Facilities',
+                    prefixIcon: Icon(Icons.local_offer_rounded),
+                  ),
+                ),
+                TextFormField(
+                  controller: _availableDateController,
+                  decoration: InputDecoration(
+                    labelText: 'Available From',
+                    prefixIcon: Icon(Icons.date_range_rounded),
+                  ),
+                  onTap: () {
+                    _selectDate(context);
+                  },
+                ),
+                SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _pickImage();
+                    },
+                    child: Text('Select Image'),
+                  ),
+                ),
+                SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _uploadImageToFirebase();
+                    },
+                    child: const Text('Upload Image '),
+                  ),
+                ),
+                SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _savePropertyInformation();
+                    },
+                    child: Text('Submit'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -267,12 +277,17 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
       context: context,
       initialDate: currentDate,
       firstDate: currentDate,
-      lastDate: currentDate.add(Duration(days: 365)), // Limit to one year from today
+
+      lastDate: currentDate.add(Duration(days: 365)),
+
     );
 
     if (selectedDate != null && selectedDate != currentDate) {
       setState(() {
-        _availableDateController.text = DateFormat('yyyy-MM-dd').format(selectedDate);
+
+        _availableDateController.text =
+            DateFormat('yyyy-MM-dd').format(selectedDate);
+
       });
     }
   }
@@ -300,7 +315,9 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
   }
 
   void _savePropertyInformation() async {
+
     // Get the values from controllers
+
     String propertyType = _propertyTypeController.text;
     String price = _priceRangeController.text;
     String bedrooms = _bedroomsController.text;
@@ -310,10 +327,10 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
     String phone = _phoneController.text;
     String facilities = _facilityController.text;
     String availableDate = _availableDateController.text;
-    // Upload image to Firebase Storage
+
     String imageUrl = await _uploadImage();
 
-    // Create a document with the property information
+
     await _propertyCollection.add({
       'propertyType': propertyType,
       'price': price,
@@ -322,12 +339,16 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
       'district': district,
       'area': area,
       'phone': phone,
-      'facilities':facilities,
+
+      'facilities': facilities,
+
       'imageUrl': imageUrl,
       'availableDate': availableDate,
     });
 
+
     // Clear the text controllers after submitting
+
     _propertyTypeController.clear();
     _priceRangeController.clear();
     _bedroomsController.clear();
@@ -339,26 +360,26 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
     _availableDateController.clear();
 
 
-    // Show a success message or navigate to another screen if needed
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Property information saved')));
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
+      MaterialPageRoute(builder: (context) => PropertyListScreen()),
+
     );
   }
 
   Future<String> _uploadImage() async {
     if (_selectedImage == null) {
-      return ''; // Return empty string if no image selected
+
+      return '';
     }
 
     Reference storageReference =
-    FirebaseStorage.instance.ref().child(' ${DateTime.now()}');
+    FirebaseStorage.instance.ref().child('${DateTime.now()}');
     UploadTask uploadTask = storageReference.putFile(_selectedImage!);
     await uploadTask.whenComplete(() => null);
 
-    // Get the URL of the uploaded image
     String imageUrl = await storageReference.getDownloadURL();
     return imageUrl;
   }
