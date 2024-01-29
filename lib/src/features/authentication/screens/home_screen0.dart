@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/about_us_screen.dart';
 import 'property_list_screen.dart'; // Assuming you have a file named property_list_screen.dart
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
   }
+
 
   List<String> catNames = ['Family', 'Bachelor', 'Office', 'Sublet', 'Hostel', 'More..'];
   List<Color> catColors = [
@@ -126,7 +129,118 @@ class _HomeScreenState extends State<HomeScreen> {
               ), // Add your Recent Posts content here
             ],
           ),
+
         ),
+      ),
+    );
+  }
+}
+
+class FavoriteListScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      body: ListView.builder(
+        itemCount: favoriteList.length,
+        itemBuilder: (context, index) {
+          var property = favoriteList[index];
+          return FavoriteListItem(property: property);
+        },
+      ),
+    );
+  }
+}
+
+class FavoriteListItem extends StatelessWidget {
+  final QueryDocumentSnapshot<Object?> property;
+
+  FavoriteListItem({required this.property});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      margin: EdgeInsets.all(8.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: ListTile(
+        contentPadding: EdgeInsets.all(16.0),
+        title: Text(
+          'Property Type: ${property['propertyType']}',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 8),
+            Text('Bedrooms: ${property['bedrooms']}'),
+            Text('Bathrooms: ${property['bathrooms']}'),
+            Text('Price: ${property['price']}'),
+            Text('District: ${property['district']}'),
+            Text('Area: ${property['area']}'),
+            Text('Phone: ${property['phone']}'),
+            Text('Available Date: ${property['availableDate']}'),
+            Text('Facilities: ${property['facilities']}'),
+
+
+            SizedBox(height: 8),
+          ],
+        ),
+        trailing: IconButton(
+          icon: Icon(Icons.delete),
+          onPressed: () {
+            // Remove item from the favorite list
+            favoriteList.remove(property);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Removed from favorites'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+List<QueryDocumentSnapshot<Object?>> favoriteList = [];
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: HomeScreen(),
+      routes: {
+        '/favorites': (context) => FavoriteListScreen(),
+      },
+    ),
+  );
+}
+class ViewPhotosScreen extends StatelessWidget {
+  final QueryDocumentSnapshot<Object?> property;
+
+  ViewPhotosScreen({required this.property});
+
+  @override
+  Widget build(BuildContext context) {
+    final String? imageUrl = property['imageUrl'];
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Property Photo'),
+      ),
+      body: imageUrl != null
+          ? Image.network(
+        imageUrl,
+        fit: BoxFit.cover,
+      )
+          : Center(
+        child: Text('No photo available'),
       ),
     );
   }

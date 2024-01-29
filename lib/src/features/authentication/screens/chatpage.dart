@@ -65,7 +65,35 @@ class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver {
         userMap = value.docs.isNotEmpty ? value.docs[0].data() : null;
         isLoading = false;
       });
-      print(userMap);
+
+      if (value.docs.isNotEmpty) {
+        setState(() {
+          userMap = value.docs[0].data();
+        });
+
+        String roomId = chatRoomId(
+          _auth.currentUser?.uid ?? "", // Current user's UID
+          userMap!['uid'] ?? "", // Searched user's UID (assuming 'uid' is the field name)
+        );
+/*
+if (roomId.isNotEmpty) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => ChatRoom(
+              chatRoomId: roomId,
+              userMap: userMap!,
+            ),
+          ));
+        } else {
+          print("Error: Empty chat room ID");
+        }
+ */
+
+
+      } else {
+        // Handle the case where no matching user is found
+        print("User not found");
+      }
+
     });
 
   }
@@ -77,6 +105,8 @@ class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+
+
       body: isLoading
           ? Center(
         child: Container(

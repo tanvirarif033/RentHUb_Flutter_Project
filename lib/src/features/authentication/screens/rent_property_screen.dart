@@ -1,14 +1,19 @@
 import 'dart:io';
 import 'package:intl/intl.dart';
+
+
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/post_success_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_list_screen.dart';
 
 import 'home_screen0.dart';
+
 
 
 class RentPropertyScreen extends StatefulWidget {
@@ -29,9 +34,11 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
   final TextEditingController _facilityController = TextEditingController();
   final TextEditingController _availableDateController = TextEditingController();
 
+
   final CollectionReference _propertyCollection =
   FirebaseFirestore.instance.collection('properties');
   final List<String> suggestions = ["Family", "Bachelor", "Sublet", "Office","Hostel","Others"];
+
   final List<String> suggestions1 = [
     "Dhaka",
     "Faridpur",
@@ -64,8 +71,10 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
     "Lalmonirhat",
     "Nilphamari",
     "Panchagarh",
+
     "Rangpur",
     "Thakurgaon",
+
     "Barguna",
     "Barisal",
     "Bhola",
@@ -96,15 +105,18 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
     "Magura",
     "Meherpur",
     "Narail",
+
     "Satkhira"
 
   ];
+
 
   final ImagePicker _imagePicker = ImagePicker();
   File? _selectedImage;
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -258,19 +270,24 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
     );
   }
 
+
   Future<void> _selectDate(BuildContext context) async {
     DateTime currentDate = DateTime.now();
     DateTime? selectedDate = await showDatePicker(
       context: context,
       initialDate: currentDate,
       firstDate: currentDate,
+
       lastDate: currentDate.add(Duration(days: 365)),
+
     );
 
     if (selectedDate != null && selectedDate != currentDate) {
       setState(() {
+
         _availableDateController.text =
             DateFormat('yyyy-MM-dd').format(selectedDate);
+
       });
     }
   }
@@ -298,6 +315,9 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
   }
 
   void _savePropertyInformation() async {
+
+    // Get the values from controllers
+
     String propertyType = _propertyTypeController.text;
     String price = _priceRangeController.text;
     String bedrooms = _bedroomsController.text;
@@ -307,7 +327,9 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
     String phone = _phoneController.text;
     String facilities = _facilityController.text;
     String availableDate = _availableDateController.text;
+
     String imageUrl = await _uploadImage();
+
 
     await _propertyCollection.add({
       'propertyType': propertyType,
@@ -317,10 +339,15 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
       'district': district,
       'area': area,
       'phone': phone,
+
       'facilities': facilities,
+
       'imageUrl': imageUrl,
       'availableDate': availableDate,
     });
+
+
+    // Clear the text controllers after submitting
 
     _propertyTypeController.clear();
     _priceRangeController.clear();
@@ -332,16 +359,19 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
     _facilityController.clear();
     _availableDateController.clear();
 
+
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Property information saved')));
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => PropertyListScreen()),
+
     );
   }
 
   Future<String> _uploadImage() async {
     if (_selectedImage == null) {
+
       return '';
     }
 
