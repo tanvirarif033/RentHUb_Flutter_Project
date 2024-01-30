@@ -1,8 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/about_us_screen.dart';
+import 'property_list_screen.dart'; // Assuming you have a file named property_list_screen.dart
+
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -14,144 +18,119 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _value = 1; // Set an initial value
+  }
+
+
+  List<String> catNames = ['Family', 'Bachelor', 'Office', 'Sublet', 'Hostel', 'More..'];
+  List<Color> catColors = [
+    Colors.blue, Colors.green, Colors.orange, Colors.red, Colors.purple, Colors.yellow,
+  ];
+  List<Icon> catIcons = [
+    Icon(Icons.people),
+    Icon(Icons.person),
+    Icon(Icons.work),
+    Icon(Icons.apartment),
+    Icon(Icons.hotel),
+    Icon(Icons.more),
+  ];
+
+  void _handleTap(String category) {
+    // You can replace this with your actual navigation logic
+    print('Pressed: $category');
+    switch (category) {
+      case 'Family':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => about_us_screen()));
+        break;
+      case 'Bachelor':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => about_us_screen()));
+        break;
+      case 'Office':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => about_us_screen()));
+        break;
+      case 'Sublet':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => about_us_screen()));
+        break;
+      case 'Hostel':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => about_us_screen()));
+        break;
+      case 'More..':
+        Navigator.push(context, MaterialPageRoute(builder: (context) => about_us_screen()));
+        break;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PropertyList(),
-    );
-  }
-}
-
-class PropertyList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('properties').snapshots(),
-      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return AlertDialog(
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CircularProgressIndicator(),
-                SizedBox(height: 16),
-                Text("Loading..."),
-              ],
-            ),
-          );
-        }
-
-        if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        }
-
-        return ListView.builder(
-          itemCount: snapshot.data!.docs.length,
-          itemBuilder: (context, index) {
-            var property = snapshot.data!.docs[index];
-            return PropertyCard(property: property);
-          },
-        );
-      },
-    );
-  }
-}
-
-class PropertyCard extends StatefulWidget {
-  final QueryDocumentSnapshot<Object?> property;
-
-  PropertyCard({required this.property});
-
-  @override
-  _PropertyCardState createState() => _PropertyCardState();
-}
-
-class _PropertyCardState extends State<PropertyCard> {
-  bool isFavorite = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final Map<String, dynamic>? data =
-    widget.property.data() as Map<String, dynamic>?;
-
-    return Card(
-
-
-      elevation: 5,
-      margin: EdgeInsets.all(8.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: ListTile(
-        contentPadding: EdgeInsets.all(16.0),
-        title: Text(
-          'Property Type: ${widget.property['propertyType']}',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 8),
-            Text('Bedrooms: ${widget.property['bedrooms']}'),
-            Text('Bathrooms: ${widget.property['bathrooms']}'),
-            if (data?.containsKey('price') ?? false)
-              Text('Price: ${widget.property['price']}'),
-            if (data?.containsKey('district') ?? false)
-              Text('District: ${widget.property['district']}'),
-            if (data?.containsKey('area') ?? false)
-              Text('Area: ${widget.property['area']}'),
-            if (data?.containsKey('availableDate') ?? false)
-              Text('Available Date: ${widget.property['availableDate']}'),
-            if (data?.containsKey('phone') ?? false)
-              Text('Phone: ${widget.property['phone']}'),
-            if (data?.containsKey('facilities') ?? false)
-              Text('Facilities: ${widget.property['facilities']}'),
-            SizedBox(height: 8),
-          ],
-        ),
-        tileColor: Colors.blueGrey[50],
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              icon: Icon(
-                isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: isFavorite ? Colors.red : null,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(right: 15, bottom: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Categories',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              onPressed: () {
-                setState(() {
-                  isFavorite = !isFavorite;
-                  if (isFavorite) {
-                    // Add to favorite list
-                    // You can use a provider or another state management solution
-                    // to manage the list of favorites globally.
-                    // For simplicity, I'm using a static list here.
-                    favoriteList.add(widget.property);
-                  } else {
-                    // Remove from favorite list
-                    favoriteList.remove(widget.property);
-                  }
-                });
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.photo),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ViewPhotosScreen(property: widget.property),
-                  ),
-                );
-              },
-            ),
-          ],
+              const SizedBox(height: 20),
+              GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 1.3,
+                ),
+                itemCount: catNames.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      // Handle tap action for the icon
+                      _handleTap(catNames[index]);
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: catColors[index],
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: catIcons[index],
+                          ),
+                        ),
+                        // SizedBox(height: 10,), // Adjust spacing if needed
+                        Text(
+                          catNames[index],
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
+              SizedBox(height: 20), // Add space between Categories and Recent Posts
+              const Text(
+                'Recent Posts', // Add this header
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Expanded(
+                child: PropertyListScreen(),
+              ), // Add your Recent Posts content here
+            ],
+          ),
+
         ),
       ),
     );

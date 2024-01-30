@@ -1,21 +1,25 @@
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_local_notifications/flutter_local_notifications.dart' as local_notifications;
 import 'package:gap/gap.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/chatpage.dart';
-
-
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/otp_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_details_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_list_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
 
 
 import '../../../constants/images_strings.dart';
 import 'favourite_screen.dart';
+
 import 'home_screen0.dart';
 import 'messages_screen.dart';
 import 'notification_screen.dart';
+
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -125,7 +129,7 @@ class _HomeState extends State<Home> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>  const NotificationScreen(),
+                  builder: (context) =>  const OTPScreen(),
                 ),
               );
             },
@@ -145,7 +149,7 @@ class _HomeState extends State<Home> {
           ),
         ],
         title: Text(appBarTitles[index],
-        style: const TextStyle(color: Colors.white,fontSize: 28) ,
+          style: const TextStyle(color: Colors.white,fontSize: 28) ,
         ),
         centerTitle: true,
       ),
@@ -166,15 +170,12 @@ class _HomeState extends State<Home> {
       ),
 
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        alignment: Alignment.center,
-        margin: const EdgeInsets.all(5),
-        child: getSelectedWidget(index: index),
-      ),
-
-
-
+      width: double.infinity,
+      height: double.infinity,
+      alignment: Alignment.center,
+      margin: const EdgeInsets.all(5),
+      child: getSelectedWidget(index: index),
+    ),
 
     );
 
@@ -184,18 +185,19 @@ class _HomeState extends State<Home> {
     Widget widget;
     switch(index){
       case 0:
-        widget =  const HomeScreen();
+        widget =  PropertyListScreen();
         break;
       case 1:
-        //widget = const favourite_screen();
-        widget= FavoriteListScreen ();
+
+      //widget = const favourite_screen();
+        widget =  FavoriteList();
+
         break;
       case 2:
-        widget=const HomeScreen();
+        widget= const RentPropertyScreen();
         break;
       case 3:
-      //widget =ChatScreen();
-      widget =const chatpage();
+        widget = const chatpage();
 
         break;
       case 4:

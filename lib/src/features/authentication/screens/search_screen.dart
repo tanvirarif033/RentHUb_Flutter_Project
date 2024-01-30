@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rent_hub_flutter_project/src/constants/text_strings.dart';
@@ -137,7 +138,8 @@ class _FilterPageState extends State<FilterPage> {
             TextFormField(
               controller: _bathroomsController,
               decoration: InputDecoration(labelText: 'Bathrooms',
-                prefixIcon: Icon(Icons.bathtub_rounded),
+                  prefixIcon: Icon(Icons.bathtub_rounded),
+
 
               ),
             ),
@@ -248,6 +250,7 @@ class ResultsDialog extends StatelessWidget {
       ),
     );
   }
+
 
   Widget _buildPropertyCard(DocumentSnapshot document) {
     // Customize this based on your database structure

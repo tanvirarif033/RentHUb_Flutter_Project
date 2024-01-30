@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -100,6 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
 
+
                         const SizedBox(height: tFormHeight - 20),
                         TextField(
                           controller:_passwordController,
@@ -197,33 +199,33 @@ class _SignUpPageState extends State<SignUpPage> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
+    
+    User? user = await _auth.signUpWithEmailAndPassword(username, email, password);
 
-      User? user = await _auth.signUpWithEmailAndPassword(username, email, password);
-
-      if (user != null) {
-      print("User is successfully created");
-
-
-
-      ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-      content: Text('Sign up successful!'),
-      duration: Duration(seconds: 2),
-      ),
-      );
+    if (user != null) {
+    print("User is successfully created");
 
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) =>  LogIn()));
-      } else {
-      print("Some error happened");
-      }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+    content: Text('Sign up successful!'),
+    duration: Duration(seconds: 2),
+    ),
+    );
+
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) =>  LogIn()));
+    } else {
+    print("Some error happened");
     }
-
-
-
   }
 
 
 
+}
 
-      // Handle the error, show a message, etc
+
+
+
+// Handle the error, show a message, etc
