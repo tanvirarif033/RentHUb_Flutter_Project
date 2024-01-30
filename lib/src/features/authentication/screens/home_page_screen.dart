@@ -5,6 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart' as
 import 'package:gap/gap.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/chatpage.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/otp_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_details_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_list_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
@@ -13,7 +14,7 @@ import 'package:rent_hub_flutter_project/src/features/authentication/screens/sea
 
 import '../../../constants/images_strings.dart';
 import 'favourite_screen.dart';
-import 'filter_page0.dart';
+
 import 'home_screen0.dart';
 import 'messages_screen.dart';
 import 'notification_screen.dart';
@@ -128,7 +129,7 @@ class _HomeState extends State<Home> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>  const NotificationScreen(),
+                  builder: (context) =>  const OTPScreen(),
                 ),
               );
             },
@@ -189,14 +190,14 @@ class _HomeState extends State<Home> {
       case 1:
 
       //widget = const favourite_screen();
-        widget = const FilterPage();
+        widget =  FavoriteList();
 
         break;
       case 2:
-        widget=const HomeScreen();
+        widget= const RentPropertyScreen();
         break;
       case 3:
-        widget = ChatPage();
+        widget = const chatpage();
 
         break;
       case 4:
