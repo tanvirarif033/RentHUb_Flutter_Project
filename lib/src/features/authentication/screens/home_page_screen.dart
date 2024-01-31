@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart' as local_notifications;
 import 'package:gap/gap.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/chatpage.dart';
+
+
+
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/otp_screen.dart';
-import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_details_screen.dart';
+
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_list_screen.dart';
+
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
 
@@ -129,7 +133,9 @@ class _HomeState extends State<Home> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
+
                   builder: (context) =>  const OTPScreen(),
+
                 ),
               );
             },
