@@ -6,6 +6,7 @@ import 'package:rent_hub_flutter_project/src/features/authentication/screens/sig
 import '../../../constants/images_strings.dart';
 import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
+
 import 'forgate.dart';
 
 
@@ -68,7 +69,7 @@ class _LogInState extends State<LogIn> {
         ),
       );
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>  Home()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
         // Show a failure Snackbar

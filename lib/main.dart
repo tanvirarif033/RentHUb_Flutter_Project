@@ -57,6 +57,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
+
       themeMode: currentThemeMode,
       home: const splash_screen(
         child: LogIn(), // Assuming LogIn is the initial screen after the splash screen
