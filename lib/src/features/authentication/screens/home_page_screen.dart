@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'package:gap/gap.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/chatpage.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/home.dart';
 
 
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/navigation_drawer_screen.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/otp_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/rent_property_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/search_screen.dart';
 
@@ -112,7 +114,7 @@ class _HomeState extends State<Home> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>  const NotificationScreen(),
+                  builder: (context) =>  const HomeScreen0(),
                 ),
               );
             },

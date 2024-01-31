@@ -16,22 +16,34 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeModeProvider(),
-      child:  MyApp(),
+      child: MyApp(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-   MyApp({super.key});
-  NotificationServices notificationServices =NotificationServices();
+class MyApp extends StatefulWidget {
+  MyApp({super.key}) ;
 
-   /*void intState(){
-     super.intState();
-      notificationServices.requestNotificationPermission();
-   }*/
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  NotificationServices notificationServices = NotificationServices();
+
+  @override
+  void initState() {
+    super.initState();
+    notificationServices.requestNotificationPermission();
+
+    notificationServices.getDeviceToken().then((value){
+      print('device token: ');
+      print(value);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-
     ThemeMode currentThemeMode = ThemeMode.light;
 
     void toggleThemeMode() {
@@ -39,19 +51,16 @@ class MyApp extends StatelessWidget {
           ? ThemeMode.dark
           : ThemeMode.light;
     }
+
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-
       themeMode: currentThemeMode,
       home: const splash_screen(
-        child: LogIn(), // Assuming WelcomeScreen is the initial screen after the splash screen
-
+        child: LogIn(), // Assuming LogIn is the initial screen after the splash screen
       ),
     );
   }
 }
-
-
