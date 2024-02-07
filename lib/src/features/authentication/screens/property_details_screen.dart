@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_model.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/see_review.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/write_review.dart';
+import 'package:gap/gap.dart';
 
+import 'customer_info.dart';
 class PropertyDetailsScreen extends StatelessWidget {
   final Property property;
 
@@ -59,6 +63,53 @@ class PropertyDetailsScreen extends StatelessWidget {
                     _buildSection('Facilities', 'Facilities: ${property.facilities}', 20),
                     _buildSection('Contact', 'Phone: ${property.phone}', 20),
                     _buildSection('Available From', 'Available From: ${property.availableDate}', 20),
+                    SizedBox(height: 16.0),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // Add your button click logic here
+                            // For example, you can navigate to another screen or perform an action
+                            Navigator.push(context,
+
+                              MaterialPageRoute(builder: (context)=>  WriteReview(),),
+
+                            );
+                          },
+                          child: Text('Give Review'),
+                        ),
+                        Gap(10),
+
+                        ElevatedButton(
+                          onPressed: () {
+                            // Add your button click logic here
+                            // For example, you can navigate to another screen or perform an action
+                            Navigator.push(context,
+
+                              MaterialPageRoute(builder: (context)=>  SeeReviewScreen(),),
+
+                            );
+                          },
+                          child: Text('See Review'),
+                        ),
+                        Gap(10),
+
+                        ElevatedButton(
+                          onPressed: () {
+                            // Add your button click logic here
+                            // For example, you can navigate to another screen or perform an action
+                            Navigator.push(context,
+
+                              MaterialPageRoute(builder: (context)=>  CustomerInfoScreen(),),
+
+                            );
+                          },
+                          child: Text('Advance Payment'),
+                        ),
+
+                      ],
+                    ),
+
                   ],
                 ),
               ),

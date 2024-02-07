@@ -38,6 +38,8 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
   final CollectionReference _propertyCollection =
   FirebaseFirestore.instance.collection('properties');
   final List<String> suggestions = ["Family", "Bachelor", "Sublet", "Office","Hostel","Others"];
+  final List<String> suggestions2 = ["1","2","3","4","5"];
+  final List<String> suggestions3 = ["1","2","3","4","5"];
 
   final List<String> suggestions1 = [
     "Dhaka",
@@ -156,22 +158,62 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
                 TextFormField(
                   controller: _priceRangeController,
                   decoration: InputDecoration(
-                    labelText: 'Price',
+                    labelText: 'Price(Monthtly)',
                     prefixIcon: Icon(Icons.attach_money),
                   ),
                 ),
-                TextFormField(
-                  controller: _bedroomsController,
-                  decoration: InputDecoration(
-                    labelText: 'Bedrooms',
-                    prefixIcon: Icon(Icons.king_bed),
+                TypeAheadField(
+                  hideOnEmpty: true,
+                  debounceDuration: Duration(milliseconds: 300),
+                  suggestionsCallback: (pattern) async {
+                    return suggestions2
+                        .where((item) =>
+                        item.toLowerCase().contains(pattern.toLowerCase()))
+                        .toList();
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      title: Text(suggestion),
+                    );
+                  },
+                  onSuggestionSelected: (suggestion) {
+                    _bedroomsController.text = suggestion;
+                  },
+                  textFieldConfiguration: TextFieldConfiguration(
+                    controller: _bedroomsController,
+                    decoration: InputDecoration(
+                      labelText: 'Bedrooms',
+                      labelStyle:
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      prefixIcon: Icon(Icons.king_bed),
+                    ),
                   ),
                 ),
-                TextFormField(
-                  controller: _bathroomsController,
-                  decoration: InputDecoration(
-                    labelText: 'Bathrooms',
-                    prefixIcon: Icon(Icons.bathtub_rounded),
+                TypeAheadField(
+                  hideOnEmpty: true,
+                  debounceDuration: Duration(milliseconds: 300),
+                  suggestionsCallback: (pattern) async {
+                    return suggestions3
+                        .where((item) =>
+                        item.toLowerCase().contains(pattern.toLowerCase()))
+                        .toList();
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      title: Text(suggestion),
+                    );
+                  },
+                  onSuggestionSelected: (suggestion) {
+                    _bathroomsController.text = suggestion;
+                  },
+                  textFieldConfiguration: TextFieldConfiguration(
+                    controller:_bathroomsController,
+                    decoration: InputDecoration(
+                      labelText: 'Bathrooms',
+                      labelStyle:
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      prefixIcon: Icon(Icons.bathtub_rounded),
+                    ),
                   ),
                 ),
                 TypeAheadField(

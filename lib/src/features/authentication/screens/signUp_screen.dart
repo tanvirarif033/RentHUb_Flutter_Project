@@ -8,6 +8,7 @@ import '../../../constants/sizes.dart';
 import '../../../constants/text_strings.dart';
 import 'firebase_auth_services.dart';
 
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -17,6 +18,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   bool passwordVisible=false;
+
 
   @override
   void initState(){
@@ -199,26 +201,80 @@ class _SignUpPageState extends State<SignUpPage> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    
-    User? user = await _auth.signUpWithEmailAndPassword(username, email, password);
+    if (username.isEmpty || email.isEmpty || password.isEmpty) {
+      _showErrorAlertDialog("Please do required things");
+      return ;
+    }
 
-    if (user != null) {
-    print("User is successfully created");
-
-
-
-    ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-    content: Text('Sign up successful!'),
-    duration: Duration(seconds: 2),
-    ),
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Row(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(width: 20),
+              Text("Loading..."),
+            ],
+          ),
+        );
+      },
     );
 
+    try {
+      User? user = await _auth.signUpWithEmailAndPassword(username, email, password);
 
-    Navigator.push(context, MaterialPageRoute(builder: (context) =>  LogIn()));
-    } else {
-    print("Some error happened");
+      if (user != null) {
+        print("User is successfully created");
+
+        Navigator.pop(context); // Close the AlertDialog
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Sign up successful!'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+
+        Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+      } else {
+        print("Some error happened");
+        _showErrorAlertDialog("Some error occurred during sign up.");
+      }
+    } catch (error) {
+      print("Error during sign up: $error");
+      _showErrorAlertDialog("Some error occurred during sign up.");
+      Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
     }
+  }
+
+  void _showErrorAlertDialog(String message) {
+    Navigator.pop(context); // Close the AlertDialog
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Row(
+            children: [
+              Icon(Icons.error_outline, color: Colors.red),
+              SizedBox(width: 10),
+              Text(message),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the AlertDialog
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
 

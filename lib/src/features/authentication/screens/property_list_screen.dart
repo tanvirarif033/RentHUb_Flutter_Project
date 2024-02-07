@@ -5,6 +5,8 @@ import 'package:rent_hub_flutter_project/src/features/authentication/screens/pro
 
 import 'about_us_screen.dart';
 import 'category_screen.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_options.dart';
 
 class PropertyListScreen extends StatefulWidget {
   PropertyListScreen({Key? key}) : super(key: key);
@@ -81,7 +83,12 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
     );
   }
 
-
+  int _currentIndex = 0;
+  final List<String> images = [
+  'assets/images/Review.png',
+    'assets/images/UserSelection.png',
+    'assets/images/welcome.png',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +102,10 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
                 children: [
                   const Align(
                     alignment: Alignment.topLeft,
-                    child: Text('Categories', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,),),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Categories', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,),),
+                    ),
                   ),
                   const SizedBox(height: 10),
 
@@ -119,7 +129,7 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
                               width: 60,
                               decoration: BoxDecoration(
                                   color: catColors[index],
-                                  shape: BoxShape.rectangle
+                                  shape: BoxShape.circle
                               ),
                               child: Center(
                                 child: catIcons[index],
@@ -142,9 +152,51 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
               ),
             ),
             const SizedBox(height: 10,),
+            CarouselSlider.builder(
+              itemCount: images.length,
+              options: CarouselOptions(
+
+                height: 250,
+                autoPlay: true,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+              ),
+              itemBuilder: (BuildContext context, int index, int realIndex) {
+                return Container(
+                  child: Center(
+                    child: Image.asset(
+                      images[index],
+                      fit: BoxFit.cover,
+
+                    ),
+                  ),
+                );
+              },
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: images.map((url) {
+                int index = images.indexOf(url);
+                return Container(
+                  width: 20.0,
+                  height: 10.0,
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _currentIndex == index ? Colors.blueAccent : Colors.grey,
+                  ),
+                );
+              }).toList(),
+            ),
             const Align(
               alignment: Alignment.topLeft,
-              child: Text('Recent Posts', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,),),
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Recent Posts', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,),),
+              ),
             ),
             const SizedBox(height: 15,),
             GridView.builder(
