@@ -238,23 +238,44 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
 
   void _saveToFavourites() async {
     try {
-      await FirebaseFirestore.instance.collection('Favourites').add({
-        'propertyType': widget.property.propertyType,
-        'price': widget.property.price,
-        'bedrooms': widget.property.bedrooms,
-        'bathrooms': widget.property.bathrooms,
-        'district': widget.property.district,
-        'area': widget.property.area,
-        'phone': widget.property.phone,
-        'facilities': widget.property.facilities,
-        'imageUrl': widget.property.imageUrl,
-        'availableDate': widget.property.availableDate,
-        // Add other properties as needed
-      });
+      // Check if the property already exists in the Favorites collection
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('Favourites')
+          .where('propertyType', isEqualTo: widget.property.propertyType)
+          .where('price', isEqualTo: widget.property.price)
+          .where('bedrooms', isEqualTo: widget.property.bedrooms)
+          .where('bathrooms', isEqualTo: widget.property.bathrooms)
+          .where('district', isEqualTo: widget.property.district)
+          .where('area', isEqualTo: widget.property.area)
+          .where('phone', isEqualTo: widget.property.phone)
+          .where('facilities', isEqualTo: widget.property.facilities)
+          .where('imageUrl', isEqualTo: widget.property.imageUrl)
+          .where('availableDate', isEqualTo: widget.property.availableDate)
+          .get();
+
+      // If the property doesn't exist in Favorites, add it
+      if (querySnapshot.docs.isEmpty) {
+        await FirebaseFirestore.instance.collection('Favourites').add({
+          'propertyType': widget.property.propertyType,
+          'price': widget.property.price,
+          'bedrooms': widget.property.bedrooms,
+          'bathrooms': widget.property.bathrooms,
+          'district': widget.property.district,
+          'area': widget.property.area,
+          'phone': widget.property.phone,
+          'facilities': widget.property.facilities,
+          'imageUrl': widget.property.imageUrl,
+          'availableDate': widget.property.availableDate,
+          // Add other properties as needed
+        });
+      } else {
+        print('Property already exists in favorites');
+      }
     } catch (e) {
       print('Error saving to favourites: $e');
       // Handle error saving to favourites
     }
   }
+
 }
 
