@@ -194,7 +194,7 @@ class _HomeState extends State<Home> {
       case 1:
 
       //widget = const favourite_screen();
-        widget =  FavoriteList();
+        widget =  FavoritePropertiesPage();
 
         break;
       case 2:
