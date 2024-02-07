@@ -155,7 +155,6 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
             CarouselSlider.builder(
               itemCount: images.length,
               options: CarouselOptions(
-
                 height: 250,
                 autoPlay: true,
                 onPageChanged: (index, reason) {

@@ -9,6 +9,7 @@ class Property {
   final String facilities;
   final String imageUrl;
   final String availableDate;
+  bool isFavorite;
 
   Property({
     required this.propertyType,
@@ -21,6 +22,7 @@ class Property {
     required this.facilities,
     required this.imageUrl,
     required this.availableDate,
+    this.isFavorite = false,
   });
 
   factory Property.fromDocument(Map<String, dynamic> data) {
@@ -35,6 +37,24 @@ class Property {
       facilities: data['facilities'] ?? '',
       imageUrl: data['imageUrl'] ?? '',
       availableDate: data['availableDate'] ?? '',
+      isFavorite: data['isFavorite'] ?? false,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'propertyType': propertyType,
+      'price': price,
+      'bedrooms': bedrooms,
+      'bathrooms': bathrooms,
+      'district': district,
+      'area': area,
+      'phone': phone,
+      'facilities': facilities,
+      'imageUrl': imageUrl,
+      'availableDate': availableDate,
+      'isFavorite': isFavorite,
+    };
+  }
 }
+
