@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_model.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/see_review.dart';
@@ -198,6 +199,62 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
         duration: Duration(seconds: 1), // Adjust duration as needed
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+      // Save or remove property information to/from Firebase based on favorite status
+      if (isFavorite) {
+        _saveToFavourites();
+      } else {
+        _removeFromFavourites();
+      }
     });
   }
+
+  void _removeFromFavourites() async {
+    try {
+      // Find and delete the document with the property information from "Favourites" collection
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('Favourites')
+          .where('propertyType', isEqualTo: widget.property.propertyType)
+          .where('price', isEqualTo: widget.property.price)
+          .where('bedrooms', isEqualTo: widget.property.bedrooms)
+          .where('bathrooms', isEqualTo: widget.property.bathrooms)
+          .where('district', isEqualTo: widget.property.district)
+          .where('area', isEqualTo: widget.property.area)
+          .where('phone', isEqualTo: widget.property.phone)
+          .where('facilities', isEqualTo: widget.property.facilities)
+          .where('imageUrl', isEqualTo: widget.property.imageUrl)
+          .where('availableDate', isEqualTo: widget.property.availableDate)
+          .get();
+
+      querySnapshot.docs.forEach((doc) {
+        doc.reference.delete();
+      });
+    } catch (e) {
+      print('Error removing from favourites: $e');
+      // Handle error removing from favourites
+    }
+  }
+
+
+  void _saveToFavourites() async {
+    try {
+      await FirebaseFirestore.instance.collection('Favourites').add({
+        'propertyType': widget.property.propertyType,
+        'price': widget.property.price,
+        'bedrooms': widget.property.bedrooms,
+        'bathrooms': widget.property.bathrooms,
+        'district': widget.property.district,
+        'area': widget.property.area,
+        'phone': widget.property.phone,
+        'facilities': widget.property.facilities,
+        'imageUrl': widget.property.imageUrl,
+        'availableDate': widget.property.availableDate,
+        // Add other properties as needed
+      });
+    } catch (e) {
+      print('Error saving to favourites: $e');
+      // Handle error saving to favourites
+    }
+  }
 }
+
