@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 
@@ -157,6 +158,10 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
                 ),
                 TextFormField(
                   controller: _priceRangeController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    ],
                   decoration: InputDecoration(
                     labelText: 'Price(Monthtly)',
                     prefixIcon: Icon(Icons.attach_money),
@@ -252,6 +257,10 @@ class _RentPropertyScreenState extends State<RentPropertyScreen> {
                 ),
                 TextFormField(
                   controller: _phoneController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  ],
                   decoration: InputDecoration(
                     labelText: 'Phone Number',
                     prefixIcon: Icon(Icons.phone),

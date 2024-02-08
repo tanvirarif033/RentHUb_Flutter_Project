@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
+import '../../../constants/images_strings.dart';
 
 class SeeReviewScreen extends StatelessWidget {
   const SeeReviewScreen({Key? key}) : super(key: key);
@@ -11,7 +14,22 @@ class SeeReviewScreen extends StatelessWidget {
         backgroundColor: Colors.black,
         title: const Text('See Review', style: TextStyle(color: Colors.white)),
       ),
-      body: _buildReviewsList(),
+      body:
+      Column(
+
+        children: [
+          Center(
+            child: SizedBox(
+              width: 300,
+              height: 300,
+              child: Image(image: AssetImage(tReview)),
+            ),
+          ),
+          Expanded(
+            child: _buildReviewsList(),
+          ),
+        ],
+      ),
     );
   }
 
@@ -47,11 +65,30 @@ class SeeReviewScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Username: $username'),
+
+
                     SizedBox(height: 8.0),
-                    Text('Comment: $comment'),
+
                     SizedBox(height: 8.0),
-                    Text('Rating: $rating'),
+                    RatingBar.builder(
+                      initialRating: rating,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemSize: 30.0,
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (double value) {  },
+                    ),
+                    SizedBox(height: 8.0),
+                    Text('Rating: $rating',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20)),
+                    SizedBox(height: 8.0,),
+                    Text('Name: $username',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20)),
+                    SizedBox(height: 8.0),
+                    Text('Comment: $comment',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20)),
                   ],
                 ),
               ),
@@ -62,3 +99,5 @@ class SeeReviewScreen extends StatelessWidget {
     );
   }
 }
+
+

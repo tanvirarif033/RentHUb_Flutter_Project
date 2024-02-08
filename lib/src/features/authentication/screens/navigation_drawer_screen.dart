@@ -7,10 +7,12 @@ import 'package:rent_hub_flutter_project/src/features/authentication/screens/log
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/payment_screen.dart';
 import '../../../constants/images_strings.dart';
 import '../../../constants/text_strings.dart';
 import 'account_screen.dart';
 import 'addAcoount_screen.dart';
+import 'customer_info.dart';
 import 'invite_friends_screen.dart';
 import 'privacy_screen.dart';
 import 'setting_screen.dart';
@@ -57,14 +59,14 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   buildMenuItem(
-                    text: 'Add Account',
-                    icon: Icons.add_circle_outline_outlined,
+                    text: 'Payment History',
+                    icon: Icons.history_edu_outlined,
                     onClicked: () => selectedItem(context, 1),
                   ),
                   const SizedBox(height: 16),
                   buildMenuItem(
-                    text: 'Privacy',
-                    icon: Icons.privacy_tip_outlined,
+                    text: 'Customer Details',
+                    icon: Icons.info_outline,
                     onClicked: () => selectedItem(context, 2),
                   ),
                   const SizedBox(height: 16),
@@ -174,12 +176,12 @@ class NavigationDrawerWidget extends StatelessWidget {
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const addAccount_screen(),
+          builder: (context) =>  PaymentHistoryScreen(),
         ));
         break;
       case 2:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const privacy_screen(),
+          builder: (context) => const CustomerDetailsScreen(),
         ));
         break;
       case 3:

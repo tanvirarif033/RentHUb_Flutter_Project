@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_hub_flutter_project/src/features/authentication/screens/payment_screen.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/property_model.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/see_review.dart';
 import 'package:rent_hub_flutter_project/src/features/authentication/screens/write_review.dart';
@@ -100,7 +101,10 @@ class PropertyDetailsScreen extends StatelessWidget {
                             // For example, you can navigate to another screen or perform an action
                             Navigator.push(context,
 
-                              MaterialPageRoute(builder: (context)=>  CustomerInfoScreen(),),
+                              MaterialPageRoute(builder: (context)=>
+                                 // CustomerInfoScreen(),
+                              PaymentMethod1()
+                              ),
 
                             );
                           },
