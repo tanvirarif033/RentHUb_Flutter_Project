@@ -34,6 +34,9 @@ class _FavoritePropertiesPageState extends State<FavoritePropertiesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Favourites"),
+      centerTitle: true,
+      ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
