@@ -23,8 +23,35 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    // Set the initial favorite status based on property's isFavorite value
-    isFavorite = widget.property.isFavorite;
+    _fetchFavoriteStatus();
+  }
+
+  void _fetchFavoriteStatus() async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('Favourites')
+          .where('propertyType', isEqualTo: widget.property.propertyType)
+          .where('price', isEqualTo: widget.property.price)
+          .where('bedrooms', isEqualTo: widget.property.bedrooms)
+          .where('bathrooms', isEqualTo: widget.property.bathrooms)
+          .where('district', isEqualTo: widget.property.district)
+          .where('area', isEqualTo: widget.property.area)
+          .where('phone', isEqualTo: widget.property.phone)
+          .where('facilities', isEqualTo: widget.property.facilities)
+          .where('imageUrl', isEqualTo: widget.property.imageUrl)
+          .where('availableDate', isEqualTo: widget.property.availableDate)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // If the property exists in the favorites collection, set isFavorite to true
+        setState(() {
+          isFavorite = true;
+        });
+      }
+    } catch (e) {
+      print('Error fetching favorite status: $e');
+      // Handle error fetching favorite status
+    }
   }
 
   @override
@@ -50,8 +77,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                     image: widget.property.imageUrl != null &&
                         widget.property.imageUrl.isNotEmpty
                         ? NetworkImage(widget.property.imageUrl!)
-                        : AssetImage(
-                        'assets/logo/renthub.png') as ImageProvider<Object>,
+                        : AssetImage('assets/logo/renthub.png') as ImageProvider<Object>,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -153,7 +179,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     // Favorite Button
                   ],
                 ),
@@ -238,7 +264,6 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
 
   void _saveToFavourites() async {
     try {
-      // Check if the property already exists in the Favorites collection
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('Favourites')
           .where('propertyType', isEqualTo: widget.property.propertyType)
@@ -253,7 +278,6 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
           .where('availableDate', isEqualTo: widget.property.availableDate)
           .get();
 
-      // If the property doesn't exist in Favorites, add it
       if (querySnapshot.docs.isEmpty) {
         await FirebaseFirestore.instance.collection('Favourites').add({
           'propertyType': widget.property.propertyType,
@@ -266,16 +290,12 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
           'facilities': widget.property.facilities,
           'imageUrl': widget.property.imageUrl,
           'availableDate': widget.property.availableDate,
-          // Add other properties as needed
         });
       } else {
         print('Property already exists in favorites');
       }
     } catch (e) {
       print('Error saving to favourites: $e');
-      // Handle error saving to favourites
     }
   }
-
 }
-
