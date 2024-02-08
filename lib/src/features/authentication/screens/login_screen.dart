@@ -36,6 +36,12 @@ class _LogInState extends State<LogIn> {
 
   userLogin() async {
     try {
+
+      // Validate the form
+      if (!_formkey.currentState!.validate()) {
+        return;
+      }
+
       // Show the loading dialog
       showDialog(
         context: context,
@@ -53,13 +59,15 @@ class _LogInState extends State<LogIn> {
           );
         },
       );
+
+      // Perform Firebase authentication
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: useremailcontroller.text,
         password: userpasswordcontroller.text,
       );
+
       // Hide the loading dialog
       Navigator.pop(context);
-
 
       // Show a success Snackbar
       ScaffoldMessenger.of(context).showSnackBar(
@@ -69,18 +77,55 @@ class _LogInState extends State<LogIn> {
         ),
       );
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) =>  Home()));
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
-        // Show a failure Snackbar
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Center(child: Text("Failed to Login. Check your credentials.")),
-            duration: Duration(seconds: 2),
-          ),
-        );
-      }
+      // Navigate to the Home page
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
     }
+    on FirebaseAuthException catch (e) {
+      // Hide the loading dialog
+      Navigator.pop(context);
+
+      String errorMessage = "Some error occurred.";
+
+      // Handle specific authentication errors
+      if (e.code == 'user-not-found') {
+        errorMessage = "User not found.";
+      } else if (e.code == 'wrong-password') {
+        errorMessage = "Incorrect password.";
+      }
+
+      // Show an error AlertDialog
+      _showErrorAlertDialog(errorMessage);
+    }
+  }
+  void _showErrorAlertDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Row(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(width: 20),
+              Text(message),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Close the AlertDialog
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+
+    // After some time, stop the CircularProgressIndicator
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.pop(context); // Close the AlertDialog
+    });
   }
 
   @override

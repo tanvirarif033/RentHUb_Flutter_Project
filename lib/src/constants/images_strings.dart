@@ -13,6 +13,7 @@ const String tOnBoardingImage3 = "assets/images/on_boarding_images/on-boarding-i
 
 // -- Review Screen Images
 const String tReview = "assets/images/Review.png";
+const String wReview="assets/images/write.png";
 
 // -- User Selection
 const String tUserSelection = "assets/images/UserSelection.png";
