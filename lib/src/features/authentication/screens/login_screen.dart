@@ -290,51 +290,7 @@ class _LogInState extends State<LogIn> {
                                               const SizedBox(
                                                 height: 20.0,
                                               ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(context,
 
-                                                    MaterialPageRoute(builder: (context)=> const ForgotPassword()),
-                                                  );
-                                                },
-                                                child: Container(
-                                                  padding: const EdgeInsets.all(20.0),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                    color: Theme.of(context).cardColor,
-                                                  ),
-                                                  child: Row(
-                                                    children: [
-                                                      const Icon(
-                                                        Icons.mobile_friendly_rounded,
-                                                        size: 60.0,
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 10.0,
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                        children: [
-                                                          Text(
-                                                            tPhoneNo,
-                                                            style: Theme.of(context)
-                                                                .textTheme
-                                                                .titleLarge,
-                                                          ),
-                                                          Text(
-                                                            tResetViaPhone,
-                                                            style: Theme.of(context)
-                                                                .textTheme
-                                                                .bodyMedium,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
                                             ],
                                           ),
                                         ),
